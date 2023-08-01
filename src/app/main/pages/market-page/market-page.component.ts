@@ -10,6 +10,6 @@ export class MarketPageComponent {
   constructor(private router: Router) {}
   navigateToAbout() {
     // Cambiar la ruta al componente 'Acerca de'
-    this.router.navigate(['/storeDetails']);
+    this.router.navigate(['/details']);
   }
 }

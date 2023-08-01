@@ -1,28 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { MarketPageComponent } from './store/pages/market-page/market-page.component';
-import { MarketDetailsComponent } from './store/pages/market-details/market-details.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { MainComponent } from './main/main.component';
+import { SessionComponent } from './session/session.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePageComponent,
-  },
-  {
-    path: 'store',
-    loadChildren: () =>
-      import('./store/store.module').then((m) => m.StoreModule),
-  },
-  {
-    path: 'dashboard',
-    loadChildren: () =>
-      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+    component:MainComponent,
+    loadChildren: () => import('./main/main.module').then(x=>x.MainModule),
   },
   {
     path: 'login',
-    component: LoginPageComponent,
+    component:SessionComponent,
+    loadChildren: () => import('./session/session.module').then(x=>x.SessionModule),
+  },
+  {
+    path: 'dashboard',
+    component:DashboardComponent,
+    loadChildren: () => import('./dashboard/dashboard.module').then(x=>x.DashboardModule),
   },
 ];
 
