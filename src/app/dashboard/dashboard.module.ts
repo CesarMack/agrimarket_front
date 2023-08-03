@@ -8,6 +8,7 @@ import { DetailsProductPageComponent } from './pages/details-product-page/detail
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { SharedModule } from './shared/shared.module';
 import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
     DetailsProductPageComponent,
     ProfilePageComponent,
     OrdersPageComponent,
+    OrdersComponent,
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule],
 })
