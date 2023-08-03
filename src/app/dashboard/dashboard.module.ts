@@ -4,10 +4,20 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { CommonModule } from '@angular/common';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { DetailsProductPageComponent } from './pages/details-product-page/details-product-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { SharedModule } from './shared/shared.module';
+import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
 
 @NgModule({
-  declarations: [DashboardPageComponent, ProductPageComponent  ],
-  imports: [
-    CommonModule, DashboardRoutingModule],
+  declarations: [
+    DashboardComponent,
+    DashboardPageComponent,
+    ProductPageComponent,
+    DetailsProductPageComponent,
+    ProfilePageComponent,
+    OrdersPageComponent,
+  ],
+  imports: [CommonModule, DashboardRoutingModule, SharedModule],
 })
 export class DashboardModule {}

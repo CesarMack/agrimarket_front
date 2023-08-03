@@ -1,0 +1,121 @@
+<section class="p-10 w-full h-full bg-[#f6f6f6]">
+  <div class="p-10 bg-white shadow-lg rounded-3xl w-full h-full">
+    <h2
+      class="text-3xl font-bold text-[#2A9763] font-['Montserrat_Alternates']"
+    >
+      Detalles Perfil
+    </h2>
+
+    <form class="flex gap-10">
+      <article class="w-2/4">
+        <div class="flex gap-10 w-full mt-5">
+          <span class="w-2/4 flex flex-col">
+            <label class="">Nombre(s)</label>
+            <input type="text" class="h-9 border border-[#38C984] rounded-lg" />
+          </span>
+          <span class="w-2/4 flex flex-col">
+            <label>Apellido</label>
+            <input type="text" class="h-9 border border-[#38C984] rounded-lg" />
+          </span>
+        </div>
+
+        <div class="flex gap-10 w-full mt-5">
+          <span class="w-2/4 flex flex-col">
+            <label>email</label>
+            <input type="text" class="h-9 border border-[#38C984] rounded-lg" />
+          </span>
+          <span class="w-2/4 flex flex-col">
+            <label>telefono</label>
+            <input type="text" class="h-9 border border-[#38C984] rounded-lg" />
+          </span>
+        </div>
+
+        <div class="flex">
+          <h3
+            class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
+          >
+            Direccion
+          </h3>
+        </div>
+
+        <div class="flex flex-col">
+          <label>calle</label>
+          <input type="text" class="h-9 border border-[#38C984] rounded-lg" />
+        </div>
+
+        <div class="flex gap-10 w-full mt-5">
+          <span class="w-2/4 flex flex-col">
+            <label>Numero exterior</label>
+            <input type="text" class="h-9 border border-[#38C984] rounded-lg" />
+          </span>
+          <span class="w-2/4 flex flex-col">
+            <label>Numero interior</label>
+            <input type="text" class="h-9 border border-[#38C984] rounded-lg" />
+          </span>
+        </div>
+        <div class="flex gap-10 w-full mt-5">
+          <span class="w-2/4 flex flex-col">
+            <label>CP</label>
+            <input type="text" class="h-9 border border-[#38C984] rounded-lg" />
+          </span>
+          <span class="w-2/4 flex flex-col">
+            <label>colonia</label>
+            <input type="text" class="h-9 border border-[#38C984] rounded-lg" />
+          </span>
+        </div>
+        <div class="flex gap-10 w-full mt-5">
+          <span class="w-2/4 flex flex-col">
+            <label>ciudad</label>
+            <input type="text" class="h-9 border border-[#38C984] rounded-lg" />
+          </span>
+          <span class="w-2/4 flex flex-col">
+            <label>Estado</label>
+            <input type="text" class="h-9 border border-[#38C984] rounded-lg" />
+          </span>
+        </div>
+        <h3>Granjas</h3>
+        <p>Deseas agregar una granja?</p>
+      </article>
+      <article class="w-2/4">
+        <div class="mx-auto border w-[200px] h-[200px]">
+          <img [src]="imageUrl" alt="Imagen cargada" />
+        </div>
+        <input
+          class="mx-auto"
+          type="file"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+        /><!--
+        <div class="w-48 h-48 border">Aqui va la foto, agregar imagen</div>
+        <label>Nombre de la granja</label>
+        <input type="text" class="border" />
+
+        <label>telefono</label>
+        <input type="text" class="border" />
+        <label
+          >Pregunntar si quiere utilizar los mismos datos de direccion del
+          granjero</label
+        >
+        <label>calle</label>
+        <input type="text" class="border" />
+        <label>Numero exterior</label>
+        <input type="text" class="border" />
+        <label>Numero interior</label>
+        <input type="text" class="border" />
+
+        <label>CP (Estos datos los tenemos que traer de una api)</label>
+        <input type="text" class="border" />
+        <label>colonia</label>
+        <input type="text" class="border" />
+        <label>ciudad</label>
+        <input type="text" class="border" />
+        <label>Estado</label>
+        <input type="text" class="border" />
+        <label>Cp</label>
+        <input type="text" class="border" />
+        <p>
+          Igual puede llevar una foto de la granja para que tenga un diostintivo</p> -->
+      </article>
+    </form>
+  </div>
+</section>

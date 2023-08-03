@@ -7,18 +7,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 const routes: Routes = [
   {
     path: '',
-    component:MainComponent,
-    loadChildren: () => import('./main/main.module').then(x=>x.MainModule),
+    loadChildren: () => import('./main/main.module').then((x) => x.MainModule),
   },
   {
     path: 'login',
-    component:SessionComponent,
-    loadChildren: () => import('./session/session.module').then(x=>x.SessionModule),
+    loadChildren: () =>
+      import('./session/session.module').then((x) => x.SessionModule),
   },
   {
     path: 'dashboard',
-    component:DashboardComponent,
-    loadChildren: () => import('./dashboard/dashboard.module').then(x=>x.DashboardModule),
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then((x) => x.DashboardModule),
   },
 ];
 
