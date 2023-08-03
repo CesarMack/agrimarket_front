@@ -5,8 +5,7 @@ import { ProductPageComponent } from './pages/product-page/product-page.componen
 import { DetailsProductPageComponent } from './pages/details-product-page/details-product-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { DashboardComponent } from './dashboard.component';
-import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
-
+import { DetailsOrderPageComponent } from './pages/details-order-page/details-order-page.component';
 const routes: Routes = [
   {
     path: '',
@@ -21,6 +20,10 @@ const routes: Routes = [
         component: ProductPageComponent,
       },
       {
+        path: 'products/details',
+        component: DetailsProductPageComponent,
+      },
+      {
         path: 'details',
         component: DetailsProductPageComponent,
       },
@@ -30,7 +33,12 @@ const routes: Routes = [
       },
       {
         path: 'orders',
-        component: OrdersPageComponent,
+        loadChildren: () =>
+          import('./pages/orders/orders.module').then((x) => x.OrdersModule),
+      },
+      {
+        path: 'orders/details',
+        component: DetailsOrderPageComponent,
       },
     ],
   },

@@ -7,8 +7,7 @@ import { ProductPageComponent } from './pages/product-page/product-page.componen
 import { DetailsProductPageComponent } from './pages/details-product-page/details-product-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { SharedModule } from './shared/shared.module';
-import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
-import { OrdersComponent } from './orders/orders.component';
+import { DetailsOrderPageComponent } from './pages/details-order-page/details-order-page.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +16,7 @@ import { OrdersComponent } from './orders/orders.component';
     ProductPageComponent,
     DetailsProductPageComponent,
     ProfilePageComponent,
-    OrdersPageComponent,
-    OrdersComponent,
+    DetailsOrderPageComponent,
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule],
 })
