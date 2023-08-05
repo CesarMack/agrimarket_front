@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-details-product-page',
-  templateUrl: './details-product-page.component.html',
-  styleUrls: ['./details-product-page.component.css'],
+  selector: 'app-farm-profile',
+  templateUrl: './farm-profile.component.html',
+  styleUrls: ['./farm-profile.component.css'],
 })
-export class DetailsProductPageComponent {
+export class FarmProfileComponent {
   imageUrl: string | ArrayBuffer | null = null;
 
   onFileSelected(event: any) {

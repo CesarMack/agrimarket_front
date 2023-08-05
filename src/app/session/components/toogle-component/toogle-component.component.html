@@ -1,0 +1,16 @@
+<div class="flex items-center space-x-4">
+  <button
+    [class.bg-blue-500]="selectedOption === 'granjero'"
+    (click)="selectOption('granjero')"
+    class="py-2 px-4 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:border-blue-300 transition-colors duration-300"
+  >
+    Granjero
+  </button>
+  <button
+    [class.bg-blue-500]="selectedOption === 'cliente'"
+    (click)="selectOption('cliente')"
+    class="py-2 px-4 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:border-blue-300 transition-colors duration-300"
+  >
+    Cliente
+  </button>
+</div>

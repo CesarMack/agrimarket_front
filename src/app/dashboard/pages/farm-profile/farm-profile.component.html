@@ -16,60 +16,14 @@
         </h3>
       </div>
       <article class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
-        <div class="flex gap-10 w-full">
-          <span class="w-2/4 flex flex-col">
-            <label class="">Nombre(s):</label>
-
-            <input
-              type="email"
-              class="h-9 border border-gray-400 rounded-2xl"
-            />
-          </span>
-          <span class="w-2/4 flex flex-col">
-            <label>Apellido:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
-          </span>
+        <div class="flex flex-col">
+          <label>Nombre:</label>
+          <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
         </div>
-        <div class="flex gap-10 w-full mt-5">
-          <span class="w-2/4 flex flex-col">
-            <label>E-mail:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
-          </span>
-          <span class="w-2/4 flex flex-col">
-            <label>Telefono:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
-          </span>
+        <div class="flex flex-col">
+          <label>Telefono:</label>
+          <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
         </div>
-      </article>
-      <article
-        class="p-5 flex justify-center items-center rounded-3xl shadow bg-[#f6f6f6]"
-      >
-        <div class="mx-auto border w-[200px] h-[200px]">
-          <img [src]="imageUrl" alt="Imagen cargada" />
-        </div>
-        <input
-          class="mx-auto"
-          type="file"
-          (change)="onFileSelected($event)"
-          accept="image/*"
-        />
-      </article>
-
-      <div class="flex border-b border-[#2A9763] my-5">
-        <h3
-          class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
-        >
-          Direccion:
-        </h3>
-      </div>
-      <div class="flex border-b border-[#2A9763] my-5">
-        <h3
-          class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
-        >
-          Direccion de la Granja:
-        </h3>
-      </div>
-      <article class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
         <div class="flex flex-col">
           <label>Calle:</label>
           <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
@@ -106,10 +60,33 @@
           </span>
         </div>
       </article>
-      <article class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
-        <p>Deseas Agregar una granja?</p>
-        <button routerLink="/dashboard/profile/farm">Agregar granja</button>
+      <article
+        class="p-5 flex flex-col justify-center items-center rounded-3xl shadow bg-[#f6f6f6]"
+      >
+        <div class="mx-auto border w-[200px] h-[200px]">
+          <img [src]="imageUrl" alt="Imagen cargada" />
+        </div>
+        <input
+          class="mx-auto"
+          type="file"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+        />
       </article>
+      <div
+        class="mt-10 col-start-2 col-end-3 flex flex-col justify-center items-center gap-10"
+      >
+        <button
+          class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
+        >
+          Guardar
+        </button>
+        <button
+          class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
+        >
+          Cancelar
+        </button>
+      </div>
     </form>
   </div>
 </section>

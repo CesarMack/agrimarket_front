@@ -1,26 +1,50 @@
 <section class="bg-[#F6F6F6] h-[100vh] w-full flex justify-center items-center">
-  <form
-    class="w-1/3 h-5/6 p-12 flex flex-col bg-white shadow-lg rounded-[35px]"
-  >
-    <img class="h-24 object-contain" src="../assets/horizontal_logo.png" />
-    <h2
-      class="mx-auto my-10 text-[#2A9763] font-['Montserrat_Alternates'] text-3xl font-semibold"
+  <div class="w-2/3 h-5/6 p-10 flex gap-10 bg-white shadow-lg rounded-[35px]">
+    <article class="w-2/4 flex justify-center items-center">
+      <img src="../assets/farmer-login.jpg" />
+    </article>
+
+    <div class="w-[2px] h-full bg-gray-300"></div>
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col w-2/4 p-12"
     >
-      Iniciar Sesion
-    </h2>
-    <label class="">Email:</label>
-    <input type="email" class="h-10 border border-[#38C984] rounded-xl" />
+      <h2
+        class="mx-auto my-10 text-[#2A9763] font-['Montserrat_Alternates'] text-[45px] font-semibold"
+      >
+        Iniciar Sesion
+      </h2>
+      <label class="mb-3 font-medium text-lg">Email:</label>
+      <input
+        type="email"
+        formControlName="email"
+        class="h-12 border border-gray-400 rounded-3xl"
+      />
+      <label class="mb-3 mt-10 font-medium text-lg">Password:</label>
+      <input
+        type="password"
+        formControlName="password"
+        class="h-12 border border-gray-400 rounded-3xl"
+      />
 
-    <label class="mt-10">Password:</label>
-    <input type="password" class="h-10 border border-[#38C984] rounded-xl" />
+      <input
+        type="submit"
+        value="Aceptar"
+        class="cursor-pointer h-12 w-full mx-auto mt-10 bg-[#38C984] text-white rounded-3xl font-semibold text-lg shadow"
+      />
 
-    <input
-      type="submit"
-      value="Aceptar"
-      class="h-11 w-2/3 mx-auto mt-10 bg-[#38C984] text-white rounded-2xl font-semibold text-lg"
-    />
-
-    <hr class="my-10" />
-    <a href="register"> No tengo cuenta registrarme </a>
-  </form>
+      <a routerLink="/dashboard">Aceptar</a>
+      <hr class="my-10" />
+      <button
+        routerLink="/register"
+        class="h-12 border border-[#38C984] rounded-3xl shadow"
+      >
+        Registro
+      </button>
+    </form>
+  </div>
+  <div *ngIf="authError" class="text-red-500">
+    Hubo problemas para iniciar sesión. Por favor, verifica tus credenciales.
+  </div>
 </section>

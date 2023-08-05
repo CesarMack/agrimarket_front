@@ -8,6 +8,7 @@ import { DetailsProductPageComponent } from './pages/details-product-page/detail
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { SharedModule } from './shared/shared.module';
 import { DetailsOrderPageComponent } from './pages/details-order-page/details-order-page.component';
+import { FarmProfileComponent } from './pages/farm-profile/farm-profile.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { DetailsOrderPageComponent } from './pages/details-order-page/details-or
     DetailsProductPageComponent,
     ProfilePageComponent,
     DetailsOrderPageComponent,
+    FarmProfileComponent,
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule],
 })

@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './main/main.component';
-import { SessionComponent } from './session/session.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginPageComponent } from './session/pages/login-page/login-page.component';
+import { RegistrationPageComponent } from './session/pages/registration-page/registration-page.component';
 
 const routes: Routes = [
   {
@@ -11,13 +10,36 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () =>
-      import('./session/session.module').then((x) => x.SessionModule),
+    component: LoginPageComponent,
   },
+  {
+    path: 'register',
+    component: RegistrationPageComponent,
+  },
+
   {
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((x) => x.DashboardModule),
+  },
+  {
+    path: 'dashboardAdmi',
+    loadChildren: () =>
+      import('./dashboard-admi/dashboard-admi.module').then(
+        (x) => x.DashboardAdmiModule
+      ),
+  },
+
+  {
+    path: 'dashboardUser',
+    loadChildren: () =>
+      import('./dashboard-user/dashboard-user.module').then(
+        (x) => x.DashboardUserModule
+      ),
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./main/main.module').then((x) => x.MainModule),
   },
 ];
 

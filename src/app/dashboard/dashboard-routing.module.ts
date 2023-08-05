@@ -6,6 +6,7 @@ import { DetailsProductPageComponent } from './pages/details-product-page/detail
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { DashboardComponent } from './dashboard.component';
 import { DetailsOrderPageComponent } from './pages/details-order-page/details-order-page.component';
+import { FarmProfileComponent } from './pages/farm-profile/farm-profile.component';
 const routes: Routes = [
   {
     path: '',
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'orders/details',
         component: DetailsOrderPageComponent,
+      },
+      {
+        path: 'profile/farm',
+        component: FarmProfileComponent,
       },
     ],
   },

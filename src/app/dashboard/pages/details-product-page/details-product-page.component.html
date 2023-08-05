@@ -1,30 +1,79 @@
 <section class="p-10 w-full h-full bg-[#f6f6f6]">
   <div class="p-10 bg-white shadow-lg rounded-3xl w-full h-full">
-    <h2>Detalles Producto</h2>
-
-    <label>Nombre (Esto es una lista desplegable)</label>
-    <input type="text" class="border" />
-    <label>Categoria</label>
-    <input type="text" class="border" />
-    <label>Fecha de cosecha (Calendar)</label>
-    <input type="text" class="border" />
-    <label>Descripcion</label>
-    <input type="text" class="border" />
-    <label>Precio</label>
-    <input type="text" class="border" />
-
-    <label>Minimo de Venta</label>
-    <input type="text" class="border" />
-    <label>Unidad de Medida</label>
-    <input type="text" class="border" />
-    <label>Stock Disponible</label>
-    <input type="text" class="border" />
-
-    <label
-      >Agrgar fotos del producto (Esto se colocara del lado izquierd) la mitad
-      de la pantalla</label
-    >
-    <button>Guardar</button>
-    <button>Eliminar</button>
+    <form class="grid grid-cols-2 gap-x-10">
+      <div class="flex border-b border-[#2A9763] mb-5">
+        <h3
+          class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
+        >
+          Datos Productos
+        </h3>
+      </div>
+      <div class="flex border-b border-[#2A9763] mb-5">
+        <h3
+          class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
+        >
+          Fotografia Producto
+        </h3>
+      </div>
+      <article class="p-5 flex flex-col rounded-3xl shadow bg-[#f6f6f6]">
+        <div class="grid grid-cols-2 gap-10">
+          <span class="flex flex-col">
+            <label>Nombre (lista desplegable)</label>
+            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+          </span>
+          <span class="flex flex-col">
+            <label>Categoria</label>
+            <input type="text" class="h-9 border border-gray-400 rounded-2xl"
+          /></span>
+          <span class="flex flex-col">
+            <label>Unidad de Medida</label>
+            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+          </span>
+          <span class="flex flex-col">
+            <label>Minimo de Venta</label>
+            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+          </span>
+          <span class="flex flex-col">
+            <label>Fecha de cosecha (Calendar)</label>
+            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+          </span>
+          <span class="flex flex-col">
+            <label>Stock Disponible</label>
+            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+          </span>
+          <span class="flex flex-col">
+            <label>Precio</label>
+            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+          </span>
+          <span class="col-span-2 flex flex-col"
+            ><label>Descripcion</label>
+            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+          </span>
+        </div>
+      </article>
+      <article
+        class="p-5 w-2/3 flex flex-col justify-center items-center rounded-3xl shadow bg-[#f6f6f6]"
+      >
+        <div class="mx-auto border w-[200px] h-[200px]">
+          <img [src]="imageUrl" alt="Imagen cargada" />
+        </div>
+        <input
+          class="mx-auto"
+          type="file"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+        />
+        <button
+          class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
+        >
+          Guardar
+        </button>
+        <button
+          class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
+        >
+          Eliminar
+        </button>
+      </article>
+    </form>
   </div>
 </section>
