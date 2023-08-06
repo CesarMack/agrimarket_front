@@ -23,7 +23,7 @@ const routes: Routes = [
       import('./dashboard/dashboard.module').then((x) => x.DashboardModule),
   },
   {
-    path: 'dashboardAdmi',
+    path: 'admin',
     loadChildren: () =>
       import('./dashboard-admi/dashboard-admi.module').then(
         (x) => x.DashboardAdmiModule

@@ -8,10 +8,17 @@ import { LoginPageComponent } from './session/pages/login-page/login-page.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationPageComponent } from './session/pages/registration-page/registration-page.component';
 import { ToogleComponentComponent } from './session/components/toogle-component/toogle-component.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegistrationPageComponent, ToogleComponentComponent],
+  declarations: [
+    AppComponent,
+    LoginPageComponent,
+    RegistrationPageComponent,
+    ToogleComponentComponent,
+  ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

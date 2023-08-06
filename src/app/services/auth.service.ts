@@ -5,7 +5,7 @@ import { Auth, userRegister } from '../interfaces/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl: string = 'https://restcountries.com/v3.1';
+  private apiUrl: string = 'https://agrimarketapi.azurewebsites.net/api/v1/';
 
   constructor(private http: HttpClient) {}
 
@@ -15,16 +15,11 @@ export class AuthService {
       password: password,
     };
 
-    return this.http
-      .post<Auth>(
-        'https://agrimarketapi.azurewebsites.net/api/v1/user/login',
-        data
-      )
-      .pipe(
-        catchError(() => {
-          throw new Error('Authentication error');
-        })
-      );
+    return this.http.post<Auth>(`${this.apiUrl}/user/login`, data).pipe(
+      catchError(() => {
+        throw new Error('Authentication error');
+      })
+    );
   }
 
   register(data: userRegister): Observable<Auth> {

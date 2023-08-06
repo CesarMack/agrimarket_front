@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -12,7 +13,8 @@ export class LoginPageComponent {
   authError = false;
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -27,8 +29,23 @@ export class LoginPageComponent {
 
       this.authService.auth(email, password).subscribe(
         (response) => {
+          console.log(response);
+
           // Éxito en la autenticación, puedes redirigir o realizar otras acciones necesarias
           console.log(response.user.role);
+          if (response.user.role === 'admin') {
+            // Redirigir a la ruta de administrador
+
+            console.log(response.user.access_token);
+
+            localStorage.setItem('user_token', response.user.access_token);
+            this.router.navigate(['/admin']);
+          } else if (response.user.role === 'cliente') {
+            // Redirigir a la ruta de cliente
+            this.router.navigate(['/cliente']);
+          } else {
+            // Si el rol no es "admin" ni "cliente", manejarlo como desees
+          }
         },
         (error) => {
           // Mostrar mensaje de error en el HTML
