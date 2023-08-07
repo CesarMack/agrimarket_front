@@ -17,7 +17,7 @@
       />
     </svg>
     <span class="sr-only">Info</span>
-    <div class="ml-3 text-sm font-medium">Operacion Exitosa</div>
+    <div class="ml-3 text-sm font-medium">Operación exitosa</div>
     <button
       type="button"
       class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8"
@@ -102,7 +102,7 @@
     <h3
       class="text-3xl font-bold text-[#2A9763] font-['Montserrat_Alternates']"
     >
-      Productos
+      Tipos de productos
     </h3>
     <div class="flex w-full gap-10">
       <div class="w-1/3">
@@ -110,11 +110,11 @@
           <h3
             class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
           >
-            Agregar Producto:
+            Agregar tipo de producto
           </h3>
         </div>
 
-        <article class="h-1/3 bg-[#f6f6f6] p-5 rounded-3xl shadow">
+        <article class="h-auto bg-[#f6f6f6] p-5 rounded-xl shadow">
           <form [formGroup]="productForm" (ngSubmit)="determineAction()">
             <!-- Campo oculto para almacenar el ID del producto -->
             <input type="hidden" formControlName="productId" />
@@ -161,11 +161,11 @@
           <h3
             class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
           >
-            Sugerencia Prefijos:
+            Sugerencias:
           </h3>
         </div>
         <article
-          class="p-5 h-[350px] rounded-2xl shadow bg-[#f6f6f6] overflow-y-auto"
+          class="p-5 h-[280px] rounded-2xl shadow bg-[#f6f6f6] overflow-y-auto"
         >
           <div class="flow-root overflow-y-auto">
             <ul
@@ -182,7 +182,7 @@
                   <div class="flex items-center space-x-4">
                     <div class="flex-1 min-w-0">
                       <p class="text-sm">
-                        Nombre del Producto:
+                        Nombre del producto:
                         <span
                           class="text-sm font-medium text-gray-900 truncate"
                         >
@@ -243,11 +243,11 @@
           <h3
             class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
           >
-            Productos:
+            Tipos de producto
           </h3>
         </div>
 
-        <div class="rounded-3xl h-[665px] bg-[#f6f6f6] shadow">
+        <div class="rounded-3xl h-[200px] pb-10 bg-[#f6f6f6] shadow">
           <form
             [formGroup]="searchForm"
             (ngSubmit)="searchProductType()"
@@ -256,7 +256,7 @@
             <div class="relative w-full border-3xl">
               <input
                 formControlName="search"
-                placeholder="Search"
+                placeholder="Buscar tipo de producto"
                 class="p-4 py-3 outline-none focus pr-10 bg-white border rounded-3xl border-gray-400 text-slate-600 h-full w-full leading-4"
               />
               <svg
@@ -286,7 +286,7 @@
             <button
               class="text-white lg:max-w-[164px] px-6 py-4 w-full rounded-3xl leading-[14px] bg-[#2A9763] shadow-lg font-medium"
             >
-              Search
+              Buscar
             </button>
           </form>
 
@@ -306,8 +306,8 @@
                   <th class="font-normal">Nombre</th>
                   <th class="font-normal">Categoria</th>
                   <th class="font-normal">Estado</th>
-                  <th class="font-normal">Fecha de Creacion</th>
-                  <th class="font-normal">Fecha de Actualizacion</th>
+                  <th class="font-normal">Fecha de creación</th>
+                  <th class="font-normal">Fecha de actualización</th>
                   <th class="font-normal text-left pl-20"></th>
                 </tr>
               </thead>
