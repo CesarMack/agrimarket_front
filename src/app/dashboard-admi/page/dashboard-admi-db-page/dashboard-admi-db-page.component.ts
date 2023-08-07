@@ -165,7 +165,7 @@ export class DashboardAdmiDbPageComponent implements OnInit {
 
   openRestoreModal(name: String) {
     this.modalMessage =
-      '¿Estás seguro que deseas restaurar? Esto te sacara de la sesion';
+      '¿Estás seguro que deseas restaurar? Esto te sacara de la sesión.';
     this.action = 'restaurar';
     this.showModal = true;
     this.nameBackup = name;
