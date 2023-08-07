@@ -535,7 +535,7 @@ export class AdmiService {
     });
     return this.http
       .post<any>(
-        `${this.apiUrlBD}backups/makeDifferentialBackup`,
+        `${this.apiUrlBD}admins/backups/makeDifferentialBackup`,
         {},
         {
           headers,
@@ -564,6 +564,106 @@ export class AdmiService {
       .get<Backups>(`${this.apiUrlBD}admins/backups/DifferentialBackup`, {
         headers,
       })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  deleteBackupDifferential(name: String): Observable<any> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    console.log(token);
+
+    console.log(name);
+
+    return this.http
+      .post<any>(
+        `${this.apiUrlBD}admins/backups/deleteDifferentialBackup/${name}`,
+        {},
+        {
+          headers,
+        }
+      )
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  restoreBackupDifferential(name: String): Observable<any> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .post<any>(
+        `${this.apiUrlBD}admins/backups/restoreDifferentialBackup/${name}`,
+        {},
+        {
+          headers,
+        }
+      )
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  //Backup  Full
+
+  getFullBackup(): Observable<Backups> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+    });
+
+    console.log(token);
+
+    return this.http
+      .get<Backups>(`${this.apiUrlBD}admins/backups/FullBackup`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  restoreFullBackup(): Observable<any> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .post<any>(
+        `${this.apiUrlBD}admins/backups/restoreFullBackup`,
+        {},
+        {
+          headers,
+        }
+      )
       .pipe(
         catchError((e) => {
           console.log(e);
