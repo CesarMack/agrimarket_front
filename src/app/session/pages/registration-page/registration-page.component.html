@@ -7,16 +7,14 @@
     <form
       [formGroup]="registerForm"
       (ngSubmit)="onSubmit()"
-      class="flex flex-col w-2/4 p-12"
+      class="flex flex-col w-2/4 p-12 pt-5"
     >
-      <h2
-        class="mx-auto mb-10 text-[#2A9763] font-['Montserrat_Alternates'] text-[45px] font-semibold"
-      >
-        Registrase
+      <h2 class="mx-auto mb-5 text-[#2A9763] font-['Montserrat_Alternates'] text-[45px] font-semibold">
+        Registrarse
       </h2>
       <div class="flex space-x-4">
         <label
-          class="flex-1 px-4 py-2 text-center bg-gray-200 rounded-lg cursor-pointer transition-colors hover:bg-[#38C984] {{
+          class="cursor-pointer flex-1 px-4 py-2 text-center mx-2 my-2 bg-[#38C984] transition duration-150 ease-in-out rounded text-white text-sm transition-colors hover:bg-gray-300 {{
             registerForm.get('userRole')!.value === '1'
               ? 'bg-red-600 text-white'
               : ''
@@ -29,10 +27,10 @@
             formControlName="userRole"
             class="hidden"
           />
-          Client
+          Cliente
         </label>
         <label
-          class="flex-1 px-4 py-2 text-center bg-gray-200 rounded-lg cursor-pointer transition-colors hover:bg-[#38C984] {{
+          class="cursor-pointer flex-1 px-4 py-2 text-center mx-2 my-2 bg-[#38C984] duration-150 ease-in-out rounded text-white text-sm transition-colors hover:bg-gray-300 {{
             registerForm.get('userRole')!.value === '2'
               ? 'bg-red-600 text-white'
               : ''
@@ -45,46 +43,51 @@
             formControlName="userRole"
             class="hidden"
           />
-          Farmer
+          Granjero
         </label>
       </div>
-      <label class="mb-3 font-medium text-lg">Nombre:</label>
-      <input
-        formControlName="firstName"
-        type="email"
-        class="h-12 border border-gray-400 rounded-3xl"
-      />
+      <div class="grid grid-cols-2 gap-5">
+        <div>
+          <label class="block mb-2 text-lg font-medium text-gray-900 mt-5">Nombre:</label>
+          <input
+            formControlName="firstName"
+            type="text"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          />
+        </div>
+        <div>
+          <label class="block mb-2 text-lg font-medium text-gray-900 mt-5">Apellido:</label>
+          <input
+            formControlName="lastName"
+            type="text"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          />
+        </div>
+      </div>
 
-      <label class="mb-3 font-medium text-lg">Apellidos:</label>
-      <input
-        formControlName="lastName"
-        type="email"
-        class="h-12 border border-gray-400 rounded-3xl"
-      />
-
-      <label class="mb-3 mt-10 font-medium text-lg">Email:</label>
+      <label class="block mb-2 text-lg font-medium text-gray-900 mt-5">Email:</label>
       <input
         formControlName="email"
         type="email"
-        class="h-12 border border-gray-400 rounded-3xl"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       />
-      <label class="mb-3 mt-10 font-medium text-lg">Password:</label>
+      <label class="block mb-2 text-lg font-medium text-gray-900 mt-5">Password:</label>
       <input
         formControlName="password"
         type="password"
-        class="h-12 border border-gray-400 rounded-3xl"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       />
 
       <input
         type="submit"
         value="Aceptar"
-        class="h-12 w-full mx-auto mt-10 bg-[#38C984] text-white rounded-3xl font-semibold text-lg shadow"
+        class="cursor-pointer mt-10 bg-[#38C984] text-white rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 shadow"
       />
 
-      <hr class="my-10" />
+      <hr class="my-3" />
       <button
         routerLink="/login"
-        class="h-12 border border-[#38C984] rounded-3xl shadow"
+        class="cursor-pointer border border-[#38C984] border-10 text-[#38C984] rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 shadow"
       >
         Ya tengo cuenta
       </button>
