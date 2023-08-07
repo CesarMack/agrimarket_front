@@ -8,10 +8,12 @@ import { Category } from '../interfaces/category';
 import { ProductType } from '../interfaces/productType';
 import { Units } from '../interfaces/units';
 import { User } from '../interfaces/user';
+import { Backups } from '../interfaces/backups';
 
 @Injectable({ providedIn: 'root' })
 export class AdmiService {
-  private apiUrl: string = 'http://localhost:8000/api/v1';
+  private apiUrl: string =
+    'http://[2806:2f0:1001:845b:10f1:deb0:5e9:3b0e]:80/api/v1';
 
   constructor(private http: HttpClient) {}
 
@@ -61,9 +63,35 @@ export class AdmiService {
     console.log(headers);
 
     return this.http
-      .get<Suggestions>(`${this.apiUrl}/admins/suggestions`, {
+      .get<Suggestions>(`${this.apiUrl}/suggested_products`, {
         headers,
       })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  updateStatusSuggestion(id: String): Observable<any> {
+    const token = localStorage.getItem('user_token');
+
+    console.log(token);
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    console.log(headers);
+
+    return this.http
+      .post<any>(
+        `${this.apiUrl}/admins/suggestions/${id}`,
+        {},
+        {
+          headers,
+        }
+      )
       .pipe(
         catchError((e) => {
           console.log(e);
@@ -484,6 +512,56 @@ export class AdmiService {
     });
     return this.http
       .post<any>(`${this.apiUrl}/admins/register`, data, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  //API BACKUP
+
+  private apiUrlBD: string =
+    'http://[2806:2f0:1001:845b:10f1:deb0:5e9:3b0e]:80/api/v1/';
+  setBackupDifferential(): Observable<any> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .post<any>(
+        `${this.apiUrlBD}backups/makeDifferentialBackup`,
+        {},
+        {
+          headers,
+        }
+      )
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  getBackupDifferential(): Observable<Backups> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+    });
+
+    console.log(token);
+
+    return this.http
+      .get<Backups>(`${this.apiUrlBD}admins/backups/DifferentialBackup`, {
         headers,
       })
       .pipe(

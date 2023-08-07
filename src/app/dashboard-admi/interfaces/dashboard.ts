@@ -8,4 +8,5 @@ export interface DataDashboard {
   admins: number;
   clients: number;
   farmers: number;
+  total: number;
 }

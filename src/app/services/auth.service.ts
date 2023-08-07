@@ -5,7 +5,8 @@ import { Auth, userRegister } from '../interfaces/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl: string = 'http://localhost:8000/api/v1';
+  private apiUrl: string =
+    'http://[2806:2f0:1001:845b:10f1:deb0:5e9:3b0e]:80/api/v1';
 
   constructor(private http: HttpClient) {}
 

@@ -8,7 +8,7 @@ export interface SuggestionData {
   id: string;
   user_id: string;
   suggestion: string;
-  finished: string;
+  finished: number;
   created_at: string;
   updated_at: string;
 }

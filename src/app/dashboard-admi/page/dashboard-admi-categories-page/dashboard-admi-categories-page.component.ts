@@ -190,6 +190,19 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
       }
     );
   }
+  updateSuggestionsData(): void {
+    this.admiService.getSuggestions().subscribe(
+      (data) => {
+        console.log(data.data);
+
+        this.suggestionsData = data; // Asignamos los datos de suggestions
+        console.log(this.suggestionsData.data);
+      },
+      (error) => {
+        console.error('Error fetching suggestions data:', error);
+      }
+    );
+  }
 
   changeStatus(id: string): void {
     this.loader = true;
@@ -198,6 +211,24 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
         this.loader = false;
         console.log(response);
         this.updateCategoryData();
+        this.showSuccessMessage = true; // Mostrar mensaje de éxito
+        setTimeout(() => {
+          this.showSuccessMessage = false; // Ocultar mensaje de éxito después de un tiempo
+        }, 3000);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  updateSuggestionStatus(id: string): void {
+    this.loader = true;
+    this.admiService.updateStatusSuggestion(id).subscribe(
+      (response) => {
+        this.loader = false;
+        console.log(response);
+        this.updateSuggestionsData();
         this.showSuccessMessage = true; // Mostrar mensaje de éxito
         setTimeout(() => {
           this.showSuccessMessage = false; // Ocultar mensaje de éxito después de un tiempo

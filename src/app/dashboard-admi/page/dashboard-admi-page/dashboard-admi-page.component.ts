@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdmiService } from '../../services/admi.service';
-import { DataDashboard } from '../../interfaces/dashboard';
+import { Dashboard } from '../../interfaces/dashboard';
 import { Suggestions } from '../../interfaces/suggestions';
 
 @Component({
@@ -9,17 +9,13 @@ import { Suggestions } from '../../interfaces/suggestions';
   styleUrls: ['./dashboard-admi-page.component.css'],
 })
 export class DashboardAdmiPageComponent implements OnInit {
-  dashboardData: DataDashboard | undefined;
+  dashboardData: Dashboard | undefined;
   constructor(private admiService: AdmiService) {}
 
   ngOnInit(): void {
     this.admiService.getDashboard().subscribe(
       (data) => {
-        this.dashboardData = {
-          admins: data.data.admins,
-          clients: data.data.clients,
-          farmers: data.data.farmers,
-        };
+        this.dashboardData = data;
       },
       (error) => {
         console.error('Error fetching dashboard data:', error);
