@@ -146,7 +146,7 @@
               <input
                 type="submit"
                 class="cursor-pointer h-11 w-1/2 bg-[#2A9763] text-white rounded-3xl font-semibold text-lg shadow-lg"
-                value=" Aceptar"
+                value="Aceptar"
               />
               <input
                 type="reset"
@@ -257,7 +257,7 @@
               <input
                 formControlName="search"
                 placeholder="Buscar tipo de producto"
-                class="p-4 py-3 outline-none focus pr-10 bg-white border rounded-3xl border-gray-400 text-slate-600 h-full w-full leading-4"
+                class="px-4 py-3 border border-gray-400 rounded-3xl h-full w-full leading-4"
               />
               <svg
                 class="absolute pointer-events-none top-3 right-5"
@@ -326,7 +326,7 @@
                   <td>
                     <p class="font-medium">
                       <ng-container
-                        *ngIf="data?.active === 1; else inactiveText"
+                        *ngIf="data?.active === '1'; else inactiveText"
                         ><span
                           class="bg-green-100 text-green-800 font-medium px-4 py-2 rounded-full"
                           >Activo</span
@@ -353,10 +353,10 @@
                   <td>
                     <div class="flex items-center">
                       <button
-                        [disabled]="data?.active !== 1"
+                        [disabled]="data?.active !== '1'"
                         (click)="showProductDetails(data)"
                         class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 bg-gray-100 dark:bg-gray-800 mr-5 hover:bg-gray-200 dark:hover:bg-gray-700 py-2.5 px-5 rounded text-sm leading-3 text-gray-600 dark:text-gray-200 focus:outline-none
-         {{ data?.active !== 1 ? 'cursor-not-allowed opacity-50' : '' }}"
+         {{ data?.active !== '1' ? 'cursor-not-allowed opacity-50' : '' }}"
                       >
                         Mostrar
                       </button>

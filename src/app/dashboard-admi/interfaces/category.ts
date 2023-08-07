@@ -7,7 +7,7 @@ export interface Category {
 export interface CategoryData {
   id: string;
   name: string;
-  active: number;
+  active: string;
   created_at: string;
   updated_at: string;
 }

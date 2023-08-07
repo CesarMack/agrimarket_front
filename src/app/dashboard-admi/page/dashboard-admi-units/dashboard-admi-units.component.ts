@@ -14,6 +14,7 @@ export class DashboardAdmiUnitsComponent implements OnInit {
   selectedUnit: any = null;
   loader: boolean = false;
   showSuccessMessage: boolean = false;
+  showErrorMessage: boolean = false;
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder
@@ -58,6 +59,7 @@ export class DashboardAdmiUnitsComponent implements OnInit {
 
       productId: this.selectedUnit.id,
       name: this.selectedUnit.name,
+      code: this.selectedUnit.code,
       // ...otros campos aquí...
     });
   }
@@ -103,18 +105,28 @@ export class DashboardAdmiUnitsComponent implements OnInit {
   }
 
   newUnit(): void {
-    console.log('actovadp');
-
     if (this.unitForm.valid) {
       const name = this.unitForm.get('name')!.value;
       const code = this.unitForm.get('code')!.value;
 
+      this.loader = true;
       this.admiService.setUnit(name, code).subscribe(
         (response) => {
           console.log(response);
+          this.updateUnitData();
+          this.loader = false;
+          this.showSuccessMessage = true;
+          setTimeout(() => {
+            this.showSuccessMessage = false; // Ocultar mensaje de éxito después de un tiempo
+          }, 3000);
         },
         (error) => {
           console.log(error);
+          this.loader = false;
+          this.showErrorMessage = true; // Mostrar mensaje de error
+          setTimeout(() => {
+            this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+          }, 3000);
         }
       );
     }

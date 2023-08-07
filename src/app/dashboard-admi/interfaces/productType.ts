@@ -9,7 +9,7 @@ export interface ProductData {
   id: string;
   name: string;
   category: string;
-  active: number;
+  active: string;
   created_at: string;
   updated_at: string;
 }
