@@ -7,6 +7,7 @@ import { Users } from '../interfaces/users';
 import { Category } from '../interfaces/category';
 import { ProductType } from '../interfaces/productType';
 import { Units } from '../interfaces/units';
+import { User } from '../interfaces/user';
 
 @Injectable({ providedIn: 'root' })
 export class AdmiService {
@@ -428,6 +429,63 @@ export class AdmiService {
           headers,
         }
       )
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  ///Show user
+
+  getUserData(): Observable<User> {
+    const token = localStorage.getItem('user_token');
+    const idUser = localStorage.getItem('user_id');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<User>(`${this.apiUrl}/users/${idUser}`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  //register
+
+  setRegisterUser(
+    name: String,
+    lastName: String,
+    email: String,
+    password: String
+  ): Observable<any> {
+    const token = localStorage.getItem('user_token');
+    console.log(token);
+
+    const data = {
+      first_name: name,
+      last_name: lastName,
+      email: email,
+      password: password,
+    };
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .post<any>(`${this.apiUrl}/admins/register`, data, {
+        headers,
+      })
       .pipe(
         catchError((e) => {
           console.log(e);

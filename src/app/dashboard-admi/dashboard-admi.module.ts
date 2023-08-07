@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardAdmiCategoriesPageComponent } from './page/dashboard-admi-categories-page/dashboard-admi-categories-page.component';
 import { DashboardAdmiCategoryComponent } from './page/dashboard-admi-category/dashboard-admi-category.component';
 import { DashboardAdmiUnitsComponent } from './page/dashboard-admi-units/dashboard-admi-units.component';
+import { DashboradAdmiRegisterComponent } from './page/dashborad-admi-register/dashborad-admi-register.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { DashboardAdmiUnitsComponent } from './page/dashboard-admi-units/dashboa
     DashboardAdmiCategoriesPageComponent,
     DashboardAdmiCategoryComponent,
     DashboardAdmiUnitsComponent,
+    DashboradAdmiRegisterComponent,
   ],
   imports: [
     CommonModule,

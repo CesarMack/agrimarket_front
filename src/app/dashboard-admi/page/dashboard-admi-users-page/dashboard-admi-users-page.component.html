@@ -55,31 +55,32 @@
 
         <div class="flex gap-5">
           <button
-            routerLink="/dashboard/orders/completed"
+            routerLink="/admin/userRegister"
             class="w-32 bg-white shadow-lg py-3 px-6 rounded-3xl text-[#2A9763] font-medium"
           >
-            Activos
-          </button>
-          <button
-            routerLink="/dashboard/orders/completed"
-            class="w-32 bg-white shadow-lg py-3 px-6 rounded-3xl text-[#2A9763] font-medium"
-          >
-            No activos
+            + Registrar
           </button>
         </div>
       </div>
       <div class="bg-[#f6f6f6]">
-        <table [cellPadding]="0" [cellSpacing]="0" class="w-full">
+        <table
+          class="text-center"
+          [cellPadding]="0"
+          [cellSpacing]="0"
+          class="w-full text-center"
+        >
           <thead>
             <tr
               tabindex="0"
               class="focus:outline-none h-16 w-full text-sm leading-none text-gray-800"
             >
-              <th class="font-normal text-left pl-4">Nombre</th>
-              <th class="font-normal text-left pl-12">Rol</th>
-              <th class="font-normal text-left pl-12">Fecha de Creacion</th>
-              <th class="font-normal text-left pl-20">Fecha de Ingreso</th>
-              <th class="font-normal text-left pl-20"></th>
+              <th class="font-normal">Nombre</th>
+              <th class="font-normal">Apellido</th>
+              <th class="font-normal">Email</th>
+              <th class="font-normal">Role</th>
+              <th class="font-normal">Fecha de Creacion</th>
+              <th class="font-normal">Fecha de Actualizacion</th>
+              <th class="font-normal"></th>
             </tr>
           </thead>
           <tbody class="w-full">
@@ -87,29 +88,35 @@
               class="focus:outline-none h-20 text-sm leading-none text-gray-800 bg-[#f6f6f6] hover:bg-gray-100 border-b border-t"
               *ngFor="let user of usersData?.data"
             >
-              <td class="pl-4 cursor-pointer">
+              <td>
                 <p class="font-medium">{{ user?.first_name }}</p>
               </td>
-              <td class="pl-12">
-                <p class="text-sm font-medium leading-none text-gray-800">
-                  72%
-                </p>
+              <td>
+                <p class="font-medium">{{ user?.last_name }}</p>
               </td>
-              <td class="pl-12">
+              <td>
                 <p class="font-medium">{{ user?.email }}</p>
               </td>
-              <td class="pl-20">
+              <td>
+                <p class="font-medium">{{ user?.role }}</p>
+              </td>
+              <td>
                 <p class="font-medium">
                   {{ user?.created_at | date : "dd-MM-yyyy" }}
                 </p>
               </td>
-              <td class="pl-20">
+              <td>
+                <p class="font-medium">
+                  {{ user?.updated_at | date : "dd-MM-yyyy" }}
+                </p>
+              </td>
+              <td>
                 <div class="flex items-center">
                   <button
-                    routerLink="/dashboardAdmi/users/info"
+                    (click)="redirectAndStoreUserId(user?.id!)"
                     class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 bg-gray-100 dark:bg-gray-800 mr-5 hover:bg-gray-200 dark:hover:bg-gray-700 py-2.5 px-5 rounded text-sm leading-3 text-gray-600 dark:text-gray-200 focus:outline-none"
                   >
-                    Mostrars
+                    Mostrar
                   </button>
                 </div>
               </td>

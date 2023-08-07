@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Users } from '../../interfaces/users';
 import { AdmiService } from '../../services/admi.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-admi-users-page',
@@ -13,7 +14,8 @@ export class DashboardAdmiUsersPageComponent implements OnInit {
   searchForm: FormGroup;
   constructor(
     private admiService: AdmiService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.searchForm = this.formBuilder.group({
       search: ['', [Validators.required]],
@@ -44,5 +46,10 @@ export class DashboardAdmiUsersPageComponent implements OnInit {
         }
       );
     }
+  }
+  redirectAndStoreUserId(userId: string): void {
+    localStorage.setItem('user_id', userId.toString());
+
+    this.router.navigate(['/admin/infoUser']);
   }
 }

@@ -8,6 +8,7 @@ import { DashboardAdmiCategoriesPageComponent } from './page/dashboard-admi-cate
 import { DashboardAdmiUserInfoPageComponent } from './page/dashboard-admi-user-info-page/dashboard-admi-user-info-page.component';
 import { DashboardAdmiCategoryComponent } from './page/dashboard-admi-category/dashboard-admi-category.component';
 import { DashboardAdmiUnitsComponent } from './page/dashboard-admi-units/dashboard-admi-units.component';
+import { DashboradAdmiRegisterComponent } from './page/dashborad-admi-register/dashborad-admi-register.component';
 const routes: Routes = [
   {
     path: '',
@@ -27,7 +28,7 @@ const routes: Routes = [
         component: DashboardAdmiUsersPageComponent,
       },
       {
-        path: 'users/info',
+        path: 'infoUser',
         component: DashboardAdmiUserInfoPageComponent,
       },
       {
@@ -41,6 +42,10 @@ const routes: Routes = [
       {
         path: 'weight',
         component: DashboardAdmiUnitsComponent,
+      },
+      {
+        path: 'userRegister',
+        component: DashboradAdmiRegisterComponent,
       },
     ],
   },
