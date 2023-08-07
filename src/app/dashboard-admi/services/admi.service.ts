@@ -6,6 +6,7 @@ import { Suggestions } from '../interfaces/suggestions';
 import { Users } from '../interfaces/users';
 import { Category } from '../interfaces/category';
 import { ProductType } from '../interfaces/productType';
+import { Units } from '../interfaces/units';
 
 @Injectable({ providedIn: 'root' })
 export class AdmiService {
@@ -289,6 +290,148 @@ export class AdmiService {
       })
       .pipe(
         catchError(() => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  changeStatusCategories(id: String): Observable<any> {
+    const token = localStorage.getItem('user_token');
+    console.log(token);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json', // Agregar la cabecera Accept
+      'Content-Type': 'application/x-www-form-urlencoded', // Agregar la cabecera Content-Type
+    });
+
+    return this.http
+      .post<any>(
+        `${this.apiUrl}/admins/categories/${id}/active`,
+        {},
+        {
+          headers,
+        }
+      )
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  updateCategoryType(id: String, name: String): Observable<any> {
+    const token = localStorage.getItem('user_token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    const data = {
+      name: name,
+    };
+
+    return this.http
+      .post<any>(`${this.apiUrl}/admins/categories/${id}`, data, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  ///Units
+
+  getUnits(): Observable<Units> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<Units>(`${this.apiUrl}/units_of_measurements`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  setUnit(name: String, code: String): Observable<any> {
+    const token = localStorage.getItem('user_token');
+    console.log(token);
+    const data = {
+      name: name,
+      code: code,
+      active: 1,
+    };
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .post<any>(`${this.apiUrl}/admins/units_of_measurements`, data, {
+        headers,
+      })
+      .pipe(
+        catchError(() => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  updateUnitType(id: String, name: String, code: String): Observable<any> {
+    const token = localStorage.getItem('user_token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    const data = {
+      name: name,
+      code: code,
+    };
+
+    return this.http
+      .post<any>(`${this.apiUrl}/admins/units_of_measurements/${id}`, data, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  changeStatusUnit(id: String): Observable<any> {
+    const token = localStorage.getItem('user_token');
+    console.log(token);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json', // Agregar la cabecera Accept
+      'Content-Type': 'application/x-www-form-urlencoded', // Agregar la cabecera Content-Type
+    });
+
+    return this.http
+      .post<any>(
+        `${this.apiUrl}/admins/units_of_measurements/${id}/active`,
+        {},
+        {
+          headers,
+        }
+      )
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
           throw new Error('Authentication error');
         })
       );

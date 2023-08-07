@@ -6,6 +6,8 @@ import { DashboardAdmiDbPageComponent } from './page/dashboard-admi-db-page/dash
 import { DashboardAdmiUsersPageComponent } from './page/dashboard-admi-users-page/dashboard-admi-users-page.component';
 import { DashboardAdmiCategoriesPageComponent } from './page/dashboard-admi-categories-page/dashboard-admi-categories-page.component';
 import { DashboardAdmiUserInfoPageComponent } from './page/dashboard-admi-user-info-page/dashboard-admi-user-info-page.component';
+import { DashboardAdmiCategoryComponent } from './page/dashboard-admi-category/dashboard-admi-category.component';
+import { DashboardAdmiUnitsComponent } from './page/dashboard-admi-units/dashboard-admi-units.component';
 const routes: Routes = [
   {
     path: '',
@@ -29,8 +31,16 @@ const routes: Routes = [
         component: DashboardAdmiUserInfoPageComponent,
       },
       {
-        path: 'categories',
+        path: 'product',
         component: DashboardAdmiCategoriesPageComponent,
+      },
+      {
+        path: 'categories',
+        component: DashboardAdmiCategoryComponent,
+      },
+      {
+        path: 'weight',
+        component: DashboardAdmiUnitsComponent,
       },
     ],
   },

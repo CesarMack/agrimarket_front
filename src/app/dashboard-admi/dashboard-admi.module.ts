@@ -8,6 +8,8 @@ import { DashboardAdmiPageComponent } from './page/dashboard-admi-page/dashboard
 import { DashboardAdmiUsersPageComponent } from './page/dashboard-admi-users-page/dashboard-admi-users-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardAdmiCategoriesPageComponent } from './page/dashboard-admi-categories-page/dashboard-admi-categories-page.component';
+import { DashboardAdmiCategoryComponent } from './page/dashboard-admi-category/dashboard-admi-category.component';
+import { DashboardAdmiUnitsComponent } from './page/dashboard-admi-units/dashboard-admi-units.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { DashboardAdmiCategoriesPageComponent } from './page/dashboard-admi-cate
     DashboardAdmiUserInfoPageComponent,
     DashboardAdmiUsersPageComponent,
     DashboardAdmiCategoriesPageComponent,
+    DashboardAdmiCategoryComponent,
+    DashboardAdmiUnitsComponent,
   ],
   imports: [
     CommonModule,

@@ -14,12 +14,12 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
   categoriesData: Category | undefined;
   productForm: FormGroup;
   searchForm: FormGroup;
-  categoryForm: FormGroup;
   suggestionsData: Suggestions | undefined;
   productsData: ProductType | undefined;
   selectedProduct: any = null;
   loader: boolean = false;
   showSuccessMessage: boolean = false;
+  showErrorMessage: boolean = false;
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder
@@ -31,9 +31,6 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
     });
     this.searchForm = this.formBuilder.group({
       search: ['', [Validators.required]],
-    });
-    this.categoryForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
     });
   }
 
@@ -115,13 +112,11 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
         (item) => item.name === categories
       );
 
-      console.log(productId, ' ', name, '', selectedOption?.id!);
       this.loader = true;
       this.admiService
         .updateProductType(productId, name, selectedOption?.id!)
         .subscribe(
           (response) => {
-            console.log(response);
             this.updateCategoryData();
             this.loader = false;
             this.showSuccessMessage = true; // Mostrar mensaje de éxito
@@ -131,7 +126,6 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
           },
           (error) => {
             this.loader = false;
-            console.log(error);
           }
         );
     }
@@ -160,11 +154,9 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
         (item) => item.name === categories
       );
 
-      console.log(name, ' ', selectedOption?.id);
       this.loader = true;
       this.admiService.setProductType(name, selectedOption?.id!).subscribe(
         (response) => {
-          console.log(response);
           this.updateCategoryData();
           this.loader = false;
           this.showSuccessMessage = true; // Mostrar mensaje de éxito
@@ -174,27 +166,16 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
         },
         (error) => {
           console.log(error);
+          this.loader = false;
+          this.showErrorMessage = true; // Mostrar mensaje de error
+          setTimeout(() => {
+            this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+          }, 3000);
         }
       );
     }
   }
 
-  newCategory(): void {
-    console.log('actovadp');
-
-    if (this.categoryForm.valid) {
-      const name = this.categoryForm.get('name')!.value;
-
-      this.admiService.setCategories(name).subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
-  }
   updateCategoryData(): void {
     this.admiService.getProductType().subscribe(
       (data) => {
