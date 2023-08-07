@@ -10,7 +10,6 @@ import { Suggestions } from '../../interfaces/suggestions';
 })
 export class DashboardAdmiPageComponent implements OnInit {
   dashboardData: DataDashboard | undefined;
-  suggestionsData: Suggestions | undefined;
   constructor(private admiService: AdmiService) {}
 
   ngOnInit(): void {
@@ -24,18 +23,6 @@ export class DashboardAdmiPageComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching dashboard data:', error);
-      }
-    );
-    // Ahora, ejecutemos getSuggestions() y almacenemos los datos en suggestionsData
-    this.admiService.getSuggestions().subscribe(
-      (data) => {
-        console.log(data.data);
-
-        this.suggestionsData = data; // Asignamos los datos de suggestions
-        console.log(this.suggestionsData.data);
-      },
-      (error) => {
-        console.error('Error fetching suggestions data:', error);
       }
     );
   }

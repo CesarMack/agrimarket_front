@@ -9,6 +9,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { SharedModule } from './shared/shared.module';
 import { DetailsOrderPageComponent } from './pages/details-order-page/details-order-page.component';
 import { FarmProfileComponent } from './pages/farm-profile/farm-profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,13 @@ import { FarmProfileComponent } from './pages/farm-profile/farm-profile.componen
     ProfilePageComponent,
     DetailsOrderPageComponent,
     FarmProfileComponent,
+    ProfilePageComponent,
   ],
-  imports: [CommonModule, DashboardRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    DashboardRoutingModule,
+    SharedModule,
+    ReactiveFormsModule,
+  ],
 })
 export class DashboardModule {}

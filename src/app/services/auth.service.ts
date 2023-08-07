@@ -5,7 +5,7 @@ import { Auth, userRegister } from '../interfaces/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl: string = 'https://agrimarketapi.azurewebsites.net/api/v1/';
+  private apiUrl: string = 'http://localhost:8000/api/v1';
 
   constructor(private http: HttpClient) {}
 
@@ -24,10 +24,7 @@ export class AuthService {
 
   register(data: userRegister): Observable<Auth> {
     return this.http
-      .post<Auth>(
-        'https://agrimarketapi.azurewebsites.net/api/v1/user/register',
-        data
-      )
+      .post<Auth>('http://localhost:8000/api/v1/user/register', data)
       .pipe(
         catchError(() => {
           throw new Error('Authentication error');

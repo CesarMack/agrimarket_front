@@ -133,39 +133,5 @@
         </div>
       </article>
     </div>
-
-    <div class="mt-10 flex flex-1 gap-10">
-      <article
-        class="p-5 w-4/6 max-h-max border rounded-lg bg-[#f6f6f6] overflow-y-auto"
-      >
-        <!-- This is an example component -->
-        <h3 class="text-xl mb-4 font-bold leading-none text-gray-900">
-          Sugerencias Prefijos
-        </h3>
-
-        <div class="flow-root overflow-y-auto">
-          <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-            <li
-              class="py-3 sm:py-4"
-              *ngFor="let suggestion of suggestionsData?.data"
-            >
-              <div class="flex items-center space-x-4">
-                <div class="flex-1 min-w-0">
-                  <p class="text-sm font-medium text-gray-900 truncate">
-                    {{ suggestion.suggestion }}
-                    <!-- Nombre del Producto -->
-                  </p>
-                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                    {{ suggestion.created_at }}
-                    <!-- Fecha de creación -->
-                  </p>
-                  <!-- Otros campos que desees mostrar -->
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </article>
-    </div>
   </div>
 </section>

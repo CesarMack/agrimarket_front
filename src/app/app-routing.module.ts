@@ -18,9 +18,16 @@ const routes: Routes = [
   },
 
   {
-    path: 'dashboard',
+    path: 'farmer',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((x) => x.DashboardModule),
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./dashboard-user/dashboard-user.module').then(
+        (x) => x.DashboardUserModule
+      ),
   },
   {
     path: 'admin',
@@ -30,13 +37,6 @@ const routes: Routes = [
       ),
   },
 
-  {
-    path: 'dashboardUser',
-    loadChildren: () =>
-      import('./dashboard-user/dashboard-user.module').then(
-        (x) => x.DashboardUserModule
-      ),
-  },
   {
     path: '**',
     loadChildren: () => import('./main/main.module').then((x) => x.MainModule),

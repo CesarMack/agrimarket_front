@@ -7,6 +7,7 @@ import { DashboardAdmiUserInfoPageComponent } from './page/dashboard-admi-user-i
 import { DashboardAdmiPageComponent } from './page/dashboard-admi-page/dashboard-admi-page.component';
 import { DashboardAdmiUsersPageComponent } from './page/dashboard-admi-users-page/dashboard-admi-users-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardAdmiCategoriesPageComponent } from './page/dashboard-admi-categories-page/dashboard-admi-categories-page.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DashboardAdmiPageComponent,
     DashboardAdmiUserInfoPageComponent,
     DashboardAdmiUsersPageComponent,
+    DashboardAdmiCategoriesPageComponent,
   ],
   imports: [
     CommonModule,

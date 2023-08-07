@@ -4,10 +4,12 @@ import { Observable, catchError, of } from 'rxjs';
 import { Dashboard } from '../interfaces/dashboard';
 import { Suggestions } from '../interfaces/suggestions';
 import { Users } from '../interfaces/users';
+import { Category } from '../interfaces/category';
+import { ProductType } from '../interfaces/productType';
 
 @Injectable({ providedIn: 'root' })
 export class AdmiService {
-  private apiUrl: string = 'https://agrimarketapi.azurewebsites.net/api/v1';
+  private apiUrl: string = 'http://localhost:8000/api/v1';
 
   constructor(private http: HttpClient) {}
 
@@ -124,6 +126,169 @@ export class AdmiService {
         catchError((e) => {
           console.log(e);
 
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  getCategory(): Observable<Category> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<Category>(`${this.apiUrl}/categories`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  getProductType(): Observable<ProductType> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    console.log(headers);
+
+    return this.http
+      .get<ProductType>(`${this.apiUrl}/product_types`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  findProductType(name: string): Observable<ProductType> {
+    const token = localStorage.getItem('user_token');
+
+    console.log(token);
+    const data = {
+      name: name,
+    };
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .post<ProductType>(`${this.apiUrl}/admins/find_product_type`, data, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  setProductType(name: String, category: String): Observable<any> {
+    const token = localStorage.getItem('user_token');
+    console.log(token);
+    const data = {
+      name: name,
+      category_id: category,
+      active: 1,
+    };
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .post<any>(`${this.apiUrl}/admins/product_types`, data, {
+        headers,
+      })
+      .pipe(
+        catchError(() => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  updateProductType(
+    id: String,
+    name: String,
+    category: String
+  ): Observable<any> {
+    const token = localStorage.getItem('user_token');
+    console.log(token);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    const data = {
+      name: name,
+      category_id: category,
+    };
+    console.log(data);
+    console.log(`${this.apiUrl}/admins/product_types/${id}`);
+
+    return this.http
+      .post<any>(`${this.apiUrl}/admins/product_types/${id}`, data, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  changeStatus(id: String): Observable<any> {
+    const token = localStorage.getItem('user_token');
+    console.log(token);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json', // Agregar la cabecera Accept
+      'Content-Type': 'application/x-www-form-urlencoded', // Agregar la cabecera Content-Type
+    });
+
+    return this.http
+      .post<any>(
+        `${this.apiUrl}/admins/product_types/${id}/active`,
+        {},
+        {
+          headers,
+        }
+      )
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  setCategories(name: String): Observable<any> {
+    const token = localStorage.getItem('user_token');
+    console.log(token);
+    const data = {
+      name: name,
+      active: 1,
+    };
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .post<any>(`${this.apiUrl}/admins/categories`, data, {
+        headers,
+      })
+      .pipe(
+        catchError(() => {
           throw new Error('Authentication error');
         })
       );

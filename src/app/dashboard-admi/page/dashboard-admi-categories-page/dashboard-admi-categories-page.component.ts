@@ -1,10 +1,230 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Category, CategoryData } from '../../interfaces/category';
+import { AdmiService } from '../../services/admi.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Suggestions } from '../../interfaces/suggestions';
+import { ProductType } from '../../interfaces/productType';
 
 @Component({
   selector: 'app-dashboard-admi-categories-page',
   templateUrl: './dashboard-admi-categories-page.component.html',
-  styleUrls: ['./dashboard-admi-categories-page.component.css']
+  styleUrls: ['./dashboard-admi-categories-page.component.css'],
 })
-export class DashboardAdmiCategoriesPageComponent {
+export class DashboardAdmiCategoriesPageComponent implements OnInit {
+  categoriesData: Category | undefined;
+  productForm: FormGroup;
+  searchForm: FormGroup;
+  categoryForm: FormGroup;
+  suggestionsData: Suggestions | undefined;
+  productsData: ProductType | undefined;
+  selectedProduct: any = null;
+  loader: boolean = false;
+  showSuccessMessage: boolean = false;
+  constructor(
+    private admiService: AdmiService,
+    private formBuilder: FormBuilder
+  ) {
+    this.productForm = this.formBuilder.group({
+      productId: [''],
+      name: ['', [Validators.required]],
+      categories: ['', Validators.required],
+    });
+    this.searchForm = this.formBuilder.group({
+      search: ['', [Validators.required]],
+    });
+    this.categoryForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+    });
+  }
 
+  ngOnInit(): void {
+    // Ahora, ejecutemos getSuggestions() y almacenemos los datos en suggestionsData
+    this.admiService.getSuggestions().subscribe(
+      (data) => {
+        console.log(data.data);
+
+        this.suggestionsData = data; // Asignamos los datos de suggestions
+        console.log(this.suggestionsData.data);
+      },
+      (error) => {
+        console.error('Error fetching suggestions data:', error);
+      }
+    );
+    this.admiService.getCategory().subscribe(
+      (data) => {
+        console.log(data);
+
+        this.categoriesData = data; // Assuming the response structure matches the provided JSON
+
+        console.log(this.categoriesData.data);
+
+        this.productForm.patchValue({
+          categories: this.categoriesData.data,
+          // ...otros campos aquí...
+        });
+      },
+      (error) => {
+        console.error('Error fetching CP data:', error);
+      }
+    );
+
+    this.admiService.getProductType().subscribe(
+      (data) => {
+        console.log(data);
+
+        this.productsData = data; // Assuming the response structure matches the provided JSON
+
+        console.log(this.productsData.data);
+      },
+      (error) => {
+        console.error('Error fetching CP data:', error);
+      }
+    );
+  }
+
+  determineAction(): void {
+    const productId = this.productForm.get('productId')?.value;
+
+    if (productId) {
+      this.updateProduct();
+    } else {
+      this.newProductType();
+    }
+  }
+  showProductDetails(product: any) {
+    // Cambia 'any' por el tipo adecuado para tus datos
+    this.selectedProduct = product;
+    console.log(this.selectedProduct.id);
+    this.productForm.patchValue({
+      // Asigna los valores del producto al formulario
+
+      productId: this.selectedProduct.id,
+      name: this.selectedProduct.name,
+      categories: this.selectedProduct.category,
+      // ...otros campos aquí...
+    });
+  }
+
+  updateProduct() {
+    if (this.productForm.valid) {
+      const productId = this.productForm.get('productId')!.value;
+      const name = this.productForm.get('name')!.value;
+      const categories = this.productForm.get('categories')!.value;
+
+      const selectedOption = this.categoriesData?.data.find(
+        (item) => item.name === categories
+      );
+
+      console.log(productId, ' ', name, '', selectedOption?.id!);
+      this.loader = true;
+      this.admiService
+        .updateProductType(productId, name, selectedOption?.id!)
+        .subscribe(
+          (response) => {
+            console.log(response);
+            this.updateCategoryData();
+            this.loader = false;
+            this.showSuccessMessage = true; // Mostrar mensaje de éxito
+            setTimeout(() => {
+              this.showSuccessMessage = false; // Ocultar mensaje de éxito después de un tiempo
+            }, 3000);
+          },
+          (error) => {
+            this.loader = false;
+            console.log(error);
+          }
+        );
+    }
+  }
+
+  searchProductType(): void {
+    if (this.searchForm.valid) {
+      const search = this.searchForm.get('search')!.value;
+
+      this.admiService.findProductType(search).subscribe(
+        (data) => {
+          this.productsData = data;
+        },
+        (error) => {
+          console.error('Error fetching user data:', error);
+        }
+      );
+    }
+  }
+
+  newProductType(): void {
+    if (this.productForm.valid) {
+      const name = this.productForm.get('name')!.value;
+      const categories = this.productForm.get('categories')!.value;
+      const selectedOption = this.categoriesData?.data.find(
+        (item) => item.name === categories
+      );
+
+      console.log(name, ' ', selectedOption?.id);
+      this.loader = true;
+      this.admiService.setProductType(name, selectedOption?.id!).subscribe(
+        (response) => {
+          console.log(response);
+          this.updateCategoryData();
+          this.loader = false;
+          this.showSuccessMessage = true; // Mostrar mensaje de éxito
+          setTimeout(() => {
+            this.showSuccessMessage = false; // Ocultar mensaje de éxito después de un tiempo
+          }, 3000);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  newCategory(): void {
+    console.log('actovadp');
+
+    if (this.categoryForm.valid) {
+      const name = this.categoryForm.get('name')!.value;
+
+      this.admiService.setCategories(name).subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+  updateCategoryData(): void {
+    this.admiService.getProductType().subscribe(
+      (data) => {
+        console.log(data);
+
+        this.productsData = data; // Assuming the response structure matches the provided JSON
+
+        console.log(this.productsData.data);
+      },
+      (error) => {
+        console.error('Error fetching CP data:', error);
+      }
+    );
+  }
+
+  changeStatus(id: string): void {
+    this.loader = true;
+    this.admiService.changeStatus(id).subscribe(
+      (response) => {
+        this.loader = false;
+        console.log(response);
+        this.updateCategoryData();
+        this.showSuccessMessage = true; // Mostrar mensaje de éxito
+        setTimeout(() => {
+          this.showSuccessMessage = false; // Ocultar mensaje de éxito después de un tiempo
+        }, 3000);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

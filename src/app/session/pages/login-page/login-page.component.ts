@@ -40,9 +40,12 @@ export class LoginPageComponent {
 
             localStorage.setItem('user_token', response.user.access_token);
             this.router.navigate(['/admin']);
-          } else if (response.user.role === 'cliente') {
+          } else if (response.user.role === 'farmer') {
             // Redirigir a la ruta de cliente
-            this.router.navigate(['/cliente']);
+
+            console.log(response.user.access_token);
+            localStorage.setItem('user_token', response.user.access_token);
+            this.router.navigate(['/farmer']);
           } else {
             // Si el rol no es "admin" ni "cliente", manejarlo como desees
           }
