@@ -13,6 +13,9 @@ export class RegistrationPageComponent {
   authError = false;
   selectedUserRole: string = ''; // Initialize with an empty string
 
+  loader: boolean = false;
+  showSuccessMessage: boolean = false;
+  showErrorMessage: boolean = false;
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder
@@ -42,6 +45,7 @@ export class RegistrationPageComponent {
       const email = this.registerForm.get('email')!.value;
       const password = this.registerForm.get('password')!.value;
       const userRole = this.registerForm.get('userRole')!.value;
+      console.log(userRole);
 
       const data: userRegister = {
         first_name: first_name,
@@ -51,14 +55,26 @@ export class RegistrationPageComponent {
         type: userRole,
       };
 
+      console.log(data);
+      this.loader = true;
+
       this.authService.register(data).subscribe(
         (response) => {
+          this.loader = false;
+          this.showSuccessMessage = true; // Mostrar mensaje de éxito
+          setTimeout(() => {
+            this.showSuccessMessage = false; // Ocultar mensaje de éxito después de un tiempo
+          }, 3000);
           // Éxito en la autenticación, puedes redirigir o realizar otras acciones necesarias
-          console.log(response.user.role);
+          console.log(response);
         },
         (error) => {
-          // Mostrar mensaje de error en el HTML
-          this.authError = true;
+          console.log(error);
+          this.loader = false;
+          this.showErrorMessage = true; // Mostrar mensaje de error
+          setTimeout(() => {
+            this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+          }, 3000);
         }
       );
     }

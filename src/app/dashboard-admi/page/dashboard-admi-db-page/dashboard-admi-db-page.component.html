@@ -111,17 +111,40 @@
           Backups completos
         </p>
 
-        <button (click)="restoreFullBackup()" class="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded-xl text-white px-10 py-4 text-sm">
+        <button
+          (click)="openModalFullBackupModal()"
+          class="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded-xl text-white px-10 py-4 text-sm"
+        >
           Restaurar backup completo
         </button>
       </div>
       <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
-            <th scope="col" class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0">ID</th>
-            <th scope="col" class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0">Nombre</th>
-            <th scope="col" class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0">Tamaño</th>
-            <th scope="col" class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0">Fecha</th>
+            <th
+              scope="col"
+              class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0"
+            >
+              ID
+            </th>
+            <th
+              scope="col"
+              class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0"
+            >
+              Nombre
+            </th>
+            <th
+              scope="col"
+              class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0"
+            >
+              Tamaño
+            </th>
+            <th
+              scope="col"
+              class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0"
+            >
+              Fecha
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -145,7 +168,7 @@
       </table>
     </div>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="mt-10 relative overflow-x-auto shadow-md sm:rounded-lg">
       <div class="p-5 flex w-full justify-between">
         <p class="text-lg font-semibold text-left text-gray-900 bg-white">
           Backup parcial
@@ -161,43 +184,71 @@
       <table class="w-full text-sm text-center text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
-            <th scope="col" class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0">ID</th>
-            <th scope="col" class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0">Nombre</th>
-            <th scope="col" class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0">Tamaño</th>
-            <th scope="col" class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0">Fecha</th>
+            <th
+              scope="col"
+              class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0"
+            >
+              ID
+            </th>
+            <th
+              scope="col"
+              class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0"
+            >
+              Nombre
+            </th>
+            <th
+              scope="col"
+              class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0"
+            >
+              Tamaño
+            </th>
+            <th
+              scope="col"
+              class="font-medium text-center px-10 py-3 lg:px-6 xl:px-0"
+            >
+              Fecha
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr
-            class="bg-white border-b"
-            *ngFor="let data of backupsData?.backups; let i = index"
+          <ng-container
+            *ngIf="(backupsData?.backups)!.length > 0; else noRecords"
           >
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+            <tr
+              class="bg-white border-b"
+              *ngFor="let data of backupsData?.backups; let i = index"
             >
-              {{ i + 1 }}
-            </th>
-            <td class="py-4">{{ data.name }}</td>
-            <td class="py-4">{{ data.size }} kb</td>
-            <td class="py-4">
-              {{ data.created_at | localTime }}
-            </td>
-            <td class="py-4 text-right">
-              <button
-                class="mx-2 my-2 bg-red-500 transition duration-150 ease-in-out hover:bg-gray-600 rounded text-white px-6 py-2 text-xs"
-                (click)="openDeleteModal(data.name)"
-              >
-                Eliminar
-              </button>
-              <button
-                class="mx-2 my-2 bg-green-500 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs"
-                (click)="openRestoreModal(data.name)"
-              >
-                Restaurar
-              </button>
-            </td>
-          </tr>
+              <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                {{ i + 1 }}
+              </td>
+              <td class="py-4">{{ data.name }}</td>
+              <td class="py-4">{{ data.size }} kb</td>
+              <td class="py-4">
+                {{ data.created_at | localTime }}
+              </td>
+              <td class="py-4 text-right">
+                <button
+                  class="mx-2 my-2 bg-red-500 transition duration-150 ease-in-out hover:bg-gray-600 rounded text-white px-6 py-2 text-xs"
+                  (click)="openDeleteModal(data.name)"
+                >
+                  Eliminar
+                </button>
+                <button
+                  class="mx-2 my-2 bg-green-500 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs"
+                  (click)="openRestoreModal(data.name)"
+                >
+                  Restaurar
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-template #noRecords>
+            <tr class="bg-white border-b">
+              <td colspan="5" class="px-6 py-4 text-center text-gray-600">
+                No hay registros disponibles.
+              </td>
+            </tr>
+          </ng-template>
         </tbody>
       </table>
     </div>

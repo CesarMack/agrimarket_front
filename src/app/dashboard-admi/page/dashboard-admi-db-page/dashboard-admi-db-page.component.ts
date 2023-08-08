@@ -99,6 +99,7 @@ export class DashboardAdmiDbPageComponent implements OnInit {
         }, 3000);
       },
       (error) => {
+        this.updateBackupDifferentialData();
         console.error('Error fetching user data:', error);
         console.log(error);
         this.loader = false;
@@ -156,6 +157,13 @@ export class DashboardAdmiDbPageComponent implements OnInit {
       }
     );
   }
+
+  openModalFullBackupModal() {
+    this.modalMessage =
+      '¿Estás seguro de que deseas hacer restauración completa?';
+    this.action = 'full';
+    this.showModal = true;
+  }
   openDeleteModal(name: String) {
     this.modalMessage = '¿Estás seguro que deseas eliminar?';
     this.action = 'eliminar';
@@ -182,6 +190,8 @@ export class DashboardAdmiDbPageComponent implements OnInit {
       this.deleteBdBackup(this.nameBackup!);
     } else if (this.action === 'restaurar') {
       this.restoreDifferentialBackup(this.nameBackup!);
+    } else if (this.action === 'full') {
+      this.restoreFullBackup();
     }
     this.showModal = false;
   }
