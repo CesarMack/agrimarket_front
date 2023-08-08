@@ -364,7 +364,7 @@
                         (click)="changeStatus(data?.id!)"
                         class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 bg-gray-100 dark:bg-gray-800 mr-5 hover:bg-gray-200 dark:hover:bg-gray-700 py-2.5 px-5 rounded text-sm leading-3 text-gray-600 dark:text-gray-200 focus:outline-none"
                       >
-                        Activar
+                        {{ data?.active === "1" ? "Desactivar" : "Activar" }}
                       </button>
                     </div>
                   </td>
