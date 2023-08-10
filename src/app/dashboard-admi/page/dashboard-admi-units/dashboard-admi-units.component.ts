@@ -15,6 +15,7 @@ export class DashboardAdmiUnitsComponent implements OnInit {
   loader: boolean = false;
   showSuccessMessage: boolean = false;
   showErrorMessage: boolean = false;
+  errorMessage: String = '';
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder
@@ -83,9 +84,22 @@ export class DashboardAdmiUnitsComponent implements OnInit {
         },
         (error) => {
           this.loader = false;
+          this.errorMessage =
+            'Se produjo un error en la operación. Por favor, intenta nuevamente.';
+          this.showErrorMessage = true; // Mostrar mensaje de error
+          setTimeout(() => {
+            this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+          }, 3000);
           console.log(error);
         }
       );
+    } else {
+      this.errorMessage =
+        'Se produjo un error en la operación. Por favor, intenta nuevamente.';
+      this.showErrorMessage = true; // Mostrar mensaje de error
+      setTimeout(() => {
+        this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+      }, 3000);
     }
   }
 
@@ -123,12 +137,21 @@ export class DashboardAdmiUnitsComponent implements OnInit {
         (error) => {
           console.log(error);
           this.loader = false;
+          this.errorMessage =
+            'Se produjo un error en la operación. Por favor, intenta nuevamente.';
           this.showErrorMessage = true; // Mostrar mensaje de error
           setTimeout(() => {
             this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
           }, 3000);
         }
       );
+    } else {
+      this.errorMessage =
+        'Se produjo un error en la operación. Por favor, intenta nuevamente.';
+      this.showErrorMessage = true; // Mostrar mensaje de error
+      setTimeout(() => {
+        this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+      }, 3000);
     }
   }
 
@@ -146,6 +169,13 @@ export class DashboardAdmiUnitsComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+        this.loader = false;
+        this.errorMessage =
+          'Se produjo un error en la operación. Por favor, intenta nuevamente.';
+        this.showErrorMessage = true; // Mostrar mensaje de error
+        setTimeout(() => {
+          this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+        }, 3000);
       }
     );
   }

@@ -47,9 +47,36 @@ export class DashboardAdmiUsersPageComponent implements OnInit {
       );
     }
   }
-  redirectAndStoreUserId(userId: string): void {
+  redirectAndStoreUserId(userId: string, userRole: string): void {
     localStorage.setItem('user_id', userId.toString());
+    localStorage.setItem('user_role', userRole.toString());
 
     this.router.navigate(['/admin/infoUser']);
+  }
+
+  getRoleDisplayName(role: string) {
+    switch (role) {
+      case 'admin':
+        return 'Administrador';
+      case 'client':
+        return 'Cliente';
+      case 'farmer':
+        return 'Granjero';
+      default:
+        return 'Desconocido';
+    }
+  }
+
+  getRoleBadgeColor(role: string) {
+    switch (role) {
+      case 'admin':
+        return 'bg-blue-500 text-white'; // Clases de colores para el rol de administrador
+      case 'client':
+        return 'bg-green-500 text-white'; // Clases de colores para el rol de cliente
+      case 'farmer':
+        return 'bg-orange-500 text-white'; // Clases de colores para el rol de granjero
+      default:
+        return 'bg-gray-500 text-white'; // Clases de colores para roles desconocidos
+    }
   }
 }

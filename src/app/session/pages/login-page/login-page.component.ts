@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginPageComponent {
   loginForm: FormGroup;
   authError = false;
+  showFieldRequiredMessage = false;
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -53,8 +54,13 @@ export class LoginPageComponent {
         (error) => {
           // Mostrar mensaje de error en el HTML
           this.authError = true;
+          setTimeout(() => {
+            this.authError = false;
+          }, 2000);
         }
       );
+    } else {
+      this.showFieldRequiredMessage = true;
     }
   }
 }

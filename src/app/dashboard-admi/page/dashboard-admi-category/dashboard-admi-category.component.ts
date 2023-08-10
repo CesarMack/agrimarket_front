@@ -14,6 +14,8 @@ export class DashboardAdmiCategoryComponent implements OnInit {
   selectedCategory: any = null;
   loader: boolean = false;
   showSuccessMessage: boolean = false;
+  showErrorMessage: boolean = false;
+  errorMessage: String = '';
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder
@@ -77,10 +79,23 @@ export class DashboardAdmiCategoryComponent implements OnInit {
           }, 3000);
         },
         (error) => {
-          this.loader = false;
           console.log(error);
+          this.loader = false;
+          this.errorMessage =
+            'Se produjo un error en la operación. Por favor, intenta nuevamente.';
+          this.showErrorMessage = true; // Mostrar mensaje de error
+          setTimeout(() => {
+            this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+          }, 3000);
         }
       );
+    } else {
+      this.errorMessage =
+        'Se produjo un error en la operación. Por favor, intenta nuevamente.';
+      this.showErrorMessage = true; // Mostrar mensaje de error
+      setTimeout(() => {
+        this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+      }, 3000);
     }
   }
 
@@ -105,14 +120,35 @@ export class DashboardAdmiCategoryComponent implements OnInit {
     if (this.categoryForm.valid) {
       const name = this.categoryForm.get('name')!.value;
 
+      this.loader = true;
       this.admiService.setCategories(name).subscribe(
         (response) => {
+          this.updateCategoryData();
+          this.loader = false;
+          this.showSuccessMessage = true; // Mostrar mensaje de éxito
+          setTimeout(() => {
+            this.showSuccessMessage = false; // Ocultar mensaje de éxito después de un tiempo
+          }, 3000);
           console.log(response);
         },
         (error) => {
           console.log(error);
+          this.loader = false;
+          this.errorMessage =
+            'Se produjo un error en la operación. Por favor, intenta nuevamente.';
+          this.showErrorMessage = true; // Mostrar mensaje de error
+          setTimeout(() => {
+            this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+          }, 3000);
         }
       );
+    } else {
+      this.errorMessage =
+        'Se produjo un error en la operación. Por favor, intenta nuevamente.';
+      this.showErrorMessage = true; // Mostrar mensaje de error
+      setTimeout(() => {
+        this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+      }, 3000);
     }
   }
 

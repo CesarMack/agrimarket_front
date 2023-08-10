@@ -2,19 +2,43 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 import { Dashboard } from '../interfaces/dashboard';
-import { CPData } from '../interfaces/profile';
+import { CPData } from '../interfaces/cp';
+import { Profile } from '../interfaces/profile';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
-  private apiUrl: string = 'https://api.copomex.com/query/';
+  private apiUrlCP: string = 'https://api.copomex.com/query';
+  private apiUrl: string =
+    'http://[2806:2f0:1001:845b:665:8b98:ce58:95dc]:80/api/v1';
 
   constructor(private http: HttpClient) {}
 
   getCPInfo(cp: string): Observable<CPData> {
     return this.http
       .get<CPData>(
-        `${this.apiUrl}/info_cp/${cp}?type=simplified&token=e99527a4-4d5f-4411-8b05-fdb907c1798e`
+        `${this.apiUrlCP}/info_cp/${cp}?type=simplified&token=e99527a4-4d5f-4411-8b05-fdb907c1798e`
       )
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  getDataProfile(): Observable<Profile> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    console.log(headers);
+
+    return this.http
+      .get<Profile>(`${this.apiUrl}/users/me`, {
+        headers,
+      })
       .pipe(
         catchError((e) => {
           console.log(e);

@@ -21,23 +21,37 @@
             <label class="">Nombre(s):</label>
 
             <input
+              formControlName="name"
               type="email"
-              class="h-9 border border-gray-400 rounded-2xl"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
             />
           </span>
           <span class="w-2/4 flex flex-col">
             <label>Apellido:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="last_n
+              ame"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
         </div>
         <div class="flex gap-10 w-full mt-5">
           <span class="w-2/4 flex flex-col">
             <label>E-mail:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="email"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
           <span class="w-2/4 flex flex-col">
             <label>Telefono:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="phone"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
         </div>
       </article>
@@ -48,7 +62,7 @@
           <img [src]="imageUrl" alt="Imagen cargada" />
         </div>
         <input
-          class="mx-auto"
+          class="px-4 mx-auto"
           type="file"
           (change)="onFileSelected($event)"
           accept="image/*"
@@ -72,16 +86,28 @@
       <article class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
         <div class="flex flex-col">
           <label>Calle:</label>
-          <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+          <input
+            formControlName="street"
+            type="text"
+            class="px-4 h-9 border border-gray-400 rounded-2xl"
+          />
         </div>
         <div class="flex gap-10 w-full mt-5">
           <span class="w-2/4 flex flex-col">
             <label>Numero exterior:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="ext_num"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
           <span class="w-2/4 flex flex-col">
             <label>Numero interior:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="int_num"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
         </div>
 
@@ -89,10 +115,11 @@
           <span class="w-2/4 flex flex-col">
             <label>C.P:</label>
             <input
+              formControlName="zip_code"
               #cpInput
               (blur)="fetchCPInfo(cpInput.value)"
               type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
             />
           </span>
           <span class="w-2/4 flex flex-col">
@@ -114,17 +141,17 @@
           <span class="w-2/4 flex flex-col">
             <label>Ciudad:</label>
             <input
-              [formControlName]="'ciudad'"
+              formControlName="city"
               type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
             />
           </span>
           <span class="w-2/4 flex flex-col">
             <label>Estado:</label>
             <input
-              [formControlName]="'estado'"
+              formControlName="state"
               type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
             />
           </span>
         </div>

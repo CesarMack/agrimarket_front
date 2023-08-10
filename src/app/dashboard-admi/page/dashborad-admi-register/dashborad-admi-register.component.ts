@@ -13,6 +13,7 @@ export class DashboradAdmiRegisterComponent {
   loader: boolean = false;
   showSuccessMessage: boolean = false;
   showErrorMessage: boolean = false;
+  errorMessage: String = '';
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder,
@@ -21,7 +22,7 @@ export class DashboradAdmiRegisterComponent {
     this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
   }
@@ -52,11 +53,20 @@ export class DashboradAdmiRegisterComponent {
             console.log(error);
             this.loader = false;
             this.showErrorMessage = true; // Mostrar mensaje de error
+            this.errorMessage =
+              'Se produjo un error en la operación. Por favor, intenta nuevamente.';
             setTimeout(() => {
               this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
             }, 3000);
           }
         );
+    } else {
+      this.showErrorMessage = true; // Mostrar mensaje de error
+      this.errorMessage =
+        'Por favor, completa todos los campos antes de enviar el formulario.';
+      setTimeout(() => {
+        this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+      }, 3000);
     }
   }
 }

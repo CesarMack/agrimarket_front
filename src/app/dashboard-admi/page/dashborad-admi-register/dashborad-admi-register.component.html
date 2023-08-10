@@ -70,9 +70,7 @@
       />
     </svg>
     <span class="sr-only">Info</span>
-    <div class="ml-3 text-sm font-medium">
-      Se produjo un error en la operación. Por favor, intenta nuevamente.
-    </div>
+    <div class="ml-3 text-sm font-medium text-white">{{ errorMessage }}</div>
     <button
       type="button"
       class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
@@ -124,6 +122,16 @@
                 class="h-10 px-4 py-3 border border-gray-400 rounded-3xl"
               />
             </span>
+            <div
+              *ngIf="
+                registerForm.get('name')!.dirty &&
+                registerForm.get('name')!.hasError('required')
+              "
+              class="text-red-600"
+            >
+              El nombre es requerido.
+            </div>
+
             <span class="mt-5 flex flex-col">
               <label>Apellido:</label>
               <input
@@ -132,6 +140,15 @@
                 class="h-10 px-4 py-3 border border-gray-400 rounded-3xl"
               />
             </span>
+            <div
+              *ngIf="
+                registerForm.get('lastName')!.dirty &&
+                registerForm.get('lastName')!.hasError('required')
+              "
+              class="text-red-600"
+            >
+              El apellido es requerido.
+            </div>
             <span class="mt-5 flex flex-col">
               <label>Email:</label>
               <input
@@ -140,6 +157,24 @@
                 class="h-10 px-4 py-3 border border-gray-400 rounded-3xl"
               />
             </span>
+            <div
+              *ngIf="
+                registerForm.get('email')!.dirty &&
+                registerForm.get('email')!.hasError('required')
+              "
+              class="text-red-600"
+            >
+              El correo electrónico es requerido.
+            </div>
+            <div
+              *ngIf="
+                registerForm.get('email')!.dirty &&
+                registerForm.get('email')!.hasError('email')
+              "
+              class="text-red-600"
+            >
+              El correo electrónico no es válido.
+            </div>
             <span class="mt-5 flex flex-col">
               <label>Password:</label>
               <input
@@ -148,6 +183,15 @@
                 class="h-10 px-4 py-3 border border-gray-400 rounded-3xl"
               />
             </span>
+            <div
+              *ngIf="
+                registerForm.get('password')!.dirty &&
+                registerForm.get('password')!.hasError('required')
+              "
+              class="text-red-600"
+            >
+              La contraseña es requerida.
+            </div>
             <span class="flex gap-5 mt-5">
               <input
                 type="submit"

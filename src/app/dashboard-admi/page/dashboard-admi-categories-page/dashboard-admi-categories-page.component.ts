@@ -12,6 +12,7 @@ import { ProductType } from '../../interfaces/productType';
 })
 export class DashboardAdmiCategoriesPageComponent implements OnInit {
   categoriesData: Category | undefined;
+  dataOriginal: Category | undefined;
   productForm: FormGroup;
   searchForm: FormGroup;
   suggestionsData: Suggestions | undefined;
@@ -20,6 +21,7 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
   loader: boolean = false;
   showSuccessMessage: boolean = false;
   showErrorMessage: boolean = false;
+  errorMessage: String = '';
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder
@@ -51,8 +53,13 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
       (data) => {
         console.log(data);
 
-        this.categoriesData = data; // Assuming the response structure matches the provided JSON
+        this.dataOriginal = data;
 
+        this.categoriesData = {
+          data: this.dataOriginal.data.filter(
+            (category) => category.active === '1'
+          ),
+        };
         console.log(this.categoriesData.data);
 
         this.productForm.patchValue({
@@ -173,6 +180,13 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
           }, 3000);
         }
       );
+    } else {
+      this.errorMessage =
+        'Por favor, completa todos los campos antes de enviar el formulario.';
+      this.showErrorMessage = true; // Mostrar mensaje de error
+      setTimeout(() => {
+        this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
+      }, 3000);
     }
   }
 

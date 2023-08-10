@@ -37,7 +37,10 @@
       </button>
     </div>
     <div class="mt-10 grid grid-cols-6 gap-10">
-      <article class="h-60 p-5 bg-white rounded-3xl shadow-lg">
+      <article
+        *ngFor="let data of catalogData!.data"
+        class="h-60 p-5 bg-white rounded-3xl shadow-lg"
+      >
         <img
           class="h-2/3 w-full rounded-3xl border"
           src="../assets/vegetables.jpg"

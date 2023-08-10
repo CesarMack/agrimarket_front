@@ -3,7 +3,7 @@
     <h3
       class="text-3xl font-bold text-[#2A9763] font-['Montserrat_Alternates']"
     >
-      Informacion Usuario
+      Información Usuario
     </h3>
     <div class="h-full flex gap-10">
       <article class="w-1/2">
@@ -18,36 +18,42 @@
           <table [cellSpacing]="0" [cellPadding]="0" class="w-full">
             <tbody>
               <tr>
-                <td class="w-1/2 font-bold">ID de Orden:</td>
+                <td class="w-1/2 font-bold">ID de Usuario:</td>
                 <td>{{ (userData?.data)!.id }}</td>
               </tr>
               <tr>
-                <td class="font-bold">Nombre Cliente:</td>
+                <td class="font-bold">Nombre:</td>
                 <td>{{ (userData?.data)!.first_name }}</td>
               </tr>
               <tr>
-                <td class="font-bold">Apellido Cliente:</td>
+                <td class="font-bold">Apellido:</td>
                 <td>{{ (userData?.data)!.last_name }}</td>
               </tr>
               <tr>
-                <td class="font-bold">Email Cliente:</td>
+                <td class="font-bold">Email:</td>
                 <td>{{ (userData?.data)!.email }}</td>
               </tr>
               <tr>
-                <td class="font-bold">Teléfono Cliente:</td>
+                <td class="font-bold">Teléfono:</td>
                 <td>{{ (userData?.data)!.phone }}</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="flex border-b border-[#2A9763] my-5">
+        <div
+          class="flex border-b border-[#2A9763] my-5"
+          *ngIf="userRole !== 'admin'"
+        >
           <h3
             class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
           >
-            Direccion:
+            Dirección:
           </h3>
         </div>
-        <div class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
+        <div
+          class="p-5 rounded-3xl shadow bg-[#f6f6f6]"
+          *ngIf="userRole !== 'admin'"
+        >
           <table [cellSpacing]="0" [cellPadding]="0" class="w-full">
             <tbody>
               <tr>

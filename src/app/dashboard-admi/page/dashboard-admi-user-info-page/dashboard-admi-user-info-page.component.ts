@@ -9,9 +9,12 @@ import { User } from '../../interfaces/user';
 })
 export class DashboardAdmiUserInfoPageComponent implements OnInit {
   userData: User | undefined;
+  userRole: string | undefined;
+
   constructor(private admiService: AdmiService) {}
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('user_role')!;
     this.admiService.getUserData().subscribe(
       (data) => {
         this.userData = data;
