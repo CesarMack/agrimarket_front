@@ -156,6 +156,8 @@
                 <th class="font-normal text-left pl-20"></th>
               </tr>
             </thead>
+            <!--
+            Error en el activar y desactivar categorias revisar duespues -->
             <tbody class="w-full">
               <tr
                 class="focus:outline-none h-20 text-sm leading-none text-gray-800 bg-[#f6f6f6] hover:bg-gray-100 border-b border-t"
@@ -168,7 +170,7 @@
                 <td>
                   <p class="font-medium">
                     <ng-container
-                      *ngIf="data?.active === '1'; else inactiveText"
+                      *ngIf="data?.active?.toString; else inactiveText"
                       ><span
                         class="bg-green-100 text-green-800 font-medium px-4 py-2 rounded-full"
                         >Activo</span
@@ -195,10 +197,10 @@
                 <td>
                   <div class="flex items-center justify-center">
                     <button
-                      [disabled]="data?.active !== '1'"
+                      [disabled]="data?.active !== 1"
                       (click)="showCategoryDetails(data)"
                       class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 bg-gray-100 dark:bg-gray-800 mr-5 hover:bg-gray-200 dark:hover:bg-gray-700 py-2.5 px-5 rounded text-sm leading-3 text-gray-600 dark:text-gray-200 focus:outline-none
-         {{ data?.active !== '1' ? 'cursor-not-allowed opacity-50' : '' }}"
+         {{ data?.active !== 1 ? 'cursor-not-allowed opacity-50' : '' }}"
                     >
                       Mostrar
                     </button>
@@ -206,7 +208,7 @@
                       (click)="changeStatus(data?.id!)"
                       class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 bg-gray-100 dark:bg-gray-800 mr-5 hover:bg-gray-200 dark:hover:bg-gray-700 py-2.5 px-5 rounded text-sm leading-3 text-gray-600 dark:text-gray-200 focus:outline-none"
                     >
-                      {{ data?.active === "1" ? "Desactivar" : "Activar" }}
+                      {{ data?.active === 1 ? "Desactivar" : "Activar" }}
                     </button>
                   </div>
                 </td>

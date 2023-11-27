@@ -51,13 +51,15 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
     );
     this.admiService.getCategory().subscribe(
       (data) => {
+        console.log('CAtegorias en tipos de productos');
+
         console.log(data);
 
         this.dataOriginal = data;
 
         this.categoriesData = {
           data: this.dataOriginal.data.filter(
-            (category) => category.active === '1'
+            (category) => category.active === 1
           ),
         };
         console.log(this.categoriesData.data);

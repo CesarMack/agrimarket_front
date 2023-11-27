@@ -1,13 +1,15 @@
-export interface Catalog {
-  data: Product[];
+export interface ProductData {
+  data: Data;
 }
 
-export interface Product {
+export interface Data {
   id: string;
   user_id: string;
   product: string;
+  description: string;
   price: string;
   measure: string;
+  stock: string;
   minimum_sale: string;
   cutoff_date: Date;
   photos: Photo[];
