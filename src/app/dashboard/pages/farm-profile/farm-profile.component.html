@@ -1,6 +1,6 @@
 <section class="p-10 w-full h-full bg-[#f6f6f6]">
   <div class="px-10 py-5 bg-white shadow-lg rounded-3xl w-full h-full">
-    <form class="grid grid-cols-2 gap-x-10">
+    <form [formGroup]="farmForm" class="grid grid-cols-2 gap-x-10">
       <div class="flex border-b border-[#2A9763] my-5">
         <h3
           class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
@@ -18,45 +18,81 @@
       <article class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
         <div class="flex flex-col">
           <label>Nombre:</label>
-          <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+          <input
+            formControlName="name"
+            type="text"
+            class="h-9 border border-gray-400 rounded-2xl"
+          />
         </div>
         <div class="flex flex-col">
           <label>Telefono:</label>
-          <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+          <input
+            formControlName="phone"
+            type="text"
+            class="h-9 border border-gray-400 rounded-2xl"
+          />
         </div>
         <div class="flex flex-col">
           <label>Calle:</label>
-          <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+          <input
+            formControlName="street"
+            type="text"
+            class="h-9 border border-gray-400 rounded-2xl"
+          />
         </div>
         <div class="flex gap-10 w-full mt-5">
           <span class="w-2/4 flex flex-col">
             <label>Numero exterior:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="ext_num"
+              type="text"
+              class="h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
           <span class="w-2/4 flex flex-col">
             <label>Numero interior:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="int_num"
+              type="text"
+              class="h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
         </div>
 
         <div class="flex gap-10 w-full mt-5">
           <span class="w-2/4 flex flex-col">
             <label>C.P:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="zip_code"
+              type="text"
+              class="h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
           <span class="w-2/4 flex flex-col">
             <label>Colonia:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="suburb"
+              type="text"
+              class="h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
         </div>
         <div class="flex gap-10 w-full mt-5">
           <span class="w-2/4 flex flex-col">
             <label>Ciudad:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="city"
+              type="text"
+              class="h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
           <span class="w-2/4 flex flex-col">
             <label>Estado:</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="state"
+              type="text"
+              class="h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
         </div>
       </article>

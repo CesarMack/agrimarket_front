@@ -37,6 +37,10 @@ const routes: Routes = [
         component: ProfilePageComponent,
       },
       {
+        path: 'profile/farm',
+        component: FarmProfileComponent,
+      },
+      {
         path: 'orders',
         loadChildren: () =>
           import('./pages/orders/orders.module').then((x) => x.OrdersModule),
@@ -44,10 +48,6 @@ const routes: Routes = [
       {
         path: 'orders/details',
         component: DetailsOrderPageComponent,
-      },
-      {
-        path: 'profile/farm',
-        component: FarmProfileComponent,
       },
     ],
   },

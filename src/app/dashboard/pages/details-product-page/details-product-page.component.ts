@@ -78,9 +78,7 @@ export class DetailsProductPageComponent implements OnInit {
             console.log('Data producto id');
 
             console.log(data); // Llena los campos del formulario con la información obtenida
-            this.productForm.patchValue({
-              name: data.data.product,
-            });
+
             console.log(data.data.product);
 
             this.productForm.get('name')?.setValue(data.data.product);
@@ -181,6 +179,21 @@ export class DetailsProductPageComponent implements OnInit {
 
     if (this.productId) {
       console.log('Update');
+      this.farmerService.updateProduct(data, this.productId).subscribe(
+        (response) => {
+          console.log(response);
+          this.uploadImages(response)
+            .then(() => {
+              console.log('All images uploaded successfully.');
+            })
+            .catch((error) => {
+              console.log('Error uploading images:', error);
+            });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     } else {
       console.log('Create');
 
@@ -201,6 +214,7 @@ export class DetailsProductPageComponent implements OnInit {
       );
     }
   }
+
   async uploadImages(id: string): Promise<void> {
     console.log('Starting image upload...');
 

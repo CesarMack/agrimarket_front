@@ -1,6 +1,10 @@
 <section class="p-10 w-full h-full bg-[#f6f6f6]">
   <div class="px-10 py-5 bg-white shadow-lg rounded-3xl w-full h-full">
-    <form [formGroup]="profileForm" class="grid grid-cols-2 gap-x-10">
+    <form
+      [formGroup]="profileForm"
+      (ngSubmit)="updateInfoUser()"
+      class="grid grid-cols-2 gap-x-10"
+    >
       <div class="flex border-b border-[#2A9763] my-5">
         <h3
           class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
@@ -29,8 +33,7 @@
           <span class="w-2/4 flex flex-col">
             <label>Apellido:</label>
             <input
-              formControlName="last_n
-              ame"
+              formControlName="last_name"
               type="text"
               class="px-4 h-9 border border-gray-400 rounded-2xl"
             />
@@ -58,8 +61,24 @@
       <article
         class="p-5 flex justify-center items-center rounded-3xl shadow bg-[#f6f6f6]"
       >
-        <div class="mx-auto border w-[200px] h-[200px]">
-          <img [src]="imageUrl" alt="Imagen cargada" />
+        <div
+          *ngIf="selectedImage.file != null || selectedImage.previewUrl != null"
+        >
+          <h4>Imágenes seleccionadas:</h4>
+          <div class="relative mx-auto border w-[200px] h-[200px]">
+            <img
+              class="absolute"
+              *ngIf="selectedImage.previewUrl"
+              [src]="selectedImage.previewUrl"
+              alt="Vista previa"
+            />
+            <button
+              class="absolute inset-y-0 inset-x-0"
+              (click)="removeImage()"
+            >
+              Eliminar
+            </button>
+          </div>
         </div>
         <input
           class="px-4 mx-auto"
@@ -117,24 +136,17 @@
             <input
               formControlName="zip_code"
               #cpInput
-              (blur)="fetchCPInfo(cpInput.value)"
               type="text"
               class="px-4 h-9 border border-gray-400 rounded-2xl"
             />
           </span>
           <span class="w-2/4 flex flex-col">
             <label>Colonia:</label>
-            <select
-              class="h-9 border border-gray-400 rounded-2xl"
-              formControlName="colonia"
-            >
-              <option
-                *ngFor="let colonia of cpData?.response?.asentamiento"
-                [ngValue]="colonia"
-              >
-                {{ colonia }}
-              </option>
-            </select>
+            <input
+              formControlName="suburb"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
         </div>
         <div class="flex gap-10 w-full mt-5">
@@ -158,7 +170,10 @@
       </article>
       <article class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
         <p>Deseas Agregar una granja?</p>
-        <button routerLink="/dashboard/profile/farm">Agregar granja</button>
+        <button class="bg-gray-500 mr-8" routerLink="/farmer/profile/farm">
+          Agregar granja
+        </button>
+        <button class="bg-gray-500">Gurdar Info form</button>
       </article>
     </form>
   </div>

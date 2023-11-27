@@ -13,6 +13,11 @@ export class ProfilePageComponent implements OnInit {
   cpData: CPData | undefined;
   profileForm: FormGroup;
   profileData: Profile | undefined;
+  imageUrl: string | ArrayBuffer | null = null;
+  selectedImage: { file: File | null; previewUrl: string | null } = {
+    file: null,
+    previewUrl: null,
+  };
   constructor(
     private profileService: ProfileService,
     private formBuilder: FormBuilder
@@ -25,44 +30,41 @@ export class ProfilePageComponent implements OnInit {
       street: '',
       ext_num: '',
       int_num: '',
-      subur: '',
+      suburb: '',
       city: '',
       state: '',
       zip_code: '',
-
-      ciudad: '',
-      estado: '',
-      colonia: '',
-      // ...otros campos aquí...
     });
   }
   ngOnInit(): void {
     this.profileService.getDataProfile().subscribe(
       (data) => {
-        console.log(data);
-
-        this.profileData = data;
         this.profileForm.patchValue({
-          name: this.profileData.data.first_name,
-          last_name: this.profileData.data.last_name,
-          email: this.profileData.data.email,
-          phone: this.profileData.data.phone,
-          street: this.profileData.data.street,
-          ext_num: this.profileData.data.ext_num,
-          int_num: this.profileData.data.int_num,
-          suburb: this.profileData.data.suburb,
-          city: this.profileData.data.city,
-          state: this.profileData.data.state,
-          zip_code: this.profileData.data.zip_code,
+          name: data.data.first_name,
+          last_name: data.data.last_name,
+          email: data.data.email,
+          phone: data.data.phone,
+          street: data.data.street,
+          ext_num: data.data.ext_num,
+          int_num: data.data.int_num,
+          suburb: data.data.suburb,
+          city: data.data.city,
+          state: data.data.state,
+          zip_code: data.data.zip_code,
           // ...otros campos aquí...
         });
+
+        this.selectedImage = {
+          file: null,
+          previewUrl: data.data.photo,
+        };
+        console.log(this.selectedImage);
       },
       (error) => {
         console.error('Error fetching dashboard data:', error);
       }
     );
   }
-  imageUrl: string | ArrayBuffer | null = null;
 
   fetchCPInfo(cp: string) {
     this.profileService.getCPInfo(cp).subscribe(
@@ -85,14 +87,53 @@ export class ProfilePageComponent implements OnInit {
     );
   }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
+  onFileSelected(event: any): void {
+    const files: FileList = event.target.files;
+
+    // Limpiar la imagen seleccionada antes de agregar la nueva
+    this.selectedImage = { file: null, previewUrl: null };
+
+    const file: File | null = files.item(0);
+
     if (file) {
+      // Crear una URL de objeto para la vista previa de la imagen
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.imageUrl = e.target.result;
+        // Asignar la nueva imagen
+        this.selectedImage = { file, previewUrl: e.target.result };
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  removeImage(): void {
+    // Limpiar la imagen seleccionada
+    this.selectedImage = { file: null, previewUrl: null };
+  }
+
+  updateInfoUser(): void {
+    const formData = new FormData();
+    formData.append('first_name', this.profileForm.get('name')!.value);
+    formData.append('last_name', this.profileForm.get('last_name')!.value);
+    formData.append('phone', this.profileForm.get('phone')!.value);
+    formData.append('street', this.profileForm.get('street')!.value);
+    formData.append('ext_num', this.profileForm.get('ext_num')!.value);
+    formData.append('int_num', this.profileForm.get('int_num')!.value);
+    formData.append('suburb', this.profileForm.get('suburb')!.value);
+    formData.append('city', this.profileForm.get('city')!.value);
+    formData.append('state', this.profileForm.get('state')!.value);
+    formData.append('zip_code', this.profileForm.get('zip_code')!.value);
+    if (this.selectedImage.file !== null) {
+      formData.append('photo', this.selectedImage.file);
+    }
+    console.log('Update');
+    this.profileService.updateProfile(formData).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

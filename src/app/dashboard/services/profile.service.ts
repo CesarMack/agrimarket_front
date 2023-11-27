@@ -44,4 +44,23 @@ export class ProfileService {
         })
       );
   }
+
+  updateProfile(data: any): Observable<string> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .post<string>(`${this.apiUrl}/users/me/update`, data, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
 }

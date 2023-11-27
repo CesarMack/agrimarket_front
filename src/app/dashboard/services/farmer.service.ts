@@ -136,7 +136,7 @@ export class FarmerService {
       );
   }
 
-  updateProduct(data: any): Observable<string> {
+  updateProduct(data: any, id: string): Observable<string> {
     const token = localStorage.getItem('user_token');
 
     const headers = new HttpHeaders({
@@ -144,9 +144,13 @@ export class FarmerService {
     });
 
     return this.http
-      .post<{ data: { id: string } }>(`${this.apiUrl}/farmers/products`, data, {
-        headers,
-      })
+      .post<{ data: { id: string } }>(
+        `${this.apiUrl}/farmers/products/${id}`,
+        data,
+        {
+          headers,
+        }
+      )
       .pipe(
         map((response) => response.data.id),
         catchError((e) => {
