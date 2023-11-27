@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { Dashboard } from '../interfaces/dashboard';
-import { Catalog } from '../interfaces/catalog';
+import { Catalog, Product } from '../interfaces/catalog';
+import { ProductType } from '../interfaces/productType';
+import { Units } from '../interfaces/units';
+import { ProductData } from '../interfaces/productData';
 
 @Injectable({ providedIn: 'root' })
 export class FarmerService {
-  private apiUrl: string =
-    'http://[2806:2f0:1001:845b:665:8b98:ce58:95dc]:80/api/v1';
+  private apiUrl: string = 'https://agrimarketapi.azurewebsites.net/api/v1';
 
   constructor(private http: HttpClient) {}
 
@@ -49,6 +51,132 @@ export class FarmerService {
           console.log(e);
 
           throw new Error('Authentication error');
+        })
+      );
+  }
+
+  getProductType(): Observable<ProductType> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<ProductType>(`${this.apiUrl}/product_types`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  getUnits(): Observable<Units> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<Units>(`${this.apiUrl}/units_of_measurements`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  getInfoProduct(id: string): Observable<ProductData> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<ProductData>(`${this.apiUrl}/products/${id}`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  createProduct(data: any): Observable<string> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .post<{ data: { id: string } }>(`${this.apiUrl}/farmers/products`, data, {
+        headers,
+      })
+      .pipe(
+        map((response) => response.data.id),
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  updateProduct(data: any): Observable<string> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .post<{ data: { id: string } }>(`${this.apiUrl}/farmers/products`, data, {
+        headers,
+      })
+      .pipe(
+        map((response) => response.data.id),
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  uploadPhoto(photo: File, id: string): Observable<string> {
+    console.log('DEntro de la foto');
+    console.log(photo);
+    console.log(id);
+
+    const token = localStorage.getItem('user_token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    const formData: FormData = new FormData();
+    formData.append('photo', photo, photo.name);
+
+    return this.http
+      .post<string>(`${this.apiUrl}/farmers/products/${id}/photos`, formData, {
+        headers,
+      })
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          throw new Error('Error uploading photo');
         })
       );
   }

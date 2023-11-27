@@ -39,6 +39,8 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     this.profileService.getDataProfile().subscribe(
       (data) => {
+        console.log(data);
+
         this.profileData = data;
         this.profileForm.patchValue({
           name: this.profileData.data.first_name,

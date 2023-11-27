@@ -1,6 +1,10 @@
 <section class="p-10 w-full h-full bg-[#f6f6f6]">
   <div class="p-10 bg-white shadow-lg rounded-3xl w-full h-full">
-    <form class="grid grid-cols-2 gap-x-10">
+    <form
+      [formGroup]="productForm"
+      (ngSubmit)="newProduct()"
+      class="grid grid-cols-2 gap-x-10"
+    >
       <div class="flex border-b border-[#2A9763] mb-5">
         <h3
           class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
@@ -19,61 +23,134 @@
         <div class="grid grid-cols-2 gap-10">
           <span class="flex flex-col">
             <label>Nombre (lista desplegable)</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <select
+              class="h-10 px-4 border border-gray-400 rounded-3xl"
+              formControlName="name"
+              [(ngModel)]="selectedProductName"
+            >
+              <option
+                *ngFor="let item of productsType?.data"
+                [value]="item.name"
+                [attr.data-id-category]="item.id"
+              >
+                {{ item.name }}
+              </option>
+            </select>
           </span>
           <span class="flex flex-col">
             <label>Categoria</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl"
+            <input
+              type="text"
+              class="h-9 border border-gray-400 rounded-2xl"
+              [value]="getSelectedProductCategory()"
+              readonly
           /></span>
           <span class="flex flex-col">
             <label>Unidad de Medida</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <select
+              class="h-10 px-4 border border-gray-400 rounded-3xl"
+              formControlName="units"
+            >
+              <option
+                *ngFor="let item of units?.data"
+                [value]="item.name"
+                [attr.data-id-category]="item.id"
+              >
+                {{ item.name }}
+              </option>
+            </select>
           </span>
           <span class="flex flex-col">
             <label>Minimo de Venta</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="minimumSale"
+              type="text"
+              class="h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
           <span class="flex flex-col">
-            <label>Fecha de cosecha (Calendar)</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <label>Fecha de cosecha</label>
+            <!-- Modificar estilos calendario
+ -->
+            <mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date" />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
           </span>
           <span class="flex flex-col">
             <label>Stock Disponible</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="stock"
+              type="text"
+              class="h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
           <span class="flex flex-col">
             <label>Precio</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="price"
+              type="text"
+              class="h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
           <span class="col-span-2 flex flex-col"
             ><label>Descripcion</label>
-            <input type="text" class="h-9 border border-gray-400 rounded-2xl" />
+            <input
+              formControlName="description"
+              type="text"
+              class="h-9 border border-gray-400 rounded-2xl"
+            />
           </span>
         </div>
       </article>
       <article
         class="p-5 w-2/3 flex flex-col justify-center items-center rounded-3xl shadow bg-[#f6f6f6]"
       >
-        <div class="mx-auto border w-[200px] h-[200px]">
-          <img [src]="imageUrl" alt="Imagen cargada" />
+        <div *ngIf="selectedImages.length > 0">
+          <h4>Imágenes seleccionadas:</h4>
+          <div
+            class="relative mx-auto border w-[200px] h-[200px]"
+            *ngFor="let image of selectedImages; let i = index"
+          >
+            <img
+              class="absolute"
+              *ngIf="image.previewUrl"
+              [src]="image.previewUrl"
+              alt="Vista previa"
+            />
+            <button
+              class="absolute inset-y-0 inset-x-0"
+              (click)="removeImage(i)"
+            >
+              Eliminar
+            </button>
+          </div>
         </div>
         <input
           class="mx-auto"
           type="file"
           (change)="onFileSelected($event)"
           accept="image/*"
+          multiple
         />
-        <button
-          class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
-        >
-          Guardar
-        </button>
-        <button
-          class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
-        >
-          Eliminar
-        </button>
       </article>
+
+      <button
+        class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
+      >
+        Guardar
+      </button>
+      <button
+        class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
+      >
+        Eliminar
+      </button>
     </form>
   </div>
 </section>

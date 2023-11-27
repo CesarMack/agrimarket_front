@@ -8,8 +8,7 @@ import { Profile } from '../interfaces/profile';
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
   private apiUrlCP: string = 'https://api.copomex.com/query';
-  private apiUrl: string =
-    'http://[2806:2f0:1001:845b:665:8b98:ce58:95dc]:80/api/v1';
+  private apiUrl: string = 'https://agrimarketapi.azurewebsites.net/api/v1';
 
   constructor(private http: HttpClient) {}
 
@@ -33,8 +32,6 @@ export class ProfileService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
-
     return this.http
       .get<Profile>(`${this.apiUrl}/users/me`, {
         headers,

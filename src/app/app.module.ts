@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationPageComponent } from './session/pages/registration-page/registration-page.component';
 import { ToogleComponentComponent } from './session/components/toogle-component/toogle-component.component';
 import { CommonModule } from '@angular/common';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
