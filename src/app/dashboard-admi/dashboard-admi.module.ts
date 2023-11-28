@@ -12,6 +12,7 @@ import { DashboardAdmiCategoryComponent } from './page/dashboard-admi-category/d
 import { DashboardAdmiUnitsComponent } from './page/dashboard-admi-units/dashboard-admi-units.component';
 import { DashboradAdmiRegisterComponent } from './page/dashborad-admi-register/dashborad-admi-register.component';
 import { DashboardAdmiDbPageComponent } from './page/dashboard-admi-db-page/dashboard-admi-db-page.component';
+import { CardStatsComponent } from './components/card-stats/card-stats.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DashboardAdmiDbPageComponent } from './page/dashboard-admi-db-page/dash
     DashboardAdmiUnitsComponent,
     DashboradAdmiRegisterComponent,
     DashboardAdmiDbPageComponent,
+    CardStatsComponent,
   ],
   imports: [
     CommonModule,

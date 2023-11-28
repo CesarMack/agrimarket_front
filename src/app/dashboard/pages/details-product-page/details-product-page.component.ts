@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-details-product-page',
   templateUrl: './details-product-page.component.html',
-  styleUrls: ['./details-product-page.component.css'],
 })
 export class DetailsProductPageComponent implements OnInit {
   imageFiles: Array<File> = [];
