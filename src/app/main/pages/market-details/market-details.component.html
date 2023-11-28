@@ -1,29 +1,32 @@
 <section class="min-h-[90vh] px-24">
   <div class="flex w-full mt-10 h-1/6 bg-[#F6F6F6] rounded-[60px]">
     <article class="w-3/6 mt-10 mb-10 mx-10">
-      <img class="w-full rounded-3xl" src="../assets/vegetables.jpg" />
+      <img class="w-full rounded-3xl" [src]="selectedPhotoUrl" />
       <div class="w-full mt-10 flex gap-4">
-        <img class="w-2/6 rounded-3xl" src="../assets/vegetables.jpg" />
-        <img class="w-2/6 rounded-3xl" src="../assets/vegetables.jpg" />
-        <img class="w-2/6 rounded-3xl" src="../assets/vegetables.jpg" />
+        <img
+          *ngFor="let photo of productData?.data?.photos; let i = index"
+          class="w-2/6 rounded-3xl"
+          [src]="photo.url"
+          alt="Photo {{ i + 1 }}"
+          (click)="onSelectPhoto(photo.url)"
+        />
       </div>
     </article>
     <article class="bg-white shadow-lg rounded-3xl p-10 mt-10 mb-10 mx-24">
       <h2
         class="text-[#2A9763] font-['Montserrat_Alternates'] text-3xl font-semibold"
       >
-        Manzana Verde Colima
+        {{ productData?.data?.product }}
       </h2>
 
       <h3
         class="text-[#288a5b] font-['Montserrat_Alternates'] font-bold text-4xl my-5"
       >
-        $25.5 <span>Kg.</span>
+        ${{ productData?.data?.price
+        }}<span> {{ productData?.data?.measure?.code }}</span>
       </h3>
       <p class="mt-5 max-w-2xl text-base">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde rem modi
-        soluta, earum quisquam aspernatur iure ipsa harum magnam beatae fugit ad
-        ipsam omnis voluptas veritatis nobis? Architecto, consequuntur quisquam?
+        {{ productData?.data?.description }}
       </p>
 
       <table class="w-3/5">
@@ -35,38 +38,70 @@
         <tbody>
           <tr>
             <td>Fecha de cosecha</td>
-            <td>18/22/2002</td>
+            <td>
+              {{ productData?.data?.cutoff_date }}
+            </td>
           </tr>
           <tr>
             <td>Minimo de venta</td>
-            <td>5kg</td>
+            <td>
+              {{ productData?.data?.minimum_sale
+              }}{{ productData?.data?.measure?.name }}
+            </td>
           </tr>
         </tbody>
       </table>
-      <div class="mt-8 mb-5">
-        <h4 class="my-2 font-semibold text-[#2A9763]">Productor</h4>
+      <div
+        *ngIf="productData?.data?.estate?.id; else productorSection"
+        class="mt-8 mb-5"
+      >
+        <h4 class="my-2 font-semibold text-[#2A9763]">Granja</h4>
         <div class="max-w-2xl flex items-center">
           <img
             class="w-20 h-20 rounded-full"
-            src="../assets/amlo.jpg"
+            [src]="productData?.data?.estate?.photo"
             alt="Avatar"
           />
           <div class="px-6 py-4">
             <!-- Contenido adicional de la tarjeta -->
             <div class="font-bold text-xl mb-2">
-              Andres Manuel Lopez Obrador
+              {{ productData?.data?.estate?.name }}
             </div>
           </div>
         </div>
       </div>
-      <div class="flex flex-col my-5">
-        <label class="font-semibold">Cantidad</label>
-        <input
-          type="text"
-          class="w-3/12 h-10 rounded-md border l border-gray-400"
-        />
-      </div>
+      <ng-template #productorSection>
+        <div class="mt-8 mb-5">
+          <h4 class="my-2 font-semibold text-[#2A9763]">Productor</h4>
+          <div class="max-w-2xl flex items-center">
+            <img
+              class="w-20 h-20 rounded-full"
+              [src]="productData?.data?.user?.photo"
+              alt="Avatar"
+            />
+            <div class="px-6 py-4">
+              <!-- Contenido adicional de la tarjeta -->
+              <div class="font-bold text-xl mb-2">
+                {{ productData?.data?.user?.name }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <form [formGroup]="orderForm">
+        <div class="flex flex-col my-5">
+          <label class="font-semibold">Cantidad</label>
+          <input
+            formControlName="quantity"
+            type="text"
+            class="w-3/12 h-10 rounded-md border l border-gray-400"
+          />
+        </div>
+      </form>
+
       <button
+        (click)="redirectToProductDetail()"
         class="mt-20 bg-[#38C984] text-white rounded-2xl font-semibold text-lg block h-16 w-56"
       >
         Comprar

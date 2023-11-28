@@ -1,0 +1,130 @@
+<section class="min-h-[90vh] px-24">
+  <div class="flex w-full mt-10 h-1/6 bg-[#F6F6F6] rounded-[60px]">
+    <article class="w-3/6 mt-10 mb-10 mx-10">
+      <h2>Datos Personales</h2>
+      <form [formGroup]="profileForm">
+        <div class="flex gap-10 w-full">
+          <span class="w-2/4 flex flex-col">
+            <label class="">Nombre(s):</label>
+
+            <input
+              formControlName="name"
+              type="email"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
+          </span>
+          <span class="w-2/4 flex flex-col">
+            <label>Apellido:</label>
+            <input
+              formControlName="last_name"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
+          </span>
+        </div>
+        <div class="flex gap-10 w-full mt-5">
+          <span class="w-2/4 flex flex-col">
+            <label>E-mail:</label>
+            <input
+              formControlName="email"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
+          </span>
+          <span class="w-2/4 flex flex-col">
+            <label>Telefono:</label>
+            <input
+              formControlName="phone"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
+          </span>
+        </div>
+        <div class="flex gap-10 w-full mt-5">
+          <span class="w-2/4 flex flex-col">
+            <label>Calle:</label>
+            <input
+              formControlName="street"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
+          </span>
+          <span class="w-2/4 flex flex-col">
+            <label>Exterior Numerico:</label>
+            <input
+              formControlName="ext_num"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
+          </span>
+        </div>
+        <div class="flex gap-10 w-full mt-5">
+          <span class="w-2/4 flex flex-col">
+            <label>Numero interior:</label>
+            <input
+              formControlName="int_num"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
+          </span>
+          <span class="w-2/4 flex flex-col">
+            <label>Colonia:</label>
+            <input
+              formControlName="suburb"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
+          </span>
+        </div>
+        <div class="flex gap-10 w-full mt-5">
+          <span class="w-2/4 flex flex-col">
+            <label>Ciudad:</label>
+            <input
+              formControlName="city"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
+          </span>
+          <span class="w-2/4 flex flex-col">
+            <label>Estado:</label>
+            <input
+              formControlName="state"
+              type="text"
+              class="px-4 h-9 border border-gray-400 rounded-2xl"
+            />
+          </span>
+        </div>
+        <span class="w-2/4 flex flex-col">
+          <label>Codigo postal:</label>
+          <input
+            formControlName="zip_code"
+            type="text"
+            class="px-4 h-9 border border-gray-400 rounded-2xl"
+          />
+        </span>
+
+        <button>Actualizar Informacion</button>
+      </form>
+    </article>
+    <article class="bg-white shadow-lg rounded-3xl p-10 mt-10 mb-10 mx-24">
+      <h2>DAtos de la orden</h2>
+
+      <div>
+        <img [src]="selectedPhotoUrl" />
+        <div>
+          <h2>{{ productData?.data?.product }}</h2>
+          <h2>Cantidad: {{ quantity }}</h2>
+        </div>
+        <div>
+          <h2>
+            ${{ productData?.data?.price }}
+            {{ productData?.data?.measure?.name }}
+          </h2>
+        </div>
+      </div>
+      <hr />
+      <h2>Total:${{ total }}</h2>
+    </article>
+    <button>Confirmar Orden</button>
+  </div>
+</section>

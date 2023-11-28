@@ -48,6 +48,9 @@ export class LoginPageComponent {
             localStorage.setItem('user_token', response.user.access_token);
             this.router.navigate(['/farmer']);
           } else {
+            console.log(response.user.access_token);
+            localStorage.setItem('user_token', response.user.access_token);
+            this.router.navigate(['/store']);
             // Si el rol no es "admin" ni "cliente", manejarlo como desees
           }
         },

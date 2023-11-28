@@ -54,19 +54,27 @@
     </div>
 
     <div class="px-10 mt-10 grid grid-cols-6 gap-10">
-      <article class="h-72 p-5 bg-white rounded-3xl shadow-lg">
+      <button
+        *ngFor="let data of catalog!.data"
+        class="h-72 p-5 bg-white rounded-3xl shadow-lg"
+        (click)="redirectToProductDetail(data.id)"
+      >
         <img
           class="h-2/3 w-full rounded-3xl border"
-          src="../assets/vegetables.jpg"
+          [src]="
+            data.photos.length > 0
+              ? data.photos[0].url
+              : '../assets/vegetables.jpg'
+          "
         />
 
-        <h3 class="mt-4 font-medium">Manza Verde</h3>
+        <h3 class="mt-4 font-medium">{{ data.product }}</h3>
         <p
           class="mt-4 font-bold text-xl text-[#2A9763] font-['Montserrat_Alternates']"
         >
-          $ 14.99
+          ${{ data.price }}
         </p>
-      </article>
+      </button>
     </div>
   </div>
   <!--
