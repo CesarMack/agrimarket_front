@@ -1,205 +1,65 @@
-<section class="bg-[#F6F6F6] h-[100vh] w-full flex justify-center items-center">
-  <div
-    *ngIf="showSuccessMessage"
-    id="alert-3"
-    class="flex absolute top-0 left-10 right-10 items-center p-4 mb-4 text-green-800 rounded-lg bg-green-400"
-    role="alert"
-  >
-    <svg
-      class="flex-shrink-0 w-4 h-4"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      viewBox="0 0 20 20"
-    >
-      <path
-        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
-      />
-    </svg>
-    <span class="sr-only">Info</span>
-    <div class="ml-3 text-sm font-medium">Operación exitosa</div>
-    <button
-      type="button"
-      class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8"
-      data-dismiss-target="#alert-3"
-      aria-label="Close"
-    >
-      <span class="sr-only">Close</span>
-      <svg
-        class="w-3 h-3"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 14 14"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-        />
-      </svg>
-    </button>
+<section class="flex flex-col md:flex-row h-screen items-center relative">
+  <div class="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
+    <img src="https://images.unsplash.com/photo-1633233523796-12890ee1cde1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="w-full h-full object-cover">
   </div>
-  <div
-    *ngIf="loader"
-    class="fixed top-0 left-0 w-full h-full bg-white bg-opacity-80 flex justify-center items-center z-50"
-  >
-    <div
-      class="animate-spin rounded-full border-t-4 border-blue-500 border-opacity-75 h-12 w-12"
-    ></div>
-    <span class="ml-2">Cargando...</span>
-  </div>
-  <!-- Mensaje de error -->
-  <div
-    *ngIf="showErrorMessage"
-    id="alert-3"
-    class="flex absolute top-0 left-10 right-10 items-center p-4 mb-4 text-red-800 rounded-lg bg-red-400"
-    role="alert"
-  >
-    <svg
-      class="flex-shrink-0 w-4 h-4"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      viewBox="0 0 20 20"
-    >
-      <path
-        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
-      />
-    </svg>
-    <span class="sr-only">Info</span>
-    <div class="ml-3 text-sm font-medium">
-      Se produjo un error en la operación. Por favor, intenta nuevamente.
+  <div class="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+    flex items-center justify-center">
+    <div class="w-full h-100">
+      <h1 class="text-xl md:text-2xl font-bold leading-tight mt-12">Registro</h1>
+
+      <form class="mt-2" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="flex space-x-4">
+          <label
+            class="cursor-pointer flex-1 px-4 py-2 text-center my-2 bg-[#f1a93d] duration-150 ease-in-out rounded text-white text-sm transition-colors hover:bg-green-600 {{
+              registerForm.get('userRole')!.value === '1'
+                ? 'bg-green-800 text-white'
+                : ''
+            }}">
+            <input type="radio" name="userRole" value="1" formControlName="userRole" class="hidden"/>
+            Cliente
+          </label>
+          <label
+            class="cursor-pointer flex-1 px-4 py-2 text-center mx-2 my-2 bg-[#f1a93d] duration-150 ease-in-out rounded text-white text-sm transition-colors hover:bg-green-600 {{
+              registerForm.get('userRole')!.value === '2'
+                ? 'bg-green-800 text-white'
+                : ''
+            }}"
+          >
+            <input
+              type="radio"
+              name="userRole"
+              value="2"
+              formControlName="userRole"
+              class="hidden"
+            />
+            Granjero
+          </label>
+        </div>
+        <div>
+          <label class="block text-gray-700 mt-4">Nombre</label>
+          <input type="email" formControlName="firstName" name="" id="" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
+
+          <label class="block text-gray-700 mt-4">Apellido</label>
+          <input type="email" formControlName="lastName" name="" id="" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
+
+          <label class="block text-gray-700 mt-4">Correo</label>
+          <input type="email" formControlName="email" name="" id="" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
+      </div>
+
+        <div class="mt-4">
+          <label class="block text-gray-700">Contraseña</label>
+          <input type="password" formControlName="password" name="" id="" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                focus:bg-white focus:outline-none" required>
+        </div>
+
+        <div class="text-right mt-2">
+          <!--<a href="#" class="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">¿Olvidaste tu contraseña?</a>-->
+        </div>
+
+        <button type="submit" value="Aceptar" class="w-full block bg-[#f1a93d] transition hover:bg-[#285429] focus:bg-[#285429] text-white font-semibold rounded-lg
+              px-4 py-3 mt-6">Registrarte</button>
+      </form>
+      <p class="mt-8">Si tienes cuenta, <a href="#" class="text-[#f1a93d] hover:text-[#285429] transition font-semibold">inicia sesión aquí.</a></p>
     </div>
-    <button
-      type="button"
-      class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
-      data-dismiss-target="#alert-3"
-      aria-label="Close"
-    >
-      <span class="sr-only">Close</span>
-      <svg
-        class="w-3 h-3"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 14 14"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-        />
-      </svg>
-    </button>
-  </div>
-
-  <div class="w-2/3 h-5/6 p-10 flex gap-10 bg-white shadow-lg rounded-[35px]">
-    <article class="w-2/4 flex justify-center items-center">
-      <img src="../assets/farmer-register.jpg" />
-    </article>
-
-    <form
-      [formGroup]="registerForm"
-      (ngSubmit)="onSubmit()"
-      class="flex flex-col w-2/4 p-12 pt-5"
-    >
-      <h2
-        class="mx-auto mb-5 text-[#2A9763] font-['Montserrat_Alternates'] text-[45px] font-semibold"
-      >
-        Registrarse
-      </h2>
-      <div class="flex space-x-4">
-        <label
-          class="cursor-pointer flex-1 px-4 py-2 text-center mx-2 my-2 bg-[#38C984]  duration-150 ease-in-out rounded text-white text-sm transition-colors hover:bg-gray-300 {{
-            registerForm.get('userRole')!.value === '1'
-              ? 'bg-green-800 text-white'
-              : ''
-          }}"
-        >
-          <input
-            type="radio"
-            name="userRole"
-            value="1"
-            formControlName="userRole"
-            class="hidden"
-          />
-          Cliente
-        </label>
-        <label
-          class="cursor-pointer flex-1 px-4 py-2 text-center mx-2 my-2 bg-[#38C984] duration-150 ease-in-out rounded text-white text-sm transition-colors hover:bg-gray-300 {{
-            registerForm.get('userRole')!.value === '2'
-              ? 'bg-green-800 text-white'
-              : ''
-          }}"
-        >
-          <input
-            type="radio"
-            name="userRole"
-            value="2"
-            formControlName="userRole"
-            class="hidden"
-          />
-          Granjero
-        </label>
-      </div>
-      <div class="grid grid-cols-2 gap-5">
-        <div>
-          <label class="block mb-2 text-lg font-medium text-gray-900 mt-5"
-            >Nombre:</label
-          >
-          <input
-            formControlName="firstName"
-            type="text"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          />
-        </div>
-        <div>
-          <label class="block mb-2 text-lg font-medium text-gray-900 mt-5"
-            >Apellido:</label
-          >
-          <input
-            formControlName="lastName"
-            type="text"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          />
-        </div>
-      </div>
-
-      <label class="block mb-2 text-lg font-medium text-gray-900 mt-5"
-        >Email:</label
-      >
-      <input
-        formControlName="email"
-        type="email"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-      />
-      <label class="block mb-2 text-lg font-medium text-gray-900 mt-5"
-        >Password:</label
-      >
-      <input
-        formControlName="password"
-        type="password"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-      />
-
-      <input
-        type="submit"
-        value="Aceptar"
-        class="cursor-pointer mt-10 bg-[#38C984] text-white rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 shadow"
-      />
-
-      <hr class="my-3" />
-      <button
-        routerLink="/login"
-        class="cursor-pointer border border-[#38C984] border-10 text-[#38C984] rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 shadow"
-      >
-        Ya tengo cuenta
-      </button>
-    </form>
-  </div>
+  </div>  
 </section>

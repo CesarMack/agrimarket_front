@@ -1,88 +1,87 @@
-<section class="bg-[#F6F6F6] h-[100vh] w-full flex justify-center items-center">
-  <div
-    class="w-2/3 h-5/6 p-10 flex gap-10 bg-white shadow-lg rounded-[35px] relative"
-  >
-    <article class="w-2/4 flex justify-center items-center">
-      <img src="../assets/farmer-login.jpg" />
-    </article>
+<section class="flex flex-col md:flex-row h-screen items-center relative">
+  <div class="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
+    <img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="w-full h-full object-cover">
+  </div>
+  <div class="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+    flex items-center justify-center">
+    <div class="w-full h-100">
+      <h1 class="text-xl md:text-2xl font-bold leading-tight mt-12">Ingresar</h1>
 
-    <div class="w-[2px] h-full bg-gray-300"></div>
-    <form
-      [formGroup]="loginForm"
-      (ngSubmit)="onSubmit()"
-      class="flex flex-col w-2/4 p-12"
-    >
-      <h2
-        class="mb-5 text-[#2A9763] font-['Montserrat_Alternates'] text-[30px] font-semibold"
-      >
-        Iniciar sesión
-      </h2>
-      <label class="block mb-2 text-lg font-medium text-gray-900"
-        >Correo electrónico:</label
-      >
-      <input
-        type="email"
-        formControlName="email"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-      />
-      <div
-        *ngIf="
-          loginForm.get('email')!.errors && loginForm.get('email')!.touched
-        "
-        class="text-red-600"
-      >
-        <div *ngIf="loginForm.get('email')!.hasError('required')">
-          El correo electrónico es requerido.
+      <form class="mt-6" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label class="block text-gray-700">Correo</label>
+          <input type="email" formControlName="email" name="" id="" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required>
+          <div *ngIf=" loginForm.get('email')!.errors && loginForm.get('email')!.touched" class="text-red-600">
+          <div *ngIf="loginForm.get('email')!.hasError('required')">
+            El correo electrónico es requerido.
+          </div>
+          <div *ngIf="loginForm.get('email')!.hasError('email')">
+            El correo electrónico no es válido.
+          </div>
+      </div>
         </div>
-        <div *ngIf="loginForm.get('email')!.hasError('email')">
-          El correo electrónico no es válido.
+
+        <div class="mt-4">
+          <label class="block text-gray-700">Contraseña</label>
+          <input type="password" formControlName="password" name="" id="" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                focus:bg-white focus:outline-none" required>
+        </div>
+
+        <div class="text-right mt-2">
+          <!--<a href="#" class="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">¿Olvidaste tu contraseña?</a>-->
+        </div>
+
+        <button type="submit" value="Aceptar" class="w-full block bg-[#f1a93d] transition hover:bg-[#285429] focus:bg-[#285429] text-white font-semibold rounded-lg
+              px-4 py-3 mt-6">Iniciar sesión</button>
+      </form>
+      <p class="mt-8">Si no tienes cuenta, <a href="#" class="text-[#f1a93d] hover:text-[#285429] transition font-semibold">registrate aquí.</a></p>
+    </div>
+  </div>
+
+  <div *ngIf="showFieldRequiredMessage" role="alert" [ngClass]="'transition duration-150 ease-in-out absolute top-0  w-full bg-red-100 shadow mb-8 ' + (alert ? 'transform -translate-y-full' : 'transform translate-y-0 ')">
+    <div class="container mx-auto xl:w-full lg:transition duration-150 ease-in-out w-11/12">
+      <div class="w-full xl:flex lg:flex py-6 items-center">
+        <div class="xl:w-5/6 lg:w-5/6 w-full flex xl:flex-row lg:flex-row flex-col justify-center items-center xl:justify-start lg:justify-start">
+          <div class="text-red-700">
+            <svg role="alert" tabindex="0" class="focus:outline-none" aria-label="error" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path class="heroicon-ui" d="M4.93 19.07A10 10 0 1 1 19.07 4.93 10 10 0 0 1 4.93 19.07zm1.41-1.41A8 8 0 1 0 17.66 6.34 8 8 0 0 0 6.34 17.66zM13.41 12l1.42 1.41a1 1 0 1 1-1.42 1.42L12 13.4l-1.41 1.42a1 1 0 1 1-1.42-1.42L10.6 12l-1.42-1.41a1 1 0 1 1 1.42-1.42L12 10.6l1.41-1.42a1 1 0 1 1 1.42 1.42L13.4 12z" />
+            </svg>
+          </div>
+          <p class="mx-4 text-lg text-red-700 text-center sm:text-left">Por favor, completa todos los campos antes de enviar el formulario.</p>
+        </div>
+        <div class="w-2/12 flex justify-end">
+          <button aria-label="close" (click)="closeAlert()" class="focus:outline-none focus:text-black hover:text-black cursor-pointer xl:relative lg:relative absolute top-0 right-0 mr-2 mt-2 xl:mt-0 xl:mr-0 lg:mt-0 lg:mr-0 text-red-700">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
         </div>
       </div>
+    </div>
+  </div>
 
-      <label class="block mb-2 text-lg font-medium text-gray-900 mt-5"
-        >Contraseña:</label
-      >
-      <input
-        type="password"
-        formControlName="password"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-      />
-      <input
-        type="submit"
-        value="Aceptar"
-        class="cursor-pointer mt-10 bg-[#38C984] text-white rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 shadow"
-      />
-      <div class="w-full flex items-center justify-between py-5">
-        <hr class="w-1/3 bg-gray-400" />
-        <p class="font-medium leading-4 text-gray-400 text-center">
-          Si no tienes cuenta
-        </p>
-        <hr class="w-1/3 bg-gray-400" />
+  <div *ngIf="authError" role="alert" [ngClass]="'transition duration-150 ease-in-out absolute top-0  w-full bg-red-100 shadow mb-8 ' + (alert ? 'transform -translate-y-full' : 'transform translate-y-0 ')">
+    <div class="container mx-auto xl:w-full lg:transition duration-150 ease-in-out w-11/12">
+      <div class="w-full xl:flex lg:flex py-6 items-center">
+        <div class="xl:w-5/6 lg:w-5/6 w-full flex xl:flex-row lg:flex-row flex-col justify-center items-center xl:justify-start lg:justify-start">
+          <div class="text-red-700">
+            <svg role="alert" tabindex="0" class="focus:outline-none" aria-label="error" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path class="heroicon-ui" d="M4.93 19.07A10 10 0 1 1 19.07 4.93 10 10 0 0 1 4.93 19.07zm1.41-1.41A8 8 0 1 0 17.66 6.34 8 8 0 0 0 6.34 17.66zM13.41 12l1.42 1.41a1 1 0 1 1-1.42 1.42L12 13.4l-1.41 1.42a1 1 0 1 1-1.42-1.42L10.6 12l-1.42-1.41a1 1 0 1 1 1.42-1.42L12 10.6l1.41-1.42a1 1 0 1 1 1.42 1.42L13.4 12z" />
+            </svg>
+          </div>
+          <p class="mx-4 text-lg text-red-700 text-center sm:text-left">Por favor, completa todos los campos antes de enviar el formulario.</p>
+        </div>
+        <div class="w-2/12 flex justify-end">
+          <button aria-label="close" (click)="closeAlert()" class="focus:outline-none focus:text-black hover:text-black cursor-pointer xl:relative lg:relative absolute top-0 right-0 mr-2 mt-2 xl:mt-0 xl:mr-0 lg:mt-0 lg:mr-0 text-red-700">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
-      <hr class="" />
-      <button
-        routerLink="/register"
-        class="cursor-pointer border border-[#38C984] border-10 text-[#38C984] rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 shadow"
-      >
-        Registrate
-      </button>
-    </form>
+    </div>
   </div>
-
-  <div
-    *ngIf="authError"
-    id="alert-3"
-    class="flex absolute top-0 left-10 right-10 items-center p-4 mb-4 text-red-800 rounded-lg bg-red-200"
-    role="alert"
-  >
-    Hubo problemas para iniciar sesión. Por favor, verifica tus credenciales.
-  </div>
-  <div
-    *ngIf="showFieldRequiredMessage"
-    id="alert-3"
-    class="flex absolute top-0 left-10 right-10 items-center p-4 mb-4 text-red-800 rounded-lg bg-red-200"
-    role="alert"
-  >
-    Por favor, completa todos los campos antes de enviar el formulario.
-  </div>
+  
 </section>
