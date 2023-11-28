@@ -16,5 +16,6 @@ export interface Product {
 }
 
 export interface Photo {
-  photo: string;
+  id: string;
+  url: string;
 }

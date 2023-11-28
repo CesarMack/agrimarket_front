@@ -97,18 +97,35 @@
         </div>
       </article>
       <article
-        class="p-5 flex flex-col justify-center items-center rounded-3xl shadow bg-[#f6f6f6]"
+        class="p-5 flex justify-center items-center rounded-3xl shadow bg-[#f6f6f6]"
       >
-        <div class="mx-auto border w-[200px] h-[200px]">
-          <img [src]="imageUrl" alt="Imagen cargada" />
+        <div
+          *ngIf="selectedImage.file != null || selectedImage.previewUrl != null"
+        >
+          <h4>Imágenes seleccionadas:</h4>
+          <div class="relative mx-auto border w-[200px] h-[200px]">
+            <img
+              class="absolute"
+              *ngIf="selectedImage.previewUrl"
+              [src]="selectedImage.previewUrl"
+              alt="Vista previa"
+            />
+            <button
+              class="absolute inset-y-0 inset-x-0"
+              (click)="removeImage()"
+            >
+              Eliminar
+            </button>
+          </div>
         </div>
         <input
-          class="mx-auto"
+          class="px-4 mx-auto"
           type="file"
           (change)="onFileSelected($event)"
           accept="image/*"
         />
       </article>
+
       <div
         class="mt-10 col-start-2 col-end-3 flex flex-col justify-center items-center gap-10"
       >

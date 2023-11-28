@@ -3,6 +3,8 @@ import { CPData } from '../../interfaces/cp';
 import { ProfileService } from '../../services/profile.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Profile } from '../../interfaces/profile';
+import { Farm } from '../../interfaces/farm';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -18,9 +20,11 @@ export class ProfilePageComponent implements OnInit {
     file: null,
     previewUrl: null,
   };
+  farmData: Farm | undefined;
   constructor(
     private profileService: ProfileService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.profileForm = this.formBuilder.group({
       name: '',
@@ -64,6 +68,14 @@ export class ProfilePageComponent implements OnInit {
         console.error('Error fetching dashboard data:', error);
       }
     );
+
+    this.profileService.getDataFarms().subscribe((data) => {
+      console.log('Data farm');
+
+      console.log(data);
+
+      this.farmData = data;
+    });
   }
 
   fetchCPInfo(cp: string) {
@@ -85,6 +97,11 @@ export class ProfilePageComponent implements OnInit {
         console.error('Error fetching CP data:', error);
       }
     );
+  }
+
+  redirectToFarmProfile(farmId: string) {
+    // Utiliza el servicio Router para navegar a la nueva ventana
+    this.router.navigate(['/farmer/profile/farm', farmId]);
   }
 
   onFileSelected(event: any): void {

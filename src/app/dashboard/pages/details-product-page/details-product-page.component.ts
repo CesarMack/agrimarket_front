@@ -13,7 +13,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsProductPageComponent implements OnInit {
   imageFiles: Array<File> = [];
-  selectedImages: { file: File | null; previewUrl: string | null }[] = [];
+  selectedImages: {
+    id: string | null;
+    file: File | null;
+    previewUrl: string | null;
+  }[] = [];
   productsType: ProductType | undefined;
   units: Units | undefined;
   productForm: FormGroup;
@@ -103,8 +107,9 @@ export class DetailsProductPageComponent implements OnInit {
               ?.setValue(new Date(data.data.cutoff_date));
 
             this.selectedImages = data.data.photos.map((photo: any) => ({
+              id: photo.id,
               file: null, // Puedes ajustar esto según tus necesidades
-              previewUrl: photo.photo,
+              previewUrl: photo.url,
             }));
           },
           (error) => {
@@ -125,15 +130,33 @@ export class DetailsProductPageComponent implements OnInit {
         // Crear una URL de objeto para la vista previa de la imagen
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.selectedImages.push({ file, previewUrl: e.target.result });
+          this.selectedImages.push({
+            id: null,
+            file,
+            previewUrl: e.target.result,
+          });
         };
         reader.readAsDataURL(file);
       }
     }
   }
 
-  removeImage(index: number): void {
-    this.selectedImages.splice(index, 1);
+  removeImage(index: number, id: string): void {
+    if (id) {
+      console.log('Foto con id');
+      this.farmerService.deletePhoto(id).subscribe(
+        (response) => {
+          console.log(response);
+
+          this.selectedImages.splice(index, 1);
+        },
+        (error) => {
+          console.error('Error delete photo', error);
+        }
+      );
+    } else {
+      this.selectedImages.splice(index, 1);
+    }
   }
   selectedProductName: string = '';
 

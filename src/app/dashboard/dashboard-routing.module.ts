@@ -37,6 +37,10 @@ const routes: Routes = [
         component: ProfilePageComponent,
       },
       {
+        path: 'profile/farm/:id',
+        component: FarmProfileComponent,
+      },
+      {
         path: 'profile/farm',
         component: FarmProfileComponent,
       },

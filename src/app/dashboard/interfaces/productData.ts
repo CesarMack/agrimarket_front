@@ -18,5 +18,6 @@ export interface Data {
 }
 
 export interface Photo {
-  photo: string;
+  id: string;
+  url: string;
 }

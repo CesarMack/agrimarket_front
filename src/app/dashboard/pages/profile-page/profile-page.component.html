@@ -170,6 +170,17 @@
       </article>
       <article class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
         <p>Deseas Agregar una granja?</p>
+        <div>
+          <button
+            class="bg-slate-400"
+            (click)="redirectToFarmProfile(farmData?.data?.id!)"
+          >
+            <img [src]="farmData?.data?.photo" class="w-20" />
+            <div>
+              <h4>{{ farmData?.data?.name }}</h4>
+            </div>
+          </button>
+        </div>
         <button class="bg-gray-500 mr-8" routerLink="/farmer/profile/farm">
           Agregar granja
         </button>

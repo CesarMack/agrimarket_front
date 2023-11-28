@@ -161,6 +161,29 @@ export class FarmerService {
       );
   }
 
+  deletePhoto(id: string): Observable<string> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .delete<{ data: string }>(
+        `${this.apiUrl}/farmers/products/${id}/photos`,
+        {
+          headers,
+        }
+      )
+      .pipe(
+        map((response) => response.data),
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
   uploadPhoto(photo: File, id: string): Observable<string> {
     console.log('DEntro de la foto');
     console.log(photo);

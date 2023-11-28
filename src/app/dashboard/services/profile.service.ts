@@ -4,6 +4,7 @@ import { Observable, catchError, of } from 'rxjs';
 import { Dashboard } from '../interfaces/dashboard';
 import { CPData } from '../interfaces/cp';
 import { Profile } from '../interfaces/profile';
+import { Farm } from '../interfaces/farm';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
@@ -44,7 +45,43 @@ export class ProfileService {
         })
       );
   }
+  getDataFarms(): Observable<Farm> {
+    const token = localStorage.getItem('user_token');
 
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .get<Farm>(`${this.apiUrl}/farmers/estates`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  getDataFarm(id: string): Observable<Farm> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .get<Farm>(`${this.apiUrl}/estates/${id}`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          console.log(e);
+
+          throw new Error('Authentication error');
+        })
+      );
+  }
   updateProfile(data: any): Observable<string> {
     const token = localStorage.getItem('user_token');
 
