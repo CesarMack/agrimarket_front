@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css'],
 })
+
 export class LoginPageComponent {
   loginForm: FormGroup;
   authError = false;
@@ -21,6 +22,12 @@ export class LoginPageComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+  }
+
+  alert: boolean = false;
+
+  closeAlert() {
+    this.alert = !this.alert;
   }
 
   onSubmit() {
