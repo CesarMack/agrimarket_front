@@ -1,0 +1,13 @@
+import { Component, OnInit } from '@angular/core';
+import { Chart } from 'chart.js';
+
+@Component({
+  selector: 'app-card-line-chart',
+  templateUrl: './card-line-chart.component.html',
+  styleUrls: ['./card-line-chart.component.css'],
+})
+export class CardLineChartComponent implements OnInit {
+  constructor() {}
+
+  ngOnInit() {}
+}
