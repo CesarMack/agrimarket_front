@@ -57,5 +57,5 @@ jobs:
         with:
           app-name: 'agrimarketFront'
           slot-name: 'Production'
-          package: .
+          package: ./dist/agrimarket_front
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_84D84CE60F804EBC809875867213B1EF }}
