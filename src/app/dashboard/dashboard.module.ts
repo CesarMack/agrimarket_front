@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CardLineChartComponent } from './components/card-line-chart/card-line-chart.component';
+import { CardStatsComponent } from './components/card-stats/card-stats.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CardLineChartComponent } from './components/card-line-chart/card-line-c
     FarmProfileComponent,
     ProfilePageComponent,
     CardLineChartComponent,
+    CardStatsComponent,
   ],
   imports: [
     CommonModule,

@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-farm-profile',
   templateUrl: './farm-profile.component.html',
-  styleUrls: ['./farm-profile.component.css'],
 })
 export class FarmProfileComponent implements OnInit {
   imageUrl: string | ArrayBuffer | null = null;
