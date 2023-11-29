@@ -1,273 +1,124 @@
 <div class="flex flex-wrap">
-  <div
-    class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg pt-5"
-  >
-    <form
-      [formGroup]="productForm"
-      (ngSubmit)="newProduct()"
-      class="grid grid-cols-2 gap-x-10"
-    >
-      <div class="flex border-b border-[#2A9763] mb-5">
-        <h3
-          class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
-        >
-          Datos Productos
-        </h3>
-      </div>
-      <div class="flex border-b border-[#2A9763] mb-5">
-        <h3
-          class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
-        >
-          Fotografia Producto
-        </h3>
-      </div>
-      <article class="p-5 flex flex-col rounded-3xl shadow bg-[#f6f6f6]">
-        <div class="grid grid-cols-2 gap-10">
-          <span class="flex flex-col">
-            <label>Nombre (lista desplegable)</label>
-            <select
-              class="h-10 px-4 border border-gray-400 rounded-3xl"
-              formControlName="name"
-              [(ngModel)]="selectedProductName"
-            >
-              <option
-                *ngFor="let item of productsType?.data"
-                [value]="item.name"
-                [attr.data-id-category]="item.id"
-              >
-                {{ item.name }}
-              </option>
-            </select>
-          </span>
-          <span class="flex flex-col">
-            <label>Categoria</label>
-            <input
-              type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
-              [value]="getSelectedProductCategory()"
-              readonly
-          /></span>
-          <span class="flex flex-col">
-            <label>Unidad de Medida</label>
-            <select
-              class="h-10 px-4 border border-gray-400 rounded-3xl"
-              formControlName="units"
-            >
-              <option
-                *ngFor="let item of units?.data"
-                [value]="item.name"
-                [attr.data-id-category]="item.id"
-              >
-                {{ item.name }}
-              </option>
-            </select>
-          </span>
-          <span class="flex flex-col">
-            <label formControlName="minimumSale" for="large-input" class="block mb-2 text-sm font-medium text-gray-900">Minimo de Venta</label>
-            <div class="mb-5">
-              <input type="text" id="large-input" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500">
+  <div class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg pt-5">
+    <form [formGroup]="productForm" (ngSubmit)="newProduct()" class="grid grid-cols-2 gap-5">
+      <div class="bg-white shadow-md rounded px-8 pb-3 mb-4 flex flex-col my-2">
+        <h2 class="text-xl font-semibold">
+          Detalles del producto
+        </h2>
+        <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
+        <div class="-mx-3 md:flex mb-6 mt-5">
+          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
+              Producto
+            </label>
+            <div class="relative">
+              <select formControlName="name" [(ngModel)]="selectedProductName" class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state">
+                <option *ngFor="let item of productsType?.data" [value]="item.name" [attr.data-id-category]="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+              <div class="pointer-events-none absolute top-0 bottom-0 right-0 mr-2 pin-y pin-r flex items-center px-2 text-grey-darker">
+                <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              </div>
+            </div>
           </div>
-          </span>
-          <span class="flex flex-col">
-            <label>Fecha de cosecha</label>
-            <!-- Modificar estilos calendario
- -->
-            <mat-form-field>
-              <mat-label>Choose a date</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="date" />
-              <mat-hint>MM/DD/YYYY</mat-hint>
-              <mat-datepicker-toggle
-                matIconSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
+      
+      
+          <div class="md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+              Unidad de medida
+            </label>
+            <div class="relative">
+              <select formControlName="units" class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state">
+                <option *ngFor="let item of units?.data" [value]="item.name" [attr.data-id-category]="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+              <div class="pointer-events-none absolute top-0 bottom-0 right-0 mr-2 pin-y pin-r flex items-center px-2 text-grey-darker">
+                <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              </div> 
+            </div>
+          </div>
+        </div>
+      
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+              Fecha de cosecha
+            </label>
+            <mat-form-field class="w-full">
+              <input matInput [matDatepicker]="picker" formControlName="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="MM/DD/YYYY"/>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </span>
-          <span class="flex flex-col">
-            <label>Stock Disponible</label>
-            <input
-              formControlName="stock"
-              type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
-            />
-          </span>
-          <span class="flex flex-col">
-            <label>Precio</label>
-            <input
-              formControlName="price"
-              type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
-            />
-          </span>
-          <span class="col-span-2 flex flex-col"
-            ><label>Descripcion</label>
-            <input
-              formControlName="description"
-              type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
-            />
-          </span>
-        </div>
-      </article>
-      <article
-        class="p-5 w-2/3 flex flex-col justify-center items-center rounded-3xl shadow bg-[#f6f6f6]"
-      >
-        <div *ngIf="selectedImages.length > 0">
-          <h4>Imágenes seleccionadas:</h4>
-          <div
-            class="relative mx-auto border w-[200px] h-[200px]"
-            *ngFor="let image of selectedImages; let i = index"
-          >
-            <img
-              class="absolute"
-              *ngIf="image.previewUrl"
-              [src]="image.previewUrl"
-              alt="Vista previa"
-            />
-            <button
-              class="absolute inset-y-0 inset-x-0"
-              (click)="removeImage(i, image.id!)"
-            >
-              Eliminar
-            </button>
+            </mat-form-field>  
+          </div>
+      
+          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+              Mínimo de venta
+            </label>
+            <input formControlName="minimumSale" type="number" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-zip" placeholder="0"  min="1">
           </div>
         </div>
-        <input
-          class="mx-auto"
-          type="file"
-          (change)="onFileSelected($event)"
-          accept="image/*"
-          multiple
-        />
-      </article>
-
-      <button
-        class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
-      >
-        Guardar
-      </button>
-      <button
-        class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
-      >
-        Eliminar
-      </button>
+      
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
+              Existencias disponibles
+            </label>
+            <input formControlName="stock" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-zip" type="number" placeholder="0"  min="1">
+          </div>
+            
+          <div class="md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
+              Precio
+            </label>
+            <input formControlName="price" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-zip" type="number" placeholder="0"  min="1">
+          </div>
+        </div>
+      
+        <div class="-mx-3 md:flex mb-6">
+          <div class="w-full px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+              Descripción del producto
+            </label>
+            <textarea formControlName="description" type="text" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-zip" placeholder="Ingresa una breve descripción de tu producto"  min="1"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white shadow-md rounded px-8 pb-8 mb-4 flex flex-col my-2">
+        <h2 class="text-xl font-semibold">
+          Fotos
+        </h2>
+        <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
+        
+        <div class="px-3 mb-6 md:mb-0 w-full flex items-center h-auto justify-center">    
+          <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 ml-2 sm:col-span-4 md:mr-3">
+            <!-- Photo File Input -->
+            <input type="file" class="hidden" x-ref="photo" x-on:change="
+                                photoName = $refs.photo.files[0].name;
+                                const reader = new FileReader();
+                                reader.onload = (e) => {
+                                    photoPreview = e.target.result;
+                                };
+                                reader.readAsDataURL($refs.photo.files[0]);
+            " multiple (change)="onFileSelected($event)">
+            
+            <div class="flex flex-col items-center text-center w-full">
+                <!-- New Profile Photo Preview -->
+                <div class="grid grid-rows-3 relative mx-auto w-[100px] h-[100px]" *ngFor="let image of selectedImages; let i = index">
+                  <img class="absolute block rounded-lg m-auto shadow" *ngIf="image.previewUrl" [src]="image.previewUrl" alt="Vista previa"/>
+                  <button class="absolute inset-y-0 inset-x-0" (click)="removeImage(i, image.id!)">
+                    Eliminar
+                  </button>
+                </div>
+                <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-400 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2 ml-3" x-on:click.prevent="$refs.photo.click()">
+                    Seleccionar fotos
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
 </div>
-
-<section class="grid grid-cols-2 gap-5 mt-28">
-  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
-    <div class="-mx-3 md:flex mb-6">
-      <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
-          Producto
-        </label>
-        <div class="relative">
-          <select formControlName="name" [(ngModel)]="selectedProductName" class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state">
-            <option *ngFor="let item of productsType?.data" [value]="item.name" [attr.data-id-category]="item.id">
-              {{ item.name }}
-            </option>
-          </select>
-          <div class="pointer-events-none absolute top-0 bottom-0 right-0 mr-2 pin-y pin-r flex items-center px-2 text-grey-darker">
-            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-          </div>
-        </div>
-      </div>
-  
-  
-      <div class="md:w-1/2 px-3">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
-          Unidad de medida
-        </label>
-        <div class="relative">
-          <select formControlName="units" class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state">
-            <option *ngFor="let item of units?.data" [value]="item.name" [attr.data-id-category]="item.id">
-              {{ item.name }}
-            </option>
-          </select>
-          <div class="pointer-events-none absolute top-0 bottom-0 right-0 mr-2 pin-y pin-r flex items-center px-2 text-grey-darker">
-            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-          </div> 
-        </div>
-      </div>
-    </div>
-  
-    <div class="-mx-3 md:flex mb-6">
-      <div class="md:w-1/2 px-3">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
-          Fecha de cosecha
-        </label>
-        <mat-form-field class="w-full">
-          <input matInput [matDatepicker]="picker" formControlName="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="MM/DD/YYYY"/>
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        </mat-form-field>  
-      </div>
-  
-      <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
-          Mínimo de venta
-        </label>
-        <input formControlName="minimumSale" type="number" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-zip" placeholder="0"  min="1">
-      </div>
-    </div>
-  
-    <div class="-mx-3 md:flex mb-6">
-      <div class="md:w-1/2 px-3">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-          Existencias disponibles
-        </label>
-        <input formControlName="stock" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-zip" type="number" placeholder="0"  min="1">
-      </div>
-        
-      <div class="md:w-1/2 px-3">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
-          Precio
-        </label>
-        <input formControlName="price" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-zip" type="number" placeholder="0"  min="1">
-      </div>
-    </div>
-  
-    <div class="-mx-3 md:flex mb-6">
-      <div class="w-full px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
-          Descripción del producto
-        </label>
-        <textarea formControlName="description" type="text" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-zip" placeholder="Ingresa una breve descripción de tu producto"  min="1"></textarea>
-      </div>
-    </div>
-  </div>
-  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
-    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-      <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
-        Foto del producto
-      </label>
-
-      <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 ml-2 sm:col-span-4 md:mr-3">
-        <!-- Photo File Input -->
-        <input type="file" class="hidden" x-ref="photo" x-on:change="
-                            photoName = $refs.photo.files[0].name;
-                            const reader = new FileReader();
-                            reader.onload = (e) => {
-                                photoPreview = e.target.result;
-                            };
-                            reader.readAsDataURL($refs.photo.files[0]);
-        ">
-        
-        <div class="text-center">
-            <!-- Current Profile Photo -->
-            <div class="mt-2" x-show="! photoPreview">
-                <img src="https://images.unsplash.com/photo-1531316282956-d38457be0993?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" class="w-40 h-40 m-auto rounded-full shadow">
-            </div>
-            <!-- New Profile Photo Preview -->
-            <div class="mt-2" x-show="photoPreview" style="display: none;">
-                <span class="block w-40 h-40 rounded-full m-auto shadow" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'" style="background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('null');">
-                </span>
-            </div>
-            <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-400 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2 ml-3" x-on:click.prevent="$refs.photo.click()">
-                Select New Photo
-            </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
