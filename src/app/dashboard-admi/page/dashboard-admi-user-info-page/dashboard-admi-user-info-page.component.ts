@@ -5,7 +5,6 @@ import { User } from '../../interfaces/user';
 @Component({
   selector: 'app-dashboard-admi-user-info-page',
   templateUrl: './dashboard-admi-user-info-page.component.html',
-  styleUrls: ['./dashboard-admi-user-info-page.component.css'],
 })
 export class DashboardAdmiUserInfoPageComponent implements OnInit {
   userData: User | undefined;

@@ -6,7 +6,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-dashboard-admi-category',
   templateUrl: './dashboard-admi-category.component.html',
-  styleUrls: ['./dashboard-admi-category.component.css'],
 })
 export class DashboardAdmiCategoryComponent implements OnInit {
   categoriesData: Category | undefined;
