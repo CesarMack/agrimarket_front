@@ -28,7 +28,7 @@ const routes: Routes = [
         component: DashboardAdmiUsersPageComponent,
       },
       {
-        path: 'infoUser',
+        path: 'user/:id',
         component: DashboardAdmiUserInfoPageComponent,
       },
       {

@@ -28,8 +28,6 @@ export class DashboardAdmiDbPageComponent implements OnInit {
     // Ahora, ejecutemos getSuggestions() y almacenemos los datos en suggestionsData
     this.admiService.getBackupDifferential().subscribe(
       (data) => {
-        console.log(data);
-
         this.backupsData = data; // Asignamos los datos de suggestions
       },
       (error) => {
@@ -38,8 +36,6 @@ export class DashboardAdmiDbPageComponent implements OnInit {
     );
     this.admiService.getFullBackup().subscribe(
       (data) => {
-        console.log(data);
-
         this.backupsFullData = data; // Asignamos los datos de suggestions
       },
       (error) => {
@@ -53,8 +49,6 @@ export class DashboardAdmiDbPageComponent implements OnInit {
     this.loader = true;
     this.admiService.setBackupDifferential().subscribe(
       (data) => {
-        console.log(data);
-
         this.updateBackupDifferentialData();
         this.loader = false;
         this.showSuccessMessage = true; // Mostrar mensaje de éxito

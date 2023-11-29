@@ -28,11 +28,7 @@ export class DashboardAdmiCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.admiService.getCategory().subscribe(
       (data) => {
-        console.log(data);
-
-        this.categoriesData = data; // Assuming the response structure matches the provided JSON
-
-        console.log(this.categoriesData.data);
+        this.categoriesData = data;
       },
       (error) => {
         console.error('Error fetching CP data:', error);
@@ -52,7 +48,6 @@ export class DashboardAdmiCategoryComponent implements OnInit {
   showCategoryDetails(product: any) {
     // Cambia 'any' por el tipo adecuado para tus datos
     this.selectedCategory = product;
-    console.log(this.selectedCategory.id);
     this.categoryForm.patchValue({
       // Asigna los valores del producto al formulario
 
@@ -69,7 +64,6 @@ export class DashboardAdmiCategoryComponent implements OnInit {
       this.loader = true;
       this.admiService.updateCategoryType(productId, name).subscribe(
         (response) => {
-          console.log(response);
           this.updateCategoryData();
           this.loader = false;
           this.showSuccessMessage = true; // Mostrar mensaje de éxito
@@ -78,7 +72,6 @@ export class DashboardAdmiCategoryComponent implements OnInit {
           }, 3000);
         },
         (error) => {
-          console.log(error);
           this.loader = false;
           this.errorMessage =
             'Se produjo un error en la operación. Por favor, intenta nuevamente.';
@@ -101,11 +94,7 @@ export class DashboardAdmiCategoryComponent implements OnInit {
   updateCategoryData(): void {
     this.admiService.getCategory().subscribe(
       (data) => {
-        console.log(data);
-
-        this.categoriesData = data; // Assuming the response structure matches the provided JSON
-
-        console.log(this.categoriesData.data);
+        this.categoriesData = data;
       },
       (error) => {
         console.error('Error fetching CP data:', error);
@@ -114,8 +103,6 @@ export class DashboardAdmiCategoryComponent implements OnInit {
   }
 
   newCategory(): void {
-    console.log('actovadp');
-
     if (this.categoryForm.valid) {
       const name = this.categoryForm.get('name')!.value;
 
@@ -128,10 +115,8 @@ export class DashboardAdmiCategoryComponent implements OnInit {
           setTimeout(() => {
             this.showSuccessMessage = false; // Ocultar mensaje de éxito después de un tiempo
           }, 3000);
-          console.log(response);
         },
         (error) => {
-          console.log(error);
           this.loader = false;
           this.errorMessage =
             'Se produjo un error en la operación. Por favor, intenta nuevamente.';
@@ -156,7 +141,6 @@ export class DashboardAdmiCategoryComponent implements OnInit {
     this.admiService.changeStatusCategories(id).subscribe(
       (response) => {
         this.loader = false;
-        console.log(response);
         this.updateCategoryData();
         this.showSuccessMessage = true; // Mostrar mensaje de éxito
         setTimeout(() => {

@@ -1,16 +1,16 @@
 <section class="min-h-[90vh] px-24">
   <div class="flex w-full mt-10 h-1/6 bg-[#F6F6F6] rounded-[60px]">
-    <article class="w-3/6 mt-10 mb-10 mx-10">
-      <img class="w-full rounded-3xl" [src]="selectedPhotoUrl" />
-      <div class="w-full mt-10 flex gap-4">
+    <article class="flex w-3/6 mt-10 mb-10 mx-10">
+      <div class="flex flex-col mr-4 gap-4">
         <img
           *ngFor="let photo of productData?.data?.photos; let i = index"
-          class="w-2/6 rounded-3xl"
+          class="w-36 h-36 rounded-3xl"
           [src]="photo.url"
           alt="Photo {{ i + 1 }}"
           (click)="onSelectPhoto(photo.url)"
         />
       </div>
+      <img class="w-full rounded-3xl" [src]="selectedPhotoUrl" />
     </article>
     <article class="bg-white shadow-lg rounded-3xl p-10 mt-10 mb-10 mx-24">
       <h2

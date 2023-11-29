@@ -6,7 +6,6 @@ import { userRegister } from '../../../interfaces/auth';
 @Component({
   selector: 'app-registration-page',
   templateUrl: './registration-page.component.html',
-  styleUrls: ['./registration-page.component.css'],
 })
 export class RegistrationPageComponent {
   registerForm: FormGroup;
@@ -30,7 +29,6 @@ export class RegistrationPageComponent {
   }
 
   selectOption(role: string): void {
-    console.log('Role selected:', role);
     {
       this.selectedUserRole = role;
       this.registerForm.controls['role'].setValue(role); // Set the selected role in the form control
@@ -39,13 +37,11 @@ export class RegistrationPageComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log('Submit button clicked');
       const first_name = this.registerForm.get('firstName')!.value;
       const last_name = this.registerForm.get('lastName')!.value;
       const email = this.registerForm.get('email')!.value;
       const password = this.registerForm.get('password')!.value;
       const userRole = this.registerForm.get('userRole')!.value;
-      console.log(userRole);
 
       const data: userRegister = {
         first_name: first_name,
@@ -55,7 +51,6 @@ export class RegistrationPageComponent {
         type: userRole,
       };
 
-      console.log(data);
       this.loader = true;
 
       this.authService.register(data).subscribe(
@@ -65,11 +60,8 @@ export class RegistrationPageComponent {
           setTimeout(() => {
             this.showSuccessMessage = false; // Ocultar mensaje de éxito después de un tiempo
           }, 3000);
-          // Éxito en la autenticación, puedes redirigir o realizar otras acciones necesarias
-          console.log(response);
         },
         (error) => {
-          console.log(error);
           this.loader = false;
           this.showErrorMessage = true; // Mostrar mensaje de error
           setTimeout(() => {

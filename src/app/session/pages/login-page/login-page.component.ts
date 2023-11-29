@@ -6,9 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css'],
 })
-
 export class LoginPageComponent {
   loginForm: FormGroup;
   authError = false;
@@ -37,26 +35,17 @@ export class LoginPageComponent {
 
       this.authService.auth(email, password).subscribe(
         (response) => {
-          console.log(response);
-
-          // Éxito en la autenticación, puedes redirigir o realizar otras acciones necesarias
-          console.log(response.user.role);
           if (response.user.role === 'admin') {
-            // Redirigir a la ruta de administrador
-
-            console.log(response.user.access_token);
-
             localStorage.setItem('user_token', response.user.access_token);
+            localStorage.setItem('user_role', response.user.role);
             this.router.navigate(['/admin']);
           } else if (response.user.role === 'farmer') {
-            // Redirigir a la ruta de cliente
-
-            console.log(response.user.access_token);
             localStorage.setItem('user_token', response.user.access_token);
+            localStorage.setItem('user_role', response.user.role);
             this.router.navigate(['/farmer']);
           } else {
-            console.log(response.user.access_token);
             localStorage.setItem('user_token', response.user.access_token);
+            localStorage.setItem('user_role', response.user.role);
             this.router.navigate(['/store']);
             // Si el rol no es "admin" ni "cliente", manejarlo como desees
           }

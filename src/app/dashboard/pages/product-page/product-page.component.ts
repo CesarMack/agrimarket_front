@@ -13,10 +13,6 @@ export class ProductPageComponent implements OnInit {
   ngOnInit(): void {
     this.farmerService.getCatalog().subscribe(
       (data) => {
-        console.log(data);
-
-        console.log(data.data);
-
         this.catalogData = data;
       },
       (error) => {

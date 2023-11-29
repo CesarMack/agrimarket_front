@@ -39,8 +39,6 @@ export class DashboradAdmiRegisterComponent {
         .setRegisterUser(name, lastName, email, password)
         .subscribe(
           (response) => {
-            console.log(response);
-
             this.loader = false;
             this.showSuccessMessage = true; // Mostrar mensaje de éxito
 
@@ -50,7 +48,6 @@ export class DashboradAdmiRegisterComponent {
             }, 2000);
           },
           (error) => {
-            console.log(error);
             this.loader = false;
             this.showErrorMessage = true; // Mostrar mensaje de error
             this.errorMessage =

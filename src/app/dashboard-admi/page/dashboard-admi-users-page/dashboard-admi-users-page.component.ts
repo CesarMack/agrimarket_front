@@ -78,4 +78,9 @@ export class DashboardAdmiUsersPageComponent implements OnInit {
         return 'bg-gray-500 text-white'; // Clases de colores para roles desconocidos
     }
   }
+
+  redirectToUserDetails(id: string) {
+    // Utiliza el servicio Router para navegar a la nueva ventana
+    this.router.navigate(['/admin/user', id]);
+  }
 }

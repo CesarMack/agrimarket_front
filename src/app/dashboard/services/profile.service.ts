@@ -20,8 +20,6 @@ export class ProfileService {
       )
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -39,8 +37,6 @@ export class ProfileService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -57,8 +53,6 @@ export class ProfileService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -76,8 +70,6 @@ export class ProfileService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -94,8 +86,6 @@ export class ProfileService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );

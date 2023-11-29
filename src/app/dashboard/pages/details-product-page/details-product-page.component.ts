@@ -42,12 +42,7 @@ export class DetailsProductPageComponent implements OnInit {
   ngOnInit(): void {
     this.farmerService.getProductType().subscribe(
       (data) => {
-        console.log('CAtegorias en tipos de productos');
-
-        console.log(data);
-
         this.productsType = data;
-
         this.productForm.patchValue({
           name: this.productsType.data,
         });
@@ -59,10 +54,6 @@ export class DetailsProductPageComponent implements OnInit {
 
     this.farmerService.getUnits().subscribe(
       (data) => {
-        console.log('CAtegorias en tipos de productos');
-
-        console.log(data);
-
         this.units = data;
       },
       (error) => {
@@ -78,15 +69,8 @@ export class DetailsProductPageComponent implements OnInit {
       if (params['id']) {
         this.farmerService.getInfoProduct(this.productId).subscribe(
           (data) => {
-            console.log('Data producto id');
-
-            console.log(data); // Llena los campos del formulario con la información obtenida
-
-            console.log(data.data.product);
-
             this.productForm.get('name')?.setValue(data.data.product);
             this.productForm.get('units')?.setValue(data.data.measure);
-
             this.productForm.patchValue({
               minimumSale: data.data.minimum_sale,
             });
@@ -116,7 +100,6 @@ export class DetailsProductPageComponent implements OnInit {
           }
         );
       }
-      console.log(this.productId);
     });
   }
   onFileSelected(event: any): void {
@@ -142,11 +125,8 @@ export class DetailsProductPageComponent implements OnInit {
 
   removeImage(index: number, id: string): void {
     if (id) {
-      console.log('Foto con id');
       this.farmerService.deletePhoto(id).subscribe(
         (response) => {
-          console.log(response);
-
           this.selectedImages.splice(index, 1);
         },
         (error) => {
@@ -194,16 +174,9 @@ export class DetailsProductPageComponent implements OnInit {
       unit_of_measurement_id: unit_of_measurement_id?.id,
     };
 
-    console.log('Data de Product');
-
-    console.log(data);
-    console.log(product_type_id?.id);
-
     if (this.productId) {
-      console.log('Update');
       this.farmerService.updateProduct(data, this.productId).subscribe(
         (response) => {
-          console.log(response);
           this.uploadImages(response)
             .then(() => {
               console.log('All images uploaded successfully.');
@@ -217,11 +190,8 @@ export class DetailsProductPageComponent implements OnInit {
         }
       );
     } else {
-      console.log('Create');
-
       this.farmerService.createProduct(data).subscribe(
         (response) => {
-          console.log(response);
           this.uploadImages(response)
             .then(() => {
               console.log('All images uploaded successfully.');
@@ -242,9 +212,7 @@ export class DetailsProductPageComponent implements OnInit {
 
     // Obtén las fotos y súbelas una por una
     for (const { file } of this.selectedImages) {
-      console.log(file);
       if (file instanceof File) {
-        console.log('Dentro del if de uploadImages');
         try {
           const response = await lastValueFrom(
             this.farmerService.uploadPhoto(file, id)

@@ -42,8 +42,6 @@ export class FarmProfileComponent implements OnInit {
       if (params['id']) {
         this.profileService.getDataFarm(this.farmId).subscribe(
           (response) => {
-            console.log('Data del farm');
-
             this.farmForm.patchValue({
               name: response.data.name,
               phone: response.data.phone,
@@ -59,7 +57,6 @@ export class FarmProfileComponent implements OnInit {
               file: null,
               previewUrl: response.data.photo,
             };
-            console.log(this.selectedImage);
           },
           (error) => {
             console.error('Error fetching CP data:', error);

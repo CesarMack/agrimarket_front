@@ -12,15 +12,12 @@ export class MainService {
   getDashboard(): Observable<Catalog> {
     const token = localStorage.getItem('user_token');
 
-    console.log(token);
-
     if (!token) {
       throw new Error('Token not available');
     }
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
 
     return this.http
       .get<Catalog>(`${this.apiUrl}/products`, {
@@ -28,8 +25,6 @@ export class MainService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -38,24 +33,18 @@ export class MainService {
   getProductData(id: string): Observable<Product> {
     const token = localStorage.getItem('user_token');
 
-    console.log(token);
-
     if (!token) {
       throw new Error('Token not available');
     }
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
-
     return this.http
       .get<Product>(`${this.apiUrl}/products/${id}`, {
         headers,
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );

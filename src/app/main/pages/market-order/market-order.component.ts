@@ -8,7 +8,6 @@ import { ProfileService } from '../../services/profile.service';
 @Component({
   selector: 'app-market-order',
   templateUrl: './market-order.component.html',
-  styleUrls: ['./market-order.component.css'],
 })
 export class MarketOrderComponent implements OnInit {
   productData: Product | undefined;
@@ -43,11 +42,7 @@ export class MarketOrderComponent implements OnInit {
         this.mainService.getProductData(params['id']).subscribe(
           (response) => {
             this.productData = response;
-            console.log(response);
-            console.log('Establo');
-            console.log(response.data.estate.id);
             this.selectedPhotoUrl = response.data.photos[0].url;
-            console.log(response.data.price);
 
             this.price = response.data.price;
             this.quantity = localStorage.getItem('quantity');
@@ -55,7 +50,6 @@ export class MarketOrderComponent implements OnInit {
             const quantityNumeric = parseFloat(this.quantity!);
             const priceNumeric = parseFloat(this.productData.data.price);
             this.total = (quantityNumeric * priceNumeric).toString();
-            console.log(this.total);
           },
           (error) => {
             console.log('Error fetching DATA', error);

@@ -33,7 +33,6 @@
         <li>
           <a
             [routerLink]="['/farmer']"
-            class="text-sm uppercase py-3 font-semibold flex flex-row items-center font-sans"
             routerLinkActive
             #adminDashboard="routerLinkActive"
             class="flex items-center p-2 text-gray-900 rounded-lg group"
@@ -58,7 +57,6 @@
         <li>
           <a
             [routerLink]="['/farmer/orders']"
-            class="text-sm uppercase py-3 font-semibold flex flex-row items-center font-sans"
             routerLinkActive
             #adminDashboard="routerLinkActive"
             class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
@@ -106,20 +104,35 @@
         <div class="w-full flex items-center mb-4 px-2">
           <div class="w-10 h-10 bg-cover rounded-md mr-3">
             <img
-              src="https://tuk-cdn.s3.amazonaws.com/assets/components/avatars/a_5.png"
-              alt="display avatar"
-              role="img"
+              *ngIf="userData?.data?.photo; else defaultImage"
+              [src]="userData?.data?.photo"
+              alt="User Photo"
               class="rounded-full h-full w-full overflow-hidden shadow"
             />
+            <ng-template #defaultImage>
+              <img
+                src="https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg"
+                alt="Default User Photo"
+                class="rounded-full h-full w-full overflow-hidden shadow"
+              />
+            </ng-template>
           </div>
           <div>
-            <p class="text-gray-900 text-sm font-medium">Cesar Mackintosh</p>
-            <p class="text-gray-900 text-xs">Editar perfíl</p>
+            <p class="text-gray-900 text-sm font-medium">
+              {{ userData?.data?.first_name + " " + userData?.data?.last_name }}
+            </p>
+            <p
+              class="text-gray-900 text-xs cursor-pointer"
+              (click)="redirectToUserDetails()"
+            >
+              Editar perfíl
+            </p>
           </div>
         </div>
         <button
           type="button"
           class="w-full focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+          (click)="logout()"
         >
           Cerrar sesión
         </button>

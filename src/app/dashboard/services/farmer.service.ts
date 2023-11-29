@@ -19,16 +19,12 @@ export class FarmerService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
-
     return this.http
       .get<Dashboard>(`${this.apiUrl}/farmers/dashboard`, {
         headers,
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -40,7 +36,6 @@ export class FarmerService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
 
     return this.http
       .get<Catalog>(`${this.apiUrl}/products`, {
@@ -48,8 +43,6 @@ export class FarmerService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -68,8 +61,6 @@ export class FarmerService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -88,8 +79,6 @@ export class FarmerService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -108,8 +97,6 @@ export class FarmerService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -129,8 +116,6 @@ export class FarmerService {
       .pipe(
         map((response) => response.data.id),
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -154,8 +139,6 @@ export class FarmerService {
       .pipe(
         map((response) => response.data.id),
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -178,17 +161,11 @@ export class FarmerService {
       .pipe(
         map((response) => response.data),
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
   }
   uploadPhoto(photo: File, id: string): Observable<string> {
-    console.log('DEntro de la foto');
-    console.log(photo);
-    console.log(id);
-
     const token = localStorage.getItem('user_token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -202,7 +179,6 @@ export class FarmerService {
       })
       .pipe(
         catchError((error) => {
-          console.log(error);
           throw new Error('Error uploading photo');
         })
       );

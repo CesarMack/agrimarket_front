@@ -7,7 +7,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-market-details',
   templateUrl: './market-details.component.html',
-  styleUrls: ['./market-details.component.css'],
 })
 export class MarketDetailsComponent implements OnInit {
   productData: Product | undefined;
@@ -34,9 +33,6 @@ export class MarketDetailsComponent implements OnInit {
         this.mainService.getProductData(params['id']).subscribe(
           (response) => {
             this.productData = response;
-            console.log(response);
-            console.log('Establo');
-            console.log(response.data.estate.id);
 
             this.selectedPhotoUrl = response.data.photos[0].url;
           },

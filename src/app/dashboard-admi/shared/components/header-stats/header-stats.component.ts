@@ -12,7 +12,5 @@ export class HeaderStatsComponent implements OnInit {
   }
   ngOnInit(): void {
     const response = this.route.snapshot.routeConfig?.path === 'admin';
-    console.log(this.route.snapshot.routeConfig?.path);
-    console.log(response);
   }
 }

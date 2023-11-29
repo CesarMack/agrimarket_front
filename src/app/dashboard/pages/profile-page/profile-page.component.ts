@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.css'],
 })
 export class ProfilePageComponent implements OnInit {
   cpData: CPData | undefined;
@@ -62,7 +61,6 @@ export class ProfilePageComponent implements OnInit {
           file: null,
           previewUrl: data.data.photo,
         };
-        console.log(this.selectedImage);
       },
       (error) => {
         console.error('Error fetching dashboard data:', error);
@@ -70,10 +68,6 @@ export class ProfilePageComponent implements OnInit {
     );
 
     this.profileService.getDataFarms().subscribe((data) => {
-      console.log('Data farm');
-
-      console.log(data);
-
       this.farmData = data;
     });
   }
@@ -81,17 +75,13 @@ export class ProfilePageComponent implements OnInit {
   fetchCPInfo(cp: string) {
     this.profileService.getCPInfo(cp).subscribe(
       (data) => {
-        console.log(data);
-
         this.cpData = data; // Assuming the response structure matches the provided JSON
-
         this.profileForm.patchValue({
           city: this.cpData.response.ciudad,
           state: this.cpData.response.estado,
           suburb: this.cpData.response.asentamiento[0],
           // ...otros campos aquí...
         });
-        console.log(this.cpData.response.ciudad);
       },
       (error) => {
         console.error('Error fetching CP data:', error);
@@ -143,7 +133,6 @@ export class ProfilePageComponent implements OnInit {
     if (this.selectedImage.file !== null) {
       formData.append('photo', this.selectedImage.file);
     }
-    console.log('Update');
     this.profileService.updateProfile(formData).subscribe(
       (response) => {
         console.log(response);

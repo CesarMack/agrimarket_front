@@ -12,35 +12,24 @@ import { Backups } from '../interfaces/backups';
 
 @Injectable({ providedIn: 'root' })
 export class AdmiService {
-  private apiUrl: string =
-    'https://agrimarketapi.azurewebsites.net/api/v1';
+  private apiUrl: string = 'https://agrimarketapi.azurewebsites.net/api/v1';
 
   constructor(private http: HttpClient) {}
 
   getDashboard(): Observable<Dashboard> {
     const token = localStorage.getItem('user_token');
-
-    console.log(token);
-
-    // Verificar si el token está disponible en el localStorage
     if (!token) {
-      // Manejar la situación en la que el token no está disponible
-      // Puede lanzar un error, redirigir a la página de inicio de sesión, etc.
       throw new Error('Token not available');
     }
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
-
     return this.http
       .get<Dashboard>(`${this.apiUrl}/admins/dashboard`, {
         headers,
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -48,19 +37,12 @@ export class AdmiService {
 
   getSuggestions(): Observable<Suggestions> {
     const token = localStorage.getItem('user_token');
-
-    console.log(token);
-
-    // Verificar si el token está disponible en el localStorage
     if (!token) {
-      // Manejar la situación en la que el token no está disponible
-      // Puede lanzar un error, redirigir a la página de inicio de sesión, etc.
       throw new Error('Token not available');
     }
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
 
     return this.http
       .get<Suggestions>(`${this.apiUrl}/suggested_products`, {
@@ -68,8 +50,6 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -77,12 +57,9 @@ export class AdmiService {
   updateStatusSuggestion(id: String): Observable<any> {
     const token = localStorage.getItem('user_token');
 
-    console.log(token);
-
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
 
     return this.http
       .post<any>(
@@ -94,8 +71,6 @@ export class AdmiService {
       )
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -104,18 +79,12 @@ export class AdmiService {
   getUsers(): Observable<Users> {
     const token = localStorage.getItem('user_token');
 
-    console.log(token);
-
-    // Verificar si el token está disponible en el localStorage
     if (!token) {
-      // Manejar la situación en la que el token no está disponible
-      // Puede lanzar un error, redirigir a la página de inicio de sesión, etc.
       throw new Error('Token not available');
     }
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
 
     return this.http
       .get<Users>(`${this.apiUrl}/admins/users`, {
@@ -123,8 +92,6 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -133,20 +100,15 @@ export class AdmiService {
   findUser(name: string): Observable<Users> {
     const token = localStorage.getItem('user_token');
 
-    console.log(token);
     const data = {
       name: name,
     };
-    // Verificar si el token está disponible en el localStorage
     if (!token) {
-      // Manejar la situación en la que el token no está disponible
-      // Puede lanzar un error, redirigir a la página de inicio de sesión, etc.
       throw new Error('Token not available');
     }
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
 
     return this.http
       .post<Users>(`${this.apiUrl}/admins/find_user`, data, {
@@ -154,8 +116,6 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -174,8 +134,6 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -187,7 +145,6 @@ export class AdmiService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    console.log(headers);
 
     return this.http
       .get<ProductType>(`${this.apiUrl}/product_types`, {
@@ -195,8 +152,6 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -204,7 +159,6 @@ export class AdmiService {
   findProductType(name: string): Observable<ProductType> {
     const token = localStorage.getItem('user_token');
 
-    console.log(token);
     const data = {
       name: name,
     };
@@ -217,8 +171,6 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -226,7 +178,6 @@ export class AdmiService {
 
   setProductType(name: String, category: String): Observable<any> {
     const token = localStorage.getItem('user_token');
-    console.log(token);
     const data = {
       name: name,
       category_id: category,
@@ -252,7 +203,6 @@ export class AdmiService {
     category: String
   ): Observable<any> {
     const token = localStorage.getItem('user_token');
-    console.log(token);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -260,8 +210,6 @@ export class AdmiService {
       name: name,
       category_id: category,
     };
-    console.log(data);
-    console.log(`${this.apiUrl}/admins/product_types/${id}`);
 
     return this.http
       .post<any>(`${this.apiUrl}/admins/product_types/${id}`, data, {
@@ -269,8 +217,6 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -278,7 +224,6 @@ export class AdmiService {
 
   changeStatus(id: String): Observable<any> {
     const token = localStorage.getItem('user_token');
-    console.log(token);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       Accept: 'application/json', // Agregar la cabecera Accept
@@ -295,8 +240,6 @@ export class AdmiService {
       )
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -304,7 +247,6 @@ export class AdmiService {
 
   setCategories(name: String): Observable<any> {
     const token = localStorage.getItem('user_token');
-    console.log(token);
     const data = {
       name: name,
       active: 1,
@@ -326,7 +268,6 @@ export class AdmiService {
 
   changeStatusCategories(id: String): Observable<any> {
     const token = localStorage.getItem('user_token');
-    console.log(token);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       Accept: 'application/json', // Agregar la cabecera Accept
@@ -343,8 +284,6 @@ export class AdmiService {
       )
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -365,8 +304,6 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -387,8 +324,6 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -396,7 +331,6 @@ export class AdmiService {
 
   setUnit(name: String, code: String): Observable<any> {
     const token = localStorage.getItem('user_token');
-    console.log(token);
     const data = {
       name: name,
       code: code,
@@ -433,8 +367,6 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -442,7 +374,6 @@ export class AdmiService {
 
   changeStatusUnit(id: String): Observable<any> {
     const token = localStorage.getItem('user_token');
-    console.log(token);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       Accept: 'application/json', // Agregar la cabecera Accept
@@ -459,8 +390,6 @@ export class AdmiService {
       )
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -468,9 +397,9 @@ export class AdmiService {
 
   ///Show user
 
-  getUserData(): Observable<User> {
+  getUserData(id: string): Observable<User> {
     const token = localStorage.getItem('user_token');
-    const idUser = localStorage.getItem('user_id');
+    const idUser = id;
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -482,8 +411,6 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -498,7 +425,6 @@ export class AdmiService {
     password: String
   ): Observable<any> {
     const token = localStorage.getItem('user_token');
-    console.log(token);
 
     const data = {
       first_name: name,
@@ -516,17 +442,30 @@ export class AdmiService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
   }
 
+  getDataProfile(): Observable<User> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .get<User>(`${this.apiUrl}/users/me`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
   //API BACKUP
 
-  private apiUrlBD: string =
-    'https://agrimarketapi.azurewebsites.net/api/v1/';
+  private apiUrlBD: string = 'https://agrimarketapi.azurewebsites.net/api/v1/';
   setBackupDifferential(): Observable<any> {
     const token = localStorage.getItem('user_token');
 
@@ -543,8 +482,6 @@ export class AdmiService {
       )
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -558,16 +495,12 @@ export class AdmiService {
       Accept: 'application/json',
     });
 
-    console.log(token);
-
     return this.http
       .get<Backups>(`${this.apiUrlBD}admins/backups/DifferentialBackup`, {
         headers,
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -580,10 +513,6 @@ export class AdmiService {
       Authorization: `Bearer ${token}`,
     });
 
-    console.log(token);
-
-    console.log(name);
-
     return this.http
       .post<any>(
         `${this.apiUrlBD}admins/backups/deleteDifferentialBackup/${name}`,
@@ -594,8 +523,6 @@ export class AdmiService {
       )
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -618,8 +545,6 @@ export class AdmiService {
       )
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -633,17 +558,12 @@ export class AdmiService {
       Authorization: `Bearer ${token}`,
       Accept: 'application/json',
     });
-
-    console.log(token);
-
     return this.http
       .get<Backups>(`${this.apiUrlBD}admins/backups/FullBackup`, {
         headers,
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -666,8 +586,6 @@ export class AdmiService {
       )
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
