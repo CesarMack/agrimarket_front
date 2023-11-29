@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard-admi-users-page',
   templateUrl: './dashboard-admi-users-page.component.html',
-  styleUrls: ['./dashboard-admi-users-page.component.css'],
 })
 export class DashboardAdmiUsersPageComponent implements OnInit {
   usersData: Users | undefined;

@@ -1,6 +1,8 @@
-<section class="p-10 w-full h-full bg-[#f6f6f6]">
-  <div class="p-10 bg-white shadow-lg rounded-3xl w-full h-full">
-    <div class="flex justify-between">
+<div class="flex flex-wrap h-screen">
+  <div
+    class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg pt-5"
+  >
+    <div class="px-10 pt-5 flex justify-between">
       <div class="relative w-4/12">
         <input
           type="search"
@@ -36,6 +38,7 @@
         + Agregar
       </button>
     </div>
+
     <div class="mt-10 grid grid-cols-6 gap-10">
       <button
         *ngFor="let data of catalogData!.data"
@@ -54,5 +57,12 @@
         <h3 class="mt-4 font-medium">{{ data.product }}</h3>
       </button>
     </div>
+    <!-- Display a message if catalogData is empty -->
+    <div
+      *ngIf="!catalogData || !catalogData.data || catalogData.data.length === 0"
+      class="mt-10 text-center"
+    >
+      <p class="text-gray-500">Aún no hay productos agregados.</p>
+    </div>
   </div>
-</section>
+</div>

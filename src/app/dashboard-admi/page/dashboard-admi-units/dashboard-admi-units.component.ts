@@ -6,7 +6,6 @@ import { AdmiService } from '../../services/admi.service';
 @Component({
   selector: 'app-dashboard-admi-units',
   templateUrl: './dashboard-admi-units.component.html',
-  styleUrls: ['./dashboard-admi-units.component.css'],
 })
 export class DashboardAdmiUnitsComponent implements OnInit {
   unitsData: Units | undefined;

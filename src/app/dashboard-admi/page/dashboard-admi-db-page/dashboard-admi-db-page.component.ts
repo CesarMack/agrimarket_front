@@ -7,7 +7,6 @@ import { LocationStrategy } from '@angular/common';
 @Component({
   selector: 'app-dashboard-admi-db-page',
   templateUrl: './dashboard-admi-db-page.component.html',
-  styleUrls: ['./dashboard-admi-db-page.component.css'],
 })
 export class DashboardAdmiDbPageComponent implements OnInit {
   backupsData: Backups | undefined;
