@@ -1,18 +1,20 @@
 <div class="flex flex-wrap">
   <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
-    <app-card-line-chart></app-card-line-chart>
+    <section>
+      <div>
+        <canvas id="chart" width="100" height="100">{{ chart }}</canvas>
+      </div>
+    </section>
   </div>
   <div class="w-full xl:w-4/12 px-4"></div>
 </div>
 <div class="flex flex-wrap mt-4">
   <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4"></div>
-  <div class="w-full xl:w-4/12 px-4"></div>
-</div>
-<div>
-  <canvas id="chart" width="100" height="100">{{ chart }}</canvas>
+  <div class="w-full xl:w-4/12 px-4"></div>0
+
 </div>
 
-<!-- <section class="flex flex-wrap">
+<section class="flex flex-wrap">
   <div class="p-10 bg-white shadow-lg rounded-3xl w-full h-full flex flex-col">
     <h3
       class="text-3xl font-bold text-[#2A9763] font-['Montserrat_Alternates']"
@@ -247,4 +249,3 @@
     </div>
   </div>
 </section>
- -->
