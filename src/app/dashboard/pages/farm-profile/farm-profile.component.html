@@ -1,147 +1,328 @@
-<div class="flex flex-wrap h-screen">
-  <div
-    class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg pt-5"
+<div
+  *ngIf="loading"
+  class="flex justify-center items-center bg-gray-700 absolute top-0 bottom-0 left-0 right-0 z-40 opacity-75"
+>
+  <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+  <svg
+    width="38"
+    height="38"
+    viewBox="0 0 38 38"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <form [formGroup]="farmForm" class="grid grid-cols-2 gap-x-10">
-      <div class="flex border-b border-[#2A9763] my-5">
-        <h3
-          class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
+    <defs>
+      <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+        <stop stop-color="#fff" stop-opacity="0" offset="0%" />
+        <stop stop-color="#fff" stop-opacity=".631" offset="63.146%" />
+        <stop stop-color="#fff" offset="100%" />
+      </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+      <g transform="translate(1 1)">
+        <path
+          d="M36 18c0-9.94-8.06-18-18-18"
+          id="Oval-2"
+          stroke="url(#a)"
+          stroke-width="2"
         >
-          Datos Generales
-        </h3>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="0.9s"
+            repeatCount="indefinite"
+          />
+        </path>
+        <circle fill="#fff" cx="36" cy="18" r="1">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="0.9s"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </g>
+    </g>
+  </svg>
+</div>
+<div
+  role="alert"
+  id="alert"
+  [ngClass]="
+    'transition duration-150 ease-in-out absolute top-0 left-0 right-0  w-full bg-green-100 shadow   ' +
+    (alert ? 'transform -translate-y-full' : 'transform translate-y-0 ')
+  "
+>
+  <div
+    class="container mx-auto xl:w-full lg:transition duration-150 ease-in-out w-11/12"
+  >
+    <div class="w-full xl:flex lg:flex py-6 items-center">
+      <div
+        class="xl:w-5/6 lg:w-5/6 w-full flex xl:flex-row lg:flex-row flex-col justify-center items-center xl:justify-start lg:justify-start"
+      >
+        <div class="text-green-700">
+          <svg
+            tabindex="0"
+            aria-label="success"
+            role="alert"
+            class="focus:outline-none"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="currentColor"
+          >
+            <path
+              class="heroicon-ui"
+              d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z"
+            />
+          </svg>
+        </div>
+        <p class="mx-4 text-lg text-green-700 text-center sm:text-left">
+          Actualización exitosa.
+        </p>
       </div>
-      <div class="flex border-b border-[#2A9763] my-5">
-        <h3
-          class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
+      <div class="w-2/12 flex justify-end">
+        <button
+          (click)="closeAlert()"
+          aria-label="close"
+          class="focus:outline-none focus:text-black hover:text-black cursor-pointer xl:relative lg:relative absolute top-0 right-0 mr-2 mt-2 xl:mt-0 xl:mr-0 lg:mt-0 lg:mr-0 text-green-700"
         >
-          Foto
-        </h3>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-x"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
-      <article class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
-        <div class="flex flex-col">
-          <label>Nombre:</label>
-          <input
-            formControlName="name"
-            type="text"
-            class="h-9 border border-gray-400 rounded-2xl"
-          />
-        </div>
-        <div class="flex flex-col">
-          <label>Telefono:</label>
-          <input
-            formControlName="phone"
-            type="text"
-            class="h-9 border border-gray-400 rounded-2xl"
-          />
-        </div>
-        <div class="flex flex-col">
-          <label>Calle:</label>
-          <input
-            formControlName="street"
-            type="text"
-            class="h-9 border border-gray-400 rounded-2xl"
-          />
-        </div>
-        <div class="flex gap-10 w-full mt-5">
-          <span class="w-2/4 flex flex-col">
-            <label>Numero exterior:</label>
+    </div>
+  </div>
+</div>
+<div class="flex flex-wrap">
+  <form
+    [formGroup]="farmForm"
+    (ngSubmit)="newFarmer()"
+    class="relative flex gap-5 w-full"
+  >
+    <div class="w-full xl:w-1/2 mb-12 xl:mb-0">
+      <div
+        class="h-full bg-white shadow-lg rounded pt-5 px-8 pb-8 mb-4 flex flex-col my-2"
+      >
+        <h2 class="text-xl font-semibold">Datos Generales</h2>
+        <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
+
+        <div class="-mx-3 md:flex mb-6 mt-5">
+          <div class="md:w-1/2 px-3">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-state"
+            >
+              Nombre
+            </label>
             <input
-              formControlName="ext_num"
-              type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
+              formControlName="name"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
-          </span>
-          <span class="w-2/4 flex flex-col">
-            <label>Numero interior:</label>
+          </div>
+
+          <div class="md:w-1/2 px-3">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-zip"
+            >
+              Telefono
+            </label>
             <input
-              formControlName="int_num"
-              type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
+              formControlName="phone"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
-          </span>
+          </div>
+        </div>
+        <div class="-mx-3 md:flex mb-6 mt-5">
+          <div class="w-full px-3">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-state"
+            >
+              Calle:
+            </label>
+            <input
+              formControlName="street"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
         </div>
 
-        <div class="flex gap-10 w-full mt-5">
-          <span class="w-2/4 flex flex-col">
-            <label>C.P:</label>
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-1/2 px-3">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-state"
+            >
+              Numero Interior:
+            </label>
+            <input
+              formControlName="int_num"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
+
+          <div class="md:w-1/2 px-3">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-zip"
+            >
+              Numero Exterior:
+            </label>
+            <input
+              formControlName="ext_num"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
+        </div>
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-1/2 px-3">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-state"
+            >
+              Codigo Postal:
+            </label>
             <input
               formControlName="zip_code"
-              type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
-          </span>
-          <span class="w-2/4 flex flex-col">
-            <label>Colonia:</label>
+          </div>
+
+          <div class="md:w-1/2 px-3">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-zip"
+            >
+              Colonia:
+            </label>
             <input
               formControlName="suburb"
-              type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
-          </span>
+          </div>
         </div>
-        <div class="flex gap-10 w-full mt-5">
-          <span class="w-2/4 flex flex-col">
-            <label>Ciudad:</label>
+        <div class="-mx-3 md:flex mb-6">
+          <div class="md:w-1/2 px-3">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-state"
+            >
+              Ciudad:
+            </label>
             <input
               formControlName="city"
-              type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
-          </span>
-          <span class="w-2/4 flex flex-col">
-            <label>Estado:</label>
+          </div>
+
+          <div class="md:w-1/2 px-3">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-zip"
+            >
+              Estado:
+            </label>
             <input
               formControlName="state"
-              type="text"
-              class="h-9 border border-gray-400 rounded-2xl"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
-          </span>
+          </div>
         </div>
-      </article>
-      <article
-        class="p-5 flex justify-center items-center rounded-3xl shadow bg-[#f6f6f6]"
+      </div>
+    </div>
+
+    <div class="xl:w-1/2 mb-12 xl:mb-0">
+      <div
+        class="h-full w-full relative bg-white shadow-lg rounded pt-5 px-8 pb-8 mb-4 flex flex-col my-2"
       >
+        <h2 class="text-xl font-semibold">Foto</h2>
+        <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
+
         <div
-          *ngIf="selectedImage.file != null || selectedImage.previewUrl != null"
+          class="px-3 mb-6 md:mb-0 w-full flex items-center h-auto justify-center"
         >
-          <h4>Imágenes seleccionadas:</h4>
-          <div class="relative mx-auto border w-[200px] h-[200px]">
-            <img
-              class="absolute"
-              *ngIf="selectedImage.previewUrl"
-              [src]="selectedImage.previewUrl"
-              alt="Vista previa"
+          <div
+            x-data="{photoName: null, photoPreview: null}"
+            class="w-full col-span-6 ml-2 sm:col-span-4 md:mr-3"
+          >
+            <!-- Photo File Input -->
+            <input
+              type="file"
+              class="hidden"
+              x-ref="photo"
+              x-on:change="
+                                photoName = $refs.photo.files[0].name;
+                                const reader = new FileReader();
+                                reader.onload = (e) => {
+                                    photoPreview = e.target.result;
+                                };
+                                reader.readAsDataURL($refs.photo.files[0]);
+            "
+              multiple
+              (change)="onFileSelected($event)"
             />
+
+            <div class="w-full">
+              <!-- New Profile Photo Preview -->
+              <div
+                class="relative mx-auto w-[150px] h-[150px]"
+                *ngIf="
+                  selectedImage.file != null || selectedImage.previewUrl != null
+                "
+              >
+                <img
+                  class="rounded-lg w-full h-full border"
+                  *ngIf="selectedImage.previewUrl"
+                  [src]="selectedImage.previewUrl"
+                  alt="Vista previa"
+                />
+                <button
+                  class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-1.5 absolute bottom-[-10px] left-1/2 transform -translate-x-1/2"
+                  (click)="removeImage()"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
             <button
-              class="absolute inset-y-0 inset-x-0"
-              (click)="removeImage()"
+              type="button"
+              class="mt-5 inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-400 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
+              x-on:click.prevent="$refs.photo.click()"
             >
-              Eliminar
+              Seleccionar fotos
             </button>
           </div>
         </div>
-        <input
-          class="px-4 mx-auto"
-          type="file"
-          (change)="onFileSelected($event)"
-          accept="image/*"
-        />
-      </article>
 
-      <div
-        class="mt-10 col-start-2 col-end-3 flex flex-col justify-center items-center gap-10"
-      >
-        <button
-          class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
+        <div
+          class="mt-10 col-start-2 col-end-3 flex flex-col justify-center items-center gap-10"
         >
-          Guardar
-        </button>
-        <button
-          class="ml-8 w-32 py-3 px-6 bg-[#38C984] text-white rounded-xl text-lg font-semibold"
-        >
-          Cancelar
-        </button>
+          <button
+            type="button"
+            class="w-1/3 focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+          >
+            Guardar
+          </button>
+        </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>

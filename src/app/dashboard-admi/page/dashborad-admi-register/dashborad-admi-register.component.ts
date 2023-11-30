@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashborad-admi-register',
   templateUrl: './dashborad-admi-register.component.html',
-  styleUrls: ['./dashborad-admi-register.component.css'],
 })
 export class DashboradAdmiRegisterComponent {
   registerForm: FormGroup;

@@ -15,6 +15,7 @@ export class DashboardAdmiCategoryComponent implements OnInit {
   showSuccessMessage: boolean = false;
   showErrorMessage: boolean = false;
   errorMessage: String = '';
+  loading: boolean = true;
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder
@@ -29,6 +30,7 @@ export class DashboardAdmiCategoryComponent implements OnInit {
     this.admiService.getCategory().subscribe(
       (data) => {
         this.categoriesData = data;
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching CP data:', error);

@@ -45,13 +45,13 @@ const routes: Routes = [
         component: FarmProfileComponent,
       },
       {
+        path: 'orders/details/:id',
+        component: DetailsOrderPageComponent,
+      },
+      {
         path: 'orders',
         loadChildren: () =>
           import('./pages/orders/orders.module').then((x) => x.OrdersModule),
-      },
-      {
-        path: 'orders/details',
-        component: DetailsOrderPageComponent,
       },
     ],
   },

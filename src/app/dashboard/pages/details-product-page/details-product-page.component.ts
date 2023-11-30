@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Units } from '../../interfaces/units';
 import { DatePipe } from '@angular/common';
 import { lastValueFrom } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-details-product-page',
   templateUrl: './details-product-page.component.html',
@@ -21,12 +21,15 @@ export class DetailsProductPageComponent implements OnInit {
   units: Units | undefined;
   productForm: FormGroup;
   productId: string = '';
+  loading: boolean = false; // Variable para controlar la visibilidad del loader
+  alert: boolean = true;
 
   constructor(
     private farmerService: FarmerService,
     private formBuilder: FormBuilder,
     private datePipe: DatePipe,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.productForm = this.formBuilder.group({
       name: [''],
@@ -37,6 +40,15 @@ export class DetailsProductPageComponent implements OnInit {
       price: [''],
       description: [''],
     });
+  }
+
+  closeAlert() {
+    this.alert = !this.alert;
+  }
+  clearForm(): void {
+    this.productForm.reset();
+    this.selectedImages = [];
+    this.selectedProductName = '';
   }
 
   ngOnInit(): void {
@@ -147,6 +159,7 @@ export class DetailsProductPageComponent implements OnInit {
   }
 
   newProduct(): void {
+    this.loading = true;
     const product_type = this.productForm.get('name')!.value;
     const product_type_id = this.productsType?.data.find(
       (item) => item.name === product_type
@@ -180,9 +193,15 @@ export class DetailsProductPageComponent implements OnInit {
           this.uploadImages(response)
             .then(() => {
               console.log('All images uploaded successfully.');
+              this.loading = false;
+              this.alert = true; // Esperar dos segundos antes de redirigir
+              setTimeout(() => {
+                this.router.navigate(['/farmer/products']);
+              }, 2000);
             })
             .catch((error) => {
               console.log('Error uploading images:', error);
+              this.loading = false;
             });
         },
         (error) => {
@@ -195,9 +214,15 @@ export class DetailsProductPageComponent implements OnInit {
           this.uploadImages(response)
             .then(() => {
               console.log('All images uploaded successfully.');
+              this.loading = false;
+              this.alert = true; // Esperar dos segundos antes de redirigir
+              setTimeout(() => {
+                this.router.navigate(['/farmer/products']);
+              }, 2000);
             })
             .catch((error) => {
               console.log('Error uploading images:', error);
+              this.loading = false;
             });
         },
         (error) => {

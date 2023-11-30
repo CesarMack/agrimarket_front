@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class DashboardAdmiUsersPageComponent implements OnInit {
   usersData: Users | undefined;
   searchForm: FormGroup;
+  loading: boolean = true;
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder,
@@ -25,6 +26,8 @@ export class DashboardAdmiUsersPageComponent implements OnInit {
     this.admiService.getUsers().subscribe(
       (data) => {
         this.usersData = data;
+        this.loading = false;
+        console.log(data);
       },
       (error) => {
         console.error('Error fetching dashboard data:', error);
@@ -39,6 +42,7 @@ export class DashboardAdmiUsersPageComponent implements OnInit {
       this.admiService.findUser(search).subscribe(
         (data) => {
           this.usersData = data;
+          console.log(data);
         },
         (error) => {
           console.error('Error fetching user data:', error);

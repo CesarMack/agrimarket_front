@@ -20,6 +20,8 @@ export class ProfilePageComponent implements OnInit {
     previewUrl: null,
   };
   farmData: Farm | undefined;
+  loading: boolean = false; // Variable para controlar la visibilidad del loader
+  alert: boolean = true;
   constructor(
     private profileService: ProfileService,
     private formBuilder: FormBuilder,
@@ -40,6 +42,7 @@ export class ProfilePageComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.loading = true;
     this.profileService.getDataProfile().subscribe(
       (data) => {
         this.profileForm.patchValue({
@@ -61,17 +64,23 @@ export class ProfilePageComponent implements OnInit {
           file: null,
           previewUrl: data.data.photo,
         };
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching dashboard data:', error);
+        this.loading = false;
       }
     );
 
     this.profileService.getDataFarms().subscribe((data) => {
       this.farmData = data;
+      console.log(data);
     });
   }
 
+  closeAlert() {
+    this.alert = !this.alert;
+  }
   fetchCPInfo(cp: string) {
     this.profileService.getCPInfo(cp).subscribe(
       (data) => {
@@ -119,6 +128,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   updateInfoUser(): void {
+    this.loading = true;
     const formData = new FormData();
     formData.append('first_name', this.profileForm.get('name')!.value);
     formData.append('last_name', this.profileForm.get('last_name')!.value);
@@ -136,9 +146,12 @@ export class ProfilePageComponent implements OnInit {
     this.profileService.updateProfile(formData).subscribe(
       (response) => {
         console.log(response);
+        this.loading = false;
+        this.alert = false; // Esperar dos segundos antes de redirigir
       },
       (error) => {
         console.log(error);
+        this.loading = false;
       }
     );
   }

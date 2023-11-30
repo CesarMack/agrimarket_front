@@ -1,42 +1,102 @@
 <div
   class="relative flex flex-col min-w-0 break-words w-full rounded bg-blueGray-700"
 >
-  <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+  <table class="items-center w-full bg-transparent border-collapse">
+    <thead>
       <tr>
-        <th scope="col" class="px-6 py-3">No. Orden</th>
-        <th scope="col" class="px-6 py-3">Cliente</th>
-        <th scope="col" class="px-6 py-3">Orden</th>
-        <th scope="col" class="px-6 py-3">Fecha Creacion</th>
-        <th scope="col" class="px-6 py-3">Precio</th>
-        <th scope="col" class="px-6 py-3">Status</th>
-        <th scope="col" class="px-6 py-3">
+        <th
+          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
+        >
+          Cliente
+        </th>
+        <th
+          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
+        >
+          Orden
+        </th>
+        <th
+          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100"
+        >
+          Fecha Creacion
+        </th>
+        <th
+          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
+        >
+          Precio
+        </th>
+        <th
+          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
+        >
+          Status
+        </th>
+        <th
+          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
+        >
           <span class="sr-only">Edit</span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr class="bg-white hover:bg-gray-50">
-        <th
-          scope="row"
-          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+      <tr *ngIf="loading">
+        <td colspan="7" class="text-center h-60">Cargando...</td>
+      </tr>
+      <tr *ngIf="ordersData?.data?.length === 0">
+        <td colspan="7" class="text-center h-60">NO HAY REGISTROS</td>
+      </tr>
+      <tr *ngFor="let order of ordersData?.data">
+        <td
+          class="border-t-0 font-bold px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
         >
-          1
-        </th>
-        <td class="px-6 py-4">Aaron Ismael Sales Flores</td>
-        <td class="px-6 py-4">Mnzana Verde</td>
-        <td class="px-6 py-4">06/02/2020</td>
-        <td class="px-6 py-4">$45,000.00</td>
-        <td class="px-6 py-4">
-          <div
-            class="w-20 h-6 flex items-center mr-16 justify-center bg-blue-50 rounded-full"
-          >
-            <p class="text-xs leading-3 text-blue-700">Confirmado</p>
-          </div>
+          {{ order.client.name }}
         </td>
-        <td class="px-2 py-4">
+        <td
+          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+        >
+          {{ order.product.name }}
+        </td>
+        <td
+          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+        >
+          {{ order.created_at }}
+        </td>
+        <td
+          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+        >
+          ${{ order.total }}
+        </td>
+        <td
+          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+        >
+          <ng-container
+            *ngIf="order.status === 'Completado'; else cancelStatus"
+          >
+            <i class="fas fa-circle text-green-500 mr-2"></i> Completado
+          </ng-container>
+          <ng-template #cancelStatus>
+            <ng-container
+              *ngIf="order.status === 'Cancelado'; else pendingStatus"
+            >
+              <i class="fas fa-circle text-red-500 mr-2"></i> Cancelado
+            </ng-container>
+            <ng-template #pendingStatus>
+              <ng-container
+                *ngIf="order.status === 'Pendiente'; else pendingStatus"
+              >
+                <i class="fas fa-circle text-yellow-500 mr-2"></i>
+                Pendiente
+              </ng-container>
+              <ng-template #pendingStatus>
+                <i class="fas fa-circle text-red-500 mr-2"></i> Rechazado
+              </ng-template>
+            </ng-template>
+          </ng-template>
+        </td>
+        <td
+          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+        >
           <button
-            class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 bg-gray-100 mr-5 hover:bg-gray-200 py-2.5 px-5 rounded text-sm leading-3 text-gray-600 focus:outline-none"
+            class="text-white bg-green-700 hover:bg-green-800 mr-5 py-2.5 px-5 rounded text-sm leading-3 focus:outline-none"
+            (click)="redirectToDetails(order.id)"
           >
             Mostrar
           </button>
