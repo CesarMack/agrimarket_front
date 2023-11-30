@@ -27,6 +27,10 @@ const routes: Routes = [
         path: 'pending',
         component: PendingOrdersPageComponent,
       },
+      {
+        path: 'rejected',
+        component: PendingOrdersPageComponent,
+      },
     ],
   },
 ];

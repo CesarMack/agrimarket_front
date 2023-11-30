@@ -4,10 +4,10 @@ import { Orders } from 'src/app/dashboard/interfaces/orders';
 import { FarmerService } from 'src/app/dashboard/services/farmer.service';
 
 @Component({
-  selector: 'app-canceled-orders-page',
-  templateUrl: './canceled-orders-page.component.html',
+  selector: 'app-reject-orders-page',
+  templateUrl: './reject-orders-page.component.html',
 })
-export class CanceledOrdersPageComponent {
+export class RejectOrdersPageComponent {
   ordersData: Orders | undefined;
   loading: boolean = true;
 
@@ -17,7 +17,7 @@ export class CanceledOrdersPageComponent {
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.farmerService.getStatusOrder('Cancelado').subscribe(
+    this.farmerService.getStatusOrder('Rechazado').subscribe(
       (response) => {
         this.ordersData = response;
         this.loading = false;

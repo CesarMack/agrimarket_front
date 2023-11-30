@@ -1,193 +1,397 @@
-<div class="flex flex-wrap">
-  <div class="w-full mb-12 xl:mb-0 px-4">
-    <div>
-      <!-- Card stats -->
-      <div class="flex flex-wrap">
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="TRAFFIC"
-            statTitle="350,897"
-            statArrow="up"
-            statPercent="3.48"
-            statPercentColor="text-emerald-500"
-            statDescripiron="Since last month"
-            statIconName="far fa-chart-bar"
-            statIconColor="bg-red-500"
-          ></app-card-stats>
+<div
+  *ngIf="loading"
+  class="flex justify-center items-center bg-gray-700 absolute top-0 bottom-0 left-0 right-0 z-40 opacity-75"
+>
+  <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+  <svg
+    width="38"
+    height="38"
+    viewBox="0 0 38 38"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+        <stop stop-color="#fff" stop-opacity="0" offset="0%" />
+        <stop stop-color="#fff" stop-opacity=".631" offset="63.146%" />
+        <stop stop-color="#fff" offset="100%" />
+      </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+      <g transform="translate(1 1)">
+        <path
+          d="M36 18c0-9.94-8.06-18-18-18"
+          id="Oval-2"
+          stroke="url(#a)"
+          stroke-width="2"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="0.9s"
+            repeatCount="indefinite"
+          />
+        </path>
+        <circle fill="#fff" cx="36" cy="18" r="1">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="0.9s"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </g>
+    </g>
+  </svg>
+</div>
+<div
+  role="alert"
+  id="alert"
+  [ngClass]="
+    'transition duration-150 ease-in-out absolute top-0 left-0 right-0  w-full bg-green-100 shadow   ' +
+    (alert ? 'transform -translate-y-full' : 'transform translate-y-0 ')
+  "
+>
+  <div
+    class="container mx-auto xl:w-full lg:transition duration-150 ease-in-out w-11/12"
+  >
+    <div class="w-full xl:flex lg:flex py-6 items-center">
+      <div
+        class="xl:w-5/6 lg:w-5/6 w-full flex xl:flex-row lg:flex-row flex-col justify-center items-center xl:justify-start lg:justify-start"
+      >
+        <div class="text-green-700">
+          <svg
+            tabindex="0"
+            aria-label="success"
+            role="alert"
+            class="focus:outline-none"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="currentColor"
+          >
+            <path
+              class="heroicon-ui"
+              d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z"
+            />
+          </svg>
         </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="NEW USERS"
-            statTitle="2,356"
-            statArrow="down"
-            statPercent="3.48"
-            statPercentColor="text-red-500"
-            statDescripiron="Since last week"
-            statIconName="fas fa-chart-pie"
-            statIconColor="bg-orange-500"
-          ></app-card-stats>
-        </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="SALES"
-            statTitle="924"
-            statArrow="down"
-            statPercent="1.10"
-            statPercentColor="text-orange-500"
-            statDescripiron="Since yesterday"
-            statIconName="fas fa-users"
-            statIconColor="bg-pink-500"
-          ></app-card-stats>
-        </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="PERFORMANCE"
-            statTitle="49,65%"
-            statArrow="up"
-            statPercent="12"
-            statPercentColor="text-emerald-500"
-            statDescripiron="Since last month"
-            statIconName="fas fa-percent"
-            statIconColor="bg-emerald-500"
-          ></app-card-stats>
-        </div>
+        <p class="mx-4 text-lg text-green-700 text-center sm:text-left">
+          Actualización exitosa.
+        </p>
+      </div>
+      <div class="w-2/12 flex justify-end">
+        <button
+          (click)="closeAlert()"
+          aria-label="close"
+          class="focus:outline-none focus:text-black hover:text-black cursor-pointer xl:relative lg:relative absolute top-0 right-0 mr-2 mt-2 xl:mt-0 xl:mr-0 lg:mt-0 lg:mr-0 text-green-700"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-x"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
 </div>
-<!-- <section class="p-10 w-full h-screen bg-[#f6f6f6]">
-  <div class="p-10 bg-white shadow-lg rounded-3xl w-full h-full flex flex-col">
-    <h3
-      class="text-3xl font-bold text-[#2A9763] font-['Montserrat_Alternates']"
-    >
-      Detalles Orden
-    </h3>
-    <div class="h-full flex gap-10">
-      <article class="w-2/3 h-full grid grid-cols-2 grid-rows-2 gap-8">
-        <div class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
-          <table [cellSpacing]="0" [cellPadding]="0" class="w-full">
-            <tbody>
-              <tr>
-                <td class="w-1/2 font-bold">Cantidad de la Orden</td>
-                <td>678998</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Total de la Orden</td>
-                <td>$12000</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
-          <table [cellSpacing]="0" [cellPadding]="0" class="w-full">
-            <tbody>
-              <tr>
-                <td class="w-1/2 font-bold">ID del Producto</td>
-                <td>678998</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Nombre del Producto</td>
-                <td>Laptop Acer</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Categoria del Producto</td>
-                <td>Electronicos</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Fecha de Corte del Producto</td>
-                <td>2023-08-15</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Decripcion</td>
-                <td>Laptop ultimageneracion con procesador</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Precio</td>
-                <td>$1200.0</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
-          <table [cellSpacing]="0" [cellPadding]="0" class="w-full">
-            <tbody>
-              <tr>
-                <td class="w-1/2 font-bold">ID de Orden:</td>
-                <td>12345</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Nombre Cliente:</td>
-                <td>Juan</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Apellido Cliente:</td>
-                <td>Pérez</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Email Cliente:</td>
-                <td>juan@example.com</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Teléfono Cliente:</td>
-                <td>555-123-4567</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
-          <p class="text-lg font-bold">Dirección Cliente:</p>
-          <table [cellSpacing]="0" [cellPadding]="0" class="w-full">
-            <tbody>
-              <tr>
-                <td class="w-1/2 font-bold">Calle:</td>
-                <td>Av. Principal</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Número Exterior:</td>
-                <td>123</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Número Interior:</td>
-                <td>2B</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Colonia:</td>
-                <td>Col. Centro</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Ciudad:</td>
-                <td>Ciudad de México</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Estado:</td>
-                <td>CDMX</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Código Postal:</td>
-                <td>12345</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </article>
-      <article class="w-1/3 rounded-3xl shadow bg-[#f6f6f6]">
+<div class="flex flex-wrap">
+  <div class="relative w-full mb-12 xl:mb-0">
+    <div class="w-full h-full bg-white shadow-lg rounded mb-12 xl:mb-0">
+      <div class="px-8 pt-5 w-full flex justify-end">
         <div
-          class="w-[250px] h-[250px] bg-red-400 rounded-3xl mx-auto mt-20"
-        ></div>
+          *ngIf="orderData?.data?.status === 'Pendiente'"
+          class="bg-yellow-200 px-4 py-2 rounded-full flex items-center justify-center"
+        >
+          <div class="flex items-center">
+            <div class="h-1 w-1 rounded-full bg-yellow-500 mr-1"></div>
+            <span class="text-sm text-yellow-500 font-normal">Pendiente</span>
+          </div>
+        </div>
 
+        <div
+          *ngIf="orderData?.data?.status === 'Cancelado'"
+          class="bg-red-200 px-4 py-2 rounded-full flex items-center justify-center"
+        >
+          <div class="flex items-center">
+            <div class="h-1 w-1 rounded-full bg-red-500 mr-1"></div>
+            <span class="text-sm text-red-500 font-normal">Cancelado</span>
+          </div>
+        </div>
+
+        <div
+          *ngIf="orderData?.data?.status === 'Completado'"
+          class="bg-green-200 px-4 py-2 rounded-full flex items-center justify-center"
+        >
+          <div class="flex items-center">
+            <div class="h-1 w-1 rounded-full bg-green-500 mr-1"></div>
+            <span class="text-sm text-green-500 font-normal">Completado</span>
+          </div>
+        </div>
+        <div
+          *ngIf="orderData?.data?.status === 'Rechazado'"
+          class="bg-red-200 px-4 py-2 rounded-full flex items-center justify-center"
+        >
+          <div class="flex items-center">
+            <div class="h-1 w-1 rounded-full bg-red-500 mr-1"></div>
+            <span class="text-sm text-red-500 font-normal">Rechazado</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-5 pt-2 px-8 pb-4 mb-4 my-2">
+        <div class="w-1/2 flex flex-col">
+          <h2 class="text-xl font-semibold">Datos de contacto</h2>
+          <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
+
+          <div class="flex gap-5">
+            <div class="w-1/2">
+              <label
+                class="block uppercase tracking-wide text-grey-darker text-sm font-bold"
+              >
+                Nombre
+              </label>
+              <div class="relative text-sm">
+                {{ orderData?.data?.client?.name }}
+              </div>
+            </div>
+            <div class="w-1/2">
+              <label
+                class="block uppercase tracking-wide text-grey-darker text-sm font-bold"
+              >
+                E-mail
+              </label>
+              <div class="relative text-sm">
+                {{ orderData?.data?.client?.email }}
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-sm font-bold"
+            >
+              Teléfono
+            </label>
+            <div class="relative text-sm">
+              {{ orderData?.data?.client?.phone }}
+            </div>
+          </div>
+        </div>
+        <div class="w-1/2 flex flex-col">
+          <h2 class="text-xl font-semibold">Direccion</h2>
+          <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
+
+          <div>
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-sm font-bold"
+            >
+              Calle
+            </label>
+            <div class="relative text-sm">
+              {{ orderData?.data?.client?.street }}
+            </div>
+          </div>
+
+          <div class="flex gap-5 mt-3">
+            <div class="w-1/2">
+              <label
+                class="block uppercase tracking-wide text-grey-darker text-sm font-bold"
+              >
+                Número Interior
+              </label>
+              <div class="relative text-sm">
+                {{ orderData?.data?.client?.int_num }}
+              </div>
+            </div>
+
+            <div class="w-1/2">
+              <label
+                class="block uppercase tracking-wide text-grey-darker text-sm font-bold"
+              >
+                Número Exterior
+              </label>
+              <div class="relative text-sm">
+                {{ orderData?.data?.client?.ext_num }}
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-5 mt-3">
+            <div class="w-1/2">
+              <label
+                class="block uppercase tracking-wide text-grey-darker text-sm font-bold"
+              >
+                Codigo Postal
+              </label>
+              <div class="relative text-sm">
+                {{ orderData?.data?.client?.zip_code }}
+              </div>
+            </div>
+
+            <div class="w-1/2">
+              <label
+                class="block uppercase tracking-wide text-grey-darker text-sm font-bold"
+              >
+                Colonia
+              </label>
+              <div class="relative text-sm">
+                {{ orderData?.data?.client?.suburb }}
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-5 mt-3">
+            <div class="w-1/2">
+              <label
+                class="block uppercase tracking-wide text-grey-darker text-sm font-bold"
+              >
+                Ciudad
+              </label>
+              <div class="relative text-sm">
+                {{ orderData?.data?.client?.city }}
+              </div>
+            </div>
+
+            <div class="w-1/2">
+              <label
+                class="block uppercase tracking-wide text-grey-darker text-sm font-bold"
+              >
+                Estado
+              </label>
+              <div class="relative text-sm">
+                {{ orderData?.data?.client?.state }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative flex flex-col min-w-0 break-words w-full rounded">
+        <table class="items-center w-full bg-transparent border-collapse">
+          <thead>
+            <tr>
+              <th
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
+              >
+                <span class="sr-only">Foto</span>
+              </th>
+              <th
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
+              >
+                Producto
+              </th>
+              <th
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
+              >
+                Categoria
+              </th>
+              <th
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100"
+              >
+                Fecha de corte
+              </th>
+              <th
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
+              >
+                Precio
+              </th>
+              <th
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
+              >
+                Cantidad
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 text-left flex items-center"
+              >
+                <img
+                  class="w-32 h-32 object-cover rounded"
+                  [src]="
+                    orderData?.data?.product?.photo
+                      ? orderData?.data?.product?.photo
+                      : '../assets/vegetables.jpg'
+                  "
+                />
+              </th>
+              <td
+                class="border-t-0 font-bold px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+              >
+                {{ orderData?.data?.product?.name }}
+              </td>
+              <td
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+              >
+                {{ orderData?.data?.product?.category }}
+              </td>
+              <td
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+              >
+                {{ orderData?.data?.product?.cutoff_date }}
+              </td>
+              <td
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+              >
+                {{ orderData?.data?.product?.price_per_measure }}
+              </td>
+              <td
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+              >
+                {{ orderData?.data?.quantity }}
+              </td>
+            </tr>
+            <tr>
+              <td
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+                colspan="4"
+              ></td>
+              <td
+                class="border-t px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-bold"
+              >
+                Total
+              </td>
+              <td
+                class="border-t px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-bold"
+              >
+                ${{ orderData?.data?.total }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex justify-end mt-16">
         <button
-          class="block mx-auto mt-20 h-12 w-56 border bg-[#38C984] rounded-3xl shadow"
+          (click)="updateStatus(orderData?.data?.id!, 'Rechazado')"
+          type="button"
+          class="w-44 focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+        >
+          Cancelar Orden
+        </button>
+        <button
+          (click)="updateStatus(orderData?.data?.id!, 'Completado')"
+          type="button"
+          class="w-44 focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
         >
           Confirmar
         </button>
-        <button
-          class="block mx-auto mt-10 h-12 w-56 border border-[#38C984] rounded-3xl shadow"
-        >
-          Cancelar
-        </button>
-      </article>
+      </div>
     </div>
   </div>
-</section>
- -->
+</div>

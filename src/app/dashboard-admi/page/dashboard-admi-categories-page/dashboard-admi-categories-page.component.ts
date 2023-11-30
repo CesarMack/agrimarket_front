@@ -21,6 +21,7 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
   showSuccessMessage: boolean = false;
   showErrorMessage: boolean = false;
   errorMessage: String = '';
+  loading: boolean = false;
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder

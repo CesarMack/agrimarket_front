@@ -6,6 +6,8 @@ import { Catalog, Product } from '../interfaces/catalog';
 import { ProductType } from '../interfaces/productType';
 import { Units } from '../interfaces/units';
 import { ProductData } from '../interfaces/productData';
+import { Orders } from '../interfaces/orders';
+import { Order } from '../interfaces/order';
 
 @Injectable({ providedIn: 'root' })
 export class FarmerService {
@@ -96,6 +98,80 @@ export class FarmerService {
         headers,
       })
       .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  getOrders(): Observable<Orders> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<Orders>(`${this.apiUrl}/orders`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  getStatusOrder(status: string): Observable<Orders> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<Orders>(`${this.apiUrl}/orders?status=${status}`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  getOrder(id: string): Observable<Order> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<Order>(`${this.apiUrl}/orders/${id}`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  updateStatusOrder(id: string, status: string): Observable<String> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .post<Order>(
+        `${this.apiUrl}/orders/update_order_status/${id}`,
+        { status: status },
+        {
+          headers,
+        }
+      )
+      .pipe(
+        map((response) => response.data.status),
         catchError((e) => {
           throw new Error('Authentication error');
         })

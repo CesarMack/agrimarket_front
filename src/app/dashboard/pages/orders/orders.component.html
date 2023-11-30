@@ -1,17 +1,60 @@
 <div class="flex flex-wrap">
-  <div class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg p-4">
-    <div class="mx-5 mb-10 flex justify-between items-center">
-      <div>
-      </div>
+  <div
+    class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg pt-5"
+  >
+    <div class="rounded-t mb-5 px-4 py-3 border-0">
+      <div class="pt-5 pb-2 flex flex-wrap items-center">
+        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+          <h3 class="font-semibold text-lg">Detalles Ordenes</h3>
+        </div>
 
-      <div class="flex gap-3">
-        <button class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 py-3" type="button" routerLink="/farmer/orders">Mostrar todo</button>
-
-        <button class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 py-1 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" routerLink="/farmer/orders/completed">Completadas</button>
-
-        <button class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 py-1 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" routerLink="/farmer/orders/pending">Pendientes</button>
-
-        <button class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 py-1 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" routerLink="/farmer/orders/canceled">Canceladas</button>
+        <div class="flex items-start gap-5">
+          <button
+            routerLink="/farmer/orders"
+            routerLinkActive="bg-[#15803D] text-white border-[#38C984]  "
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none hover:border-[#38C984] active:bg-gray-50 transition ease-in-out duration-150"
+            x-on:click.prevent="$refs.photo.click()"
+          >
+            All Orders
+          </button>
+          <button
+            routerLink="/farmer/orders/completed"
+            routerLinkActive="bg-[#15803D] text-white border-[#38C984]  "
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none hover:border-[#38C984] active:bg-gray-50 transition ease-in-out duration-150"
+            x-on:click.prevent="$refs.photo.click()"
+          >
+            Completado
+          </button>
+          <button
+            routerLink="/farmer/orders/pending"
+            routerLinkActive="bg-[#15803D] text-white border-[#38C984]  "
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none hover:border-[#38C984] active:bg-gray-50 transition ease-in-out duration-150"
+            x-on:click.prevent="$refs.photo.click()"
+          >
+            Pendientes
+          </button>
+          <button
+            routerLink="/farmer/orders/canceled"
+            routerLinkActive="bg-[#15803D] text-white border-[#38C984]  "
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none hover:border-[#38C984] active:bg-gray-50 transition ease-in-out duration-150"
+            x-on:click.prevent="$refs.photo.click()"
+          >
+            Canceladas
+          </button>
+          <button
+            routerLink="/farmer/orders/rejected"
+            routerLinkActive="bg-[#15803D] text-white border-[#38C984]  "
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none hover:border-[#38C984] active:bg-gray-50 transition ease-in-out duration-150"
+            x-on:click.prevent="$refs.photo.click()"
+          >
+            Rechazadas
+          </button>
+        </div>
       </div>
     </div>
 

@@ -15,6 +15,7 @@ export class DashboardAdmiUnitsComponent implements OnInit {
   showSuccessMessage: boolean = false;
   showErrorMessage: boolean = false;
   errorMessage: String = '';
+  loading: boolean = true;
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder
@@ -30,6 +31,7 @@ export class DashboardAdmiUnitsComponent implements OnInit {
     this.admiService.getUnits().subscribe(
       (data) => {
         this.unitsData = data;
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching CP data:', error);
