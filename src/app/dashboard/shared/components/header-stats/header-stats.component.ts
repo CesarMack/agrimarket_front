@@ -34,10 +34,12 @@ export class HeaderStatsComponent implements OnInit {
       this.title = 'Órdenes';
     } else if (route === '/farmer/orders/canceled') {
       this.title = 'Órdenes';
+    } else if (route === '/farmer/orders/rejected') {
+      this.title = 'Órdenes';
     } else if (route === '/farmer/products') {
       this.title = 'Productos';
     } else {
-      this.title = 'Título predeterminado para otras rutas';
+      this.title = 'Productos';
     }
   }
 }
