@@ -5,6 +5,7 @@ import { Suggestions } from '../../interfaces/suggestions';
 import { Chart } from 'chart.js/auto';
 import { Cards } from '../../interfaces/cards';
 import { Router } from '@angular/router';
+import { Days } from '../../interfaces/days';
 
 @Component({
   selector: 'app-dashboard-admi-page',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardAdmiPageComponent implements OnInit {
   dashboardData: Dashboard | undefined;
+  days: Days | undefined;
   public dataCard: Cards | undefined;
   public chart!: Chart;
   public completeOrders!: string;
@@ -34,17 +36,12 @@ export class DashboardAdmiPageComponent implements OnInit {
       // Inicializar gráficas con datos predeterminados
       this.initializeCharts();
     });
-
-    this.admiService.getDashboardCharts().subscribe((response) => {
-      console.log('Respuesta Card');
-      console.log(response);
-      this.dataCard = response;
-      // Inicializar gráficas con datos predeterminados
-      this.initializeCharts();
-    });
+ 
 
     this.admiService.getDashboardDays().subscribe((response)=>{
       console.log(response);
+      this.days= response;
+      this.initializeCharts()
       
     }, (error)=>{
       console.log(error);
@@ -54,9 +51,9 @@ export class DashboardAdmiPageComponent implements OnInit {
 
   initializeCharts() {
     // Obtén las etiquetas y datos desde tu JSON
-    const three_months = Object.keys(this.dataCard?.data.orders_three_months!);
-    const dataValues = Object.values(this.dataCard?.data.orders_three_months!);
-    const labels = three_months;
+    const labels = Object.keys(this.days!);
+    const dataValues = Object.values(this.days!);
+     
     const initialData = {
       labels: labels,
       datasets: [
@@ -84,22 +81,15 @@ export class DashboardAdmiPageComponent implements OnInit {
     this.chart.update();
   }
 
-  weekFilter() {
+  daysFilter() {
     this.admiService.getDashboardDays().subscribe((response)=>{
       console.log(response);
-      
-    }, (error)=>{
-      console.log(error);
-      
-    })
     // Obtén las etiquetas y datos desde tu JSON
-    const week = Object.keys(this.dataCard?.data.orders_last_week!);
-    const dataValues = Object.values(this.dataCard?.data.orders_last_week!);
-    // Lógica de filtrado por semana
-
+    const days = Object.keys(response);
+    const dataValues = Object.values(response); 
 
     const newData = {
-      labels: week,
+      labels: days,
       datasets: [
         {
           backgroundColor: '#4c51bf',
@@ -113,14 +103,22 @@ export class DashboardAdmiPageComponent implements OnInit {
     };
 
     this.updateChartData(newData);
+      
+    }, (error)=>{
+      console.log(error);
+      
+    })
+
   }
 
   monthFilter() {
 
+    this.admiService.getDashboardMonths().subscribe((response)=>{
+      console.log(response);
     // Obtén las etiquetas y datos desde tu JSON
-    const month = Object.keys(this.dataCard?.data.orders_last_month!);
-    const dataValues = Object.values(this.dataCard?.data.orders_last_month!);
-    // Lógica de filtrado por mes
+    const month = Object.keys(response);
+    const dataValues = Object.values(response); 
+
     const newData = {
       labels: month,
       datasets: [
@@ -136,31 +134,40 @@ export class DashboardAdmiPageComponent implements OnInit {
     };
 
     this.updateChartData(newData);
+      
+    }, (error)=>{
+      console.log(error);
+      
+    }) 
+ 
   }
 
-  yearFilter() {
-    // Obtén las etiquetas y datos desde tu JSON
-    const months = Object.keys(this.dataCard?.data.orders_last_six_months!);
-    const dataValues = Object.values(
-      this.dataCard?.data.orders_last_six_months!
-    );
+  weeksFilter() {  this.admiService.getDashboardWeeks().subscribe((response)=>{
+    console.log(response);
+  // Obtén las etiquetas y datos desde tu JSON
+  const weeks = Object.keys(response);
+  const dataValues = Object.values(response); 
 
-    // Lógica de filtrado por año
-    const newData = {
-      labels: months,
-      datasets: [
-        {
-          backgroundColor: '#4c51bf',
-          label: 'Órdenes',
-          data: dataValues,
-          fill: false,
-          borderColor: '#4c51bf',
-          tension: 0.1,
-        },
-      ],
-    };
+  const newData = {
+    labels: weeks,
+    datasets: [
+      {
+        backgroundColor: '#4c51bf',
+        label: 'Órdenes',
+        data: dataValues,
+        fill: false,
+        borderColor: '#4c51bf',
+        tension: 0.1,
+      },
+    ],
+  };
 
-    this.updateChartData(newData);
+  this.updateChartData(newData);
+    
+  }, (error)=>{
+    console.log(error);
+    
+  })  
   } // Método para redirigir a la página de detalles del producto
   redirectToDetails(id: string) {
     // Utiliza el servicio Router para navegar a la nueva ventana

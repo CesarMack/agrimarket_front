@@ -11,6 +11,7 @@ import { User } from '../interfaces/user';
 import { Backups } from '../interfaces/backups';
 import { Cards } from '../interfaces/cards';
 import { Days } from '../interfaces/days';
+import { Months } from '../interfaces/months';
 
 @Injectable({ providedIn: 'root' })
 export class AdmiService {
@@ -45,6 +46,36 @@ export class AdmiService {
 
     return this.http
       .get<Days>(`https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/dias`)
+      .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  getDashboardWeeks(): Observable<Months> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http
+      .get<Months>(`https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/semanas`)
+      .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  getDashboardMonths(): Observable<Months> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http
+      .get<Months>(`https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/meses`)
       .pipe(
         catchError((e) => {
           throw new Error('Authentication error');

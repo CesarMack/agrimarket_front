@@ -3,23 +3,23 @@
     <button
       class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 py-3"
       type="button"
-      (click)="weekFilter()"
+      (click)="daysFilter()"
     >
-      Semana
+      Dias
+    </button>
+    <button
+      class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 py-3"
+      type="button"
+      (click)="weeksFilter()"
+    >
+      Semanas
     </button>
     <button
       class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 py-3"
       type="button"
       (click)="monthFilter()"
     >
-      Mes
-    </button>
-    <button
-      class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 py-3"
-      type="button"
-      (click)="yearFilter()"
-    >
-      Año
+      Meses
     </button>
   </div>
   <div class="w-full mb-12 xl:mb-0">
@@ -177,7 +177,7 @@
     </div>
   </div>
 
-  <div class="w-full xl:w-1/2 mb-12 xl:mb-0 px-4">
+ <!--  <div class="w-full xl:w-1/2 mb-12 xl:mb-0 px-4">
     <div
       class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700"
     >
@@ -192,13 +192,13 @@
         </div>
       </div>
       <div class="px-4 pb-4 flex-auto">
-        <!-- Chart -->
+        
         <div class="relative w-full">
           <canvas id="chart">{{ chart }}</canvas>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <section class="flex flex-wrap px-4"></section>
