@@ -8,6 +8,7 @@ import { Units } from '../interfaces/units';
 import { ProductData } from '../interfaces/productData';
 import { Orders } from '../interfaces/orders';
 import { Order } from '../interfaces/order';
+import { Cards } from '../interfaces/cards';
 
 @Injectable({ providedIn: 'root' })
 export class FarmerService {
@@ -155,6 +156,25 @@ export class FarmerService {
         })
       );
   }
+
+  getDashboardCard(): Observable<Cards> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<Cards>(`${this.apiUrl}/farmers/dashboard`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
   updateStatusOrder(id: string, status: string): Observable<String> {
     const token = localStorage.getItem('user_token');
 
