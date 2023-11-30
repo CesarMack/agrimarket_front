@@ -2,50 +2,51 @@ import { Component, OnInit } from '@angular/core';
 import { Dashboard } from '../../interfaces/dashboard';
 import { FarmerService } from '../../services/farmer.service';
 import { Chart } from 'chart.js/auto';
+import { Cards } from '../../interfaces/cards';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
 })
 export class DashboardPageComponent implements OnInit {
+  public dataCard: Cards | undefined;
   public chart!: Chart;
-  public completeOrders!: String;
-  public canceledOrders!: String;
-  public activeProducts!: String;
-  public pendingOrders!: String;
+  public completeOrders!: string;
+  public canceledOrders!: string;
+  public activeProducts!: string;
+  public pendingOrders!: string;
 
   dashboardData: Dashboard | undefined;
 
-  constructor(private farmerService: FarmerService) {}
+  constructor(private farmerService: FarmerService, private router: Router) {}
 
   ngOnInit(): void {
-    this.farmerService.getDashboard().subscribe(
-      (data) => {
-        this.dashboardData = data;
-      },
-      (error) => {
-        console.error('Error fetching dashboard data:', error);
-      }
-    );
-
-    // Inicializar gráficas con datos predeterminados
-    this.initializeCharts();
-
-    this.activeProducts = "0";
-    this.completeOrders = "0";
-    this.pendingOrders = "0";
-    this.canceledOrders = "0";
+    this.farmerService.getDashboardCard().subscribe((response) => {
+      console.log('Respuesta CArd');
+      console.log(response);
+      this.dataCard = response;
+      this.activeProducts = response.data.products.toString();
+      this.completeOrders = response.data.completed.toString();
+      this.pendingOrders = response.data.pending.toString();
+      this.canceledOrders = response.data.canceled.toString();
+      // Inicializar gráficas con datos predeterminados
+      this.initializeCharts();
+    });
   }
 
   initializeCharts() {
-    const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'];
+    // Obtén las etiquetas y datos desde tu JSON
+    const three_months = Object.keys(this.dataCard?.data.orders_three_months!);
+    const dataValues = Object.values(this.dataCard?.data.orders_three_months!);
+    const labels = three_months;
     const initialData = {
       labels: labels,
       datasets: [
         {
           backgroundColor: '#4c51bf',
-          label: 'My First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
+          label: 'Órdenes',
+          data: dataValues,
           fill: false,
           borderColor: '#4c51bf',
           tension: 0.1,
@@ -67,14 +68,17 @@ export class DashboardPageComponent implements OnInit {
   }
 
   weekFilter() {
+    // Obtén las etiquetas y datos desde tu JSON
+    const week = Object.keys(this.dataCard?.data.orders_last_week!);
+    const dataValues = Object.values(this.dataCard?.data.orders_last_week!);
     // Lógica de filtrado por semana
     const newData = {
-      labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+      labels: week,
       datasets: [
         {
           backgroundColor: '#4c51bf',
-          label: 'My First Dataset',
-          data: [30, 45, 60, 75],
+          label: 'Órdenes',
+          data: dataValues,
           fill: false,
           borderColor: '#4c51bf',
           tension: 0.1,
@@ -83,20 +87,23 @@ export class DashboardPageComponent implements OnInit {
     };
 
     this.updateChartData(newData);
-    this.completeOrders = "1";
-    this.pendingOrders = "1";
-    this.canceledOrders = "1";
+    this.completeOrders = this.dataCard?.data.completed_orders.week.toString()!;
+    this.pendingOrders = this.dataCard?.data.pending_orders.week.toString()!;
+    this.canceledOrders = this.dataCard?.data.canceled_orders.week.toString()!;
   }
 
   monthFilter() {
+    // Obtén las etiquetas y datos desde tu JSON
+    const month = Object.keys(this.dataCard?.data.orders_last_month!);
+    const dataValues = Object.values(this.dataCard?.data.orders_last_month!);
     // Lógica de filtrado por mes
     const newData = {
-      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+      labels: month,
       datasets: [
         {
           backgroundColor: '#4c51bf',
-          label: 'My First Dataset',
-          data: [50, 65, 80, 95, 110],
+          label: 'Órdenes',
+          data: dataValues,
           fill: false,
           borderColor: '#4c51bf',
           tension: 0.1,
@@ -105,20 +112,27 @@ export class DashboardPageComponent implements OnInit {
     };
 
     this.updateChartData(newData);
-    this.completeOrders = "2";
-    this.pendingOrders =  "2";
-    this.canceledOrders = "2";
+    this.completeOrders =
+      this.dataCard?.data.completed_orders.month.toString()!;
+    this.pendingOrders = this.dataCard?.data.pending_orders.month.toString()!;
+    this.canceledOrders = this.dataCard?.data.canceled_orders.month.toString()!;
   }
 
   yearFilter() {
+    // Obtén las etiquetas y datos desde tu JSON
+    const months = Object.keys(this.dataCard?.data.orders_last_six_months!);
+    const dataValues = Object.values(
+      this.dataCard?.data.orders_last_six_months!
+    );
+
     // Lógica de filtrado por año
     const newData = {
-      labels: ['2021', '2022', '2023'],
+      labels: months,
       datasets: [
         {
           backgroundColor: '#4c51bf',
-          label: 'My First Dataset',
-          data: [100, 120, 140],
+          label: 'Órdenes',
+          data: dataValues,
           fill: false,
           borderColor: '#4c51bf',
           tension: 0.1,
@@ -127,8 +141,15 @@ export class DashboardPageComponent implements OnInit {
     };
 
     this.updateChartData(newData);
-    this.completeOrders = "3";
-    this.pendingOrders = "3";
-    this.canceledOrders = "3";
+    this.completeOrders =
+      this.dataCard?.data.completed_orders.six_months.toString()!;
+    this.pendingOrders =
+      this.dataCard?.data.pending_orders.six_months.toString()!;
+    this.canceledOrders =
+      this.dataCard?.data.canceled_orders.six_months.toString()!;
+  } // Método para redirigir a la página de detalles del producto
+  redirectToDetails(id: string) {
+    // Utiliza el servicio Router para navegar a la nueva ventana
+    this.router.navigate(['/farmer/orders/details/', id]);
   }
 }
