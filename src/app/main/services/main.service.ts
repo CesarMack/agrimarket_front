@@ -29,7 +29,26 @@ export class MainService {
         })
       );
   }
+  getProductByName(name: string): Observable<Catalog> {
+    const token = localStorage.getItem('user_token');
 
+    if (!token) {
+      throw new Error('Token not available');
+    }
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<Catalog>(`${this.apiUrl}/products?search=${name}`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
   getProductData(id: string): Observable<Product> {
     const token = localStorage.getItem('user_token');
 

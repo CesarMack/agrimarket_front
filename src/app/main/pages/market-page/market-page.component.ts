@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Catalog } from '../../interfaces/catalog';
 import { MainService } from '../../services/main.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-market-page',
@@ -9,13 +10,26 @@ import { MainService } from '../../services/main.service';
 })
 export class MarketPageComponent implements OnInit {
   catalog: Catalog | undefined;
-  constructor(private router: Router, private mainService: MainService) {}
+  searchForm: FormGroup;
+  loading: boolean = true;
+  constructor(
+    private router: Router,
+    private mainService: MainService,
+    private formBuilder: FormBuilder
+  ) {
+    this.searchForm = this.formBuilder.group({
+      search: '',
+    });
+  }
   ngOnInit(): void {
     this.mainService.getDashboard().subscribe(
       (response) => {
         this.catalog = response;
+        this.loading = false;
       },
       (error) => {
+        this.loading = false;
+
         console.log('Error with catalog', error);
       }
     );
@@ -28,5 +42,20 @@ export class MarketPageComponent implements OnInit {
   navigateToAbout() {
     // Cambiar la ruta al componente 'Acerca de'
     this.router.navigate(['/details']);
+  }
+  searchProduct(): void {
+    this.loading = true;
+
+    const search = this.searchForm.get('search')!.value;
+
+    this.mainService.getProductByName(search).subscribe(
+      (response) => {
+        this.catalog = response;
+        this.loading = false;
+      },
+      (error) => {
+        console.log('Error with catalog', error);
+      }
+    );
   }
 }
