@@ -6,17 +6,17 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-farm-profile',
   templateUrl: './farm-profile.component.html',
-  styleUrls: ['./farm-profile.component.css'],
 })
 export class FarmProfileComponent implements OnInit {
   imageUrl: string | ArrayBuffer | null = null;
-
   farmId: string = '';
   farmForm: FormGroup;
   selectedImage: { file: File | null; previewUrl: string | null } = {
     file: null,
     previewUrl: null,
   };
+  loading: boolean = false; // Variable para controlar la visibilidad del loader
+  alert: boolean = true;
   constructor(
     private profileService: ProfileService,
     private formBuilder: FormBuilder,
@@ -36,6 +36,7 @@ export class FarmProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     // Obtén el ID del producto de la URL
     this.route.params.subscribe((params) => {
       this.farmId = params['id']; // Convierte el parámetro a número si es necesario
@@ -43,8 +44,6 @@ export class FarmProfileComponent implements OnInit {
       if (params['id']) {
         this.profileService.getDataFarm(this.farmId).subscribe(
           (response) => {
-            console.log('Data del farm');
-
             this.farmForm.patchValue({
               name: response.data.name,
               phone: response.data.phone,
@@ -60,7 +59,7 @@ export class FarmProfileComponent implements OnInit {
               file: null,
               previewUrl: response.data.photo,
             };
-            console.log(this.selectedImage);
+            this.loading = false;
           },
           (error) => {
             console.error('Error fetching CP data:', error);
@@ -68,6 +67,48 @@ export class FarmProfileComponent implements OnInit {
         );
       }
     });
+  }
+  closeAlert() {
+    this.alert = !this.alert;
+  }
+  newFarmer(): void {
+    this.loading = true;
+
+    const formData = new FormData();
+    formData.append('name', this.farmForm.get('name')!.value);
+    formData.append('phone', this.farmForm.get('phone')!.value);
+    formData.append('street', this.farmForm.get('street')!.value);
+    formData.append('ext_num', this.farmForm.get('ext_num')!.value);
+    formData.append('int_num', this.farmForm.get('int_num')!.value);
+    formData.append('suburb', this.farmForm.get('suburb')!.value);
+    formData.append('city', this.farmForm.get('city')!.value);
+    formData.append('state', this.farmForm.get('state')!.value);
+    formData.append('zip_code', this.farmForm.get('zip_code')!.value);
+    if (this.selectedImage.file !== null) {
+      formData.append('photo', this.selectedImage.file);
+    }
+    if (this.farmId) {
+      this.profileService.updateFarmer(formData, this.farmId).subscribe(
+        (response) => {
+          this.loading = false;
+          this.alert = false;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.profileService.createFarmer(formData).subscribe(
+        (response) => {
+          this.loading = false;
+          this.alert = false;
+        },
+        (error) => {
+          console.log(error);
+          this.loading = false;
+        }
+      );
+    }
   }
 
   onFileSelected(event: any): void {

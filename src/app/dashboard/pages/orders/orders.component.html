@@ -1,38 +1,63 @@
-<section class="p-10 w-full h-screen bg-[#f6f6f6]">
-  <div class="p-10 bg-white shadow-lg rounded-3xl w-full h-full flex flex-col">
-    <h3
-      class="text-3xl font-bold text-[#2A9763] font-['Montserrat_Alternates']"
-    >
-      Detalles Ordenes
-    </h3>
+<div class="flex flex-wrap">
+  <div
+    class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg pt-5"
+  >
+    <div class="rounded-t mb-5 px-4 py-3 border-0">
+      <div class="pt-5 pb-2 flex flex-wrap items-center">
+        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+          <h3 class="font-semibold text-lg">Detalles Ordenes</h3>
+        </div>
 
-    <div class="px-10 my-10 flex gap-5">
-      <button
-        routerLink="/dashboard/orders"
-        class="bg-white shadow-lg py-3 px-6 rounded-3xl text-[#2A9763] font-medium"
-      >
-        All Orders
-      </button>
-      <button
-        routerLink="/dashboard/orders/completed"
-        class="py-3 px-6 rounded-3xl border-2 border-[#38C984] text-[#797a7c] font-medium"
-      >
-        Completado
-      </button>
-      <button
-        routerLink="/dashboard/orders/pending"
-        class="border-2 border-[#38C984] text-[#797a7c] py-3 px-6 rounded-3xl font-medium"
-      >
-        Pendientes
-      </button>
-      <button
-        routerLink="/dashboard/orders/canceled"
-        class="border-2 border-[#38C984] text-[#797a7c] py-3 px-6 rounded-3xl font-medium"
-      >
-        Canceladas
-      </button>
+        <div class="flex items-start gap-5">
+          <button
+            routerLink="/farmer/orders"
+            routerLinkActive="bg-[#15803D] text-white border-[#38C984]  "
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none hover:border-[#38C984] active:bg-gray-50 transition ease-in-out duration-150"
+            x-on:click.prevent="$refs.photo.click()"
+          >
+            All Orders
+          </button>
+          <button
+            routerLink="/farmer/orders/completed"
+            routerLinkActive="bg-[#15803D] text-white border-[#38C984]  "
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none hover:border-[#38C984] active:bg-gray-50 transition ease-in-out duration-150"
+            x-on:click.prevent="$refs.photo.click()"
+          >
+            Completado
+          </button>
+          <button
+            routerLink="/farmer/orders/pending"
+            routerLinkActive="bg-[#15803D] text-white border-[#38C984]  "
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none hover:border-[#38C984] active:bg-gray-50 transition ease-in-out duration-150"
+            x-on:click.prevent="$refs.photo.click()"
+          >
+            Pendientes
+          </button>
+          <button
+            routerLink="/farmer/orders/canceled"
+            routerLinkActive="bg-[#15803D] text-white border-[#38C984]  "
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none hover:border-[#38C984] active:bg-gray-50 transition ease-in-out duration-150"
+            x-on:click.prevent="$refs.photo.click()"
+          >
+            Canceladas
+          </button>
+          <button
+            routerLink="/farmer/orders/rejected"
+            routerLinkActive="bg-[#15803D] text-white border-[#38C984]  "
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none hover:border-[#38C984] active:bg-gray-50 transition ease-in-out duration-150"
+            x-on:click.prevent="$refs.photo.click()"
+          >
+            Rechazadas
+          </button>
+        </div>
+      </div>
     </div>
 
     <router-outlet></router-outlet>
   </div>
-</section>
+</div>

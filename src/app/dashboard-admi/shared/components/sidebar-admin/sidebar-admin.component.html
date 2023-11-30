@@ -1,0 +1,163 @@
+<nav
+  class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6"
+>
+  <div
+    class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto"
+  >
+    <!-- Toggler -->
+    <button
+      class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+      type="button"
+      (click)="toggleCollapseShow('bg-white m-2 py-3 px-6')"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+    <!-- Brand -->
+    <a
+      [routerLink]="['/']"
+      class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+    >
+      <img src="../assets/horizontal_logo.png" alt="" width="w-full" />
+    </a>
+    <!-- Collapse -->
+    <div
+      class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded"
+      [ngClass]="collapseShow"
+    >
+      <!-- Collapse header -->
+      <div
+        class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200"
+      >
+        <div class="flex flex-wrap">
+          <div class="w-6/12">
+            <a
+              [routerLink]="['/']"
+              class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+            >
+              Notus Angular
+            </a>
+          </div>
+          <div class="w-6/12 flex justify-end">
+            <button
+              type="button"
+              class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+              (click)="toggleCollapseShow('hidden')"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Divider -->
+      <hr class="w-48 h-1 mx-auto mb-3 bg-gray-300 border-0 rounded" />
+
+      <ul class="space-y-2 font-medium">
+        <li>
+          <a
+            [routerLink]="['/admin']"
+            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            routerLinkActive
+            #adminDashboard="routerLinkActive"
+          >
+            <i
+              class="fas fa-tv mr-2 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+            ></i>
+            Dashboard
+          </a>
+        </li>
+
+        <li>
+          <a
+            [routerLink]="['/admin/users']"
+            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            routerLinkActive
+            #adminTables="routerLinkActive"
+          >
+            <i
+              class="fa-regular fa-circle-user mr-2 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+            ></i>
+            Usuarios
+          </a>
+        </li>
+
+        <li>
+          <a
+            [routerLink]="['/admin/product']"
+            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            routerLinkActive
+            #adminMaps="routerLinkActive"
+          >
+            <i
+              class="fa-solid fa-bag-shopping mr-2 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+            ></i>
+            Productos
+          </a>
+        </li>
+
+        <li class="items-center">
+          <a
+            [routerLink]="['/admin/categories']"
+            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            routerLinkActive
+            #adminCategories="routerLinkActive"
+          >
+            <i
+              class="fa-solid fa-layer-group mr-2 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+            ></i>
+            Categorias
+          </a>
+        </li>
+        <li class="items-center">
+          <a
+            [routerLink]="['/admin/weight']"
+            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            routerLinkActive
+            #adminWeight="routerLinkActive"
+          >
+            <i
+              class="fa-solid fa-weight-hanging mr-2 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+            ></i>
+            Medidas
+          </a>
+        </li>
+      </ul>
+      <div class="w-full absolute bottom-0">
+        <div class="w-full flex items-center mb-4 px-2">
+          <div class="w-10 h-10 bg-cover rounded-md mr-3">
+            <img
+              *ngIf="userData?.data?.photo; else defaultImage"
+              [src]="userData?.data?.photo"
+              alt="User Photo"
+              class="rounded-full h-full w-full overflow-hidden shadow"
+            />
+            <ng-template #defaultImage>
+              <img
+                src="https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg"
+                alt="Default User Photo"
+                class="rounded-full h-full w-full overflow-hidden shadow"
+              />
+            </ng-template>
+          </div>
+          <div>
+            <p class="text-gray-900 text-sm font-medium">
+              {{ userData?.data?.first_name }}
+            </p>
+            <p
+              class="text-gray-900 text-xs cursor-pointer"
+              (click)="redirectToUserDetails(userData?.data?.id!)"
+            >
+              Editar perfíl
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="w-full focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+          (click)="logout()"
+        >
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

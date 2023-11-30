@@ -8,7 +8,6 @@ import { ProductType } from '../../interfaces/productType';
 @Component({
   selector: 'app-dashboard-admi-categories-page',
   templateUrl: './dashboard-admi-categories-page.component.html',
-  styleUrls: ['./dashboard-admi-categories-page.component.css'],
 })
 export class DashboardAdmiCategoriesPageComponent implements OnInit {
   categoriesData: Category | undefined;
@@ -22,6 +21,7 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
   showSuccessMessage: boolean = false;
   showErrorMessage: boolean = false;
   errorMessage: String = '';
+  loading: boolean = false;
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder
@@ -40,10 +40,7 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
     // Ahora, ejecutemos getSuggestions() y almacenemos los datos en suggestionsData
     this.admiService.getSuggestions().subscribe(
       (data) => {
-        console.log(data.data);
-
-        this.suggestionsData = data; // Asignamos los datos de suggestions
-        console.log(this.suggestionsData.data);
+        this.suggestionsData = data;
       },
       (error) => {
         console.error('Error fetching suggestions data:', error);
@@ -51,19 +48,12 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
     );
     this.admiService.getCategory().subscribe(
       (data) => {
-        console.log('CAtegorias en tipos de productos');
-
-        console.log(data);
-
         this.dataOriginal = data;
-
         this.categoriesData = {
           data: this.dataOriginal.data.filter(
             (category) => category.active === 1
           ),
         };
-        console.log(this.categoriesData.data);
-
         this.productForm.patchValue({
           categories: this.categoriesData.data,
           // ...otros campos aquí...
@@ -76,11 +66,7 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
 
     this.admiService.getProductType().subscribe(
       (data) => {
-        console.log(data);
-
-        this.productsData = data; // Assuming the response structure matches the provided JSON
-
-        console.log(this.productsData.data);
+        this.productsData = data;
       },
       (error) => {
         console.error('Error fetching CP data:', error);
@@ -100,14 +86,10 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
   showProductDetails(product: any) {
     // Cambia 'any' por el tipo adecuado para tus datos
     this.selectedProduct = product;
-    console.log(this.selectedProduct.id);
     this.productForm.patchValue({
-      // Asigna los valores del producto al formulario
-
       productId: this.selectedProduct.id,
       name: this.selectedProduct.name,
       categories: this.selectedProduct.category,
-      // ...otros campos aquí...
     });
   }
 
@@ -174,7 +156,6 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
           }, 3000);
         },
         (error) => {
-          console.log(error);
           this.loader = false;
           this.showErrorMessage = true; // Mostrar mensaje de error
           setTimeout(() => {
@@ -195,11 +176,7 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
   updateCategoryData(): void {
     this.admiService.getProductType().subscribe(
       (data) => {
-        console.log(data);
-
-        this.productsData = data; // Assuming the response structure matches the provided JSON
-
-        console.log(this.productsData.data);
+        this.productsData = data;
       },
       (error) => {
         console.error('Error fetching CP data:', error);
@@ -209,10 +186,7 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
   updateSuggestionsData(): void {
     this.admiService.getSuggestions().subscribe(
       (data) => {
-        console.log(data.data);
-
-        this.suggestionsData = data; // Asignamos los datos de suggestions
-        console.log(this.suggestionsData.data);
+        this.suggestionsData = data;
       },
       (error) => {
         console.error('Error fetching suggestions data:', error);
@@ -225,7 +199,6 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
     this.admiService.changeStatus(id).subscribe(
       (response) => {
         this.loader = false;
-        console.log(response);
         this.updateCategoryData();
         this.showSuccessMessage = true; // Mostrar mensaje de éxito
         setTimeout(() => {
@@ -243,7 +216,6 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
     this.admiService.updateStatusSuggestion(id).subscribe(
       (response) => {
         this.loader = false;
-        console.log(response);
         this.updateSuggestionsData();
         this.showSuccessMessage = true; // Mostrar mensaje de éxito
         setTimeout(() => {

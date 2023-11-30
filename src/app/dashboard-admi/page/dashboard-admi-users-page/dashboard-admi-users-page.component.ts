@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard-admi-users-page',
   templateUrl: './dashboard-admi-users-page.component.html',
-  styleUrls: ['./dashboard-admi-users-page.component.css'],
 })
 export class DashboardAdmiUsersPageComponent implements OnInit {
   usersData: Users | undefined;
   searchForm: FormGroup;
+  loading: boolean = true;
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder,
@@ -26,6 +26,8 @@ export class DashboardAdmiUsersPageComponent implements OnInit {
     this.admiService.getUsers().subscribe(
       (data) => {
         this.usersData = data;
+        this.loading = false;
+        console.log(data);
       },
       (error) => {
         console.error('Error fetching dashboard data:', error);
@@ -40,6 +42,7 @@ export class DashboardAdmiUsersPageComponent implements OnInit {
       this.admiService.findUser(search).subscribe(
         (data) => {
           this.usersData = data;
+          console.log(data);
         },
         (error) => {
           console.error('Error fetching user data:', error);
@@ -78,5 +81,10 @@ export class DashboardAdmiUsersPageComponent implements OnInit {
       default:
         return 'bg-gray-500 text-white'; // Clases de colores para roles desconocidos
     }
+  }
+
+  redirectToUserDetails(id: string) {
+    // Utiliza el servicio Router para navegar a la nueva ventana
+    this.router.navigate(['/admin/user', id]);
   }
 }

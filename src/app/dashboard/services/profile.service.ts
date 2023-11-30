@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { Dashboard } from '../interfaces/dashboard';
 import { CPData } from '../interfaces/cp';
 import { Profile } from '../interfaces/profile';
@@ -20,8 +20,6 @@ export class ProfileService {
       )
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -39,8 +37,6 @@ export class ProfileService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -57,8 +53,6 @@ export class ProfileService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -76,8 +70,6 @@ export class ProfileService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
-
           throw new Error('Authentication error');
         })
       );
@@ -94,8 +86,51 @@ export class ProfileService {
       })
       .pipe(
         catchError((e) => {
-          console.log(e);
+          throw new Error('Authentication error');
+        })
+      );
+  }
 
+  createFarmer(data: any): Observable<string> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .post<{ data: { name: string } }>(
+        `${this.apiUrl}/farmers/estates`,
+        data,
+        {
+          headers,
+        }
+      )
+      .pipe(
+        map((response) => response.data.name),
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  updateFarmer(data: any, id: string): Observable<string> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .post<{ data: { id: string } }>(
+        `${this.apiUrl}/farmers/estates/${id}`,
+        data,
+        {
+          headers,
+        }
+      )
+      .pipe(
+        map((response) => response.data.id),
+        catchError((e) => {
           throw new Error('Authentication error');
         })
       );

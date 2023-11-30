@@ -6,7 +6,6 @@ import { AdmiService } from '../../services/admi.service';
 @Component({
   selector: 'app-dashboard-admi-units',
   templateUrl: './dashboard-admi-units.component.html',
-  styleUrls: ['./dashboard-admi-units.component.css'],
 })
 export class DashboardAdmiUnitsComponent implements OnInit {
   unitsData: Units | undefined;
@@ -16,6 +15,7 @@ export class DashboardAdmiUnitsComponent implements OnInit {
   showSuccessMessage: boolean = false;
   showErrorMessage: boolean = false;
   errorMessage: String = '';
+  loading: boolean = true;
   constructor(
     private admiService: AdmiService,
     private formBuilder: FormBuilder
@@ -30,11 +30,8 @@ export class DashboardAdmiUnitsComponent implements OnInit {
   ngOnInit(): void {
     this.admiService.getUnits().subscribe(
       (data) => {
-        console.log(data);
-
-        this.unitsData = data; // Assuming the response structure matches the provided JSON
-
-        console.log(this.unitsData.data);
+        this.unitsData = data;
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching CP data:', error);
@@ -54,14 +51,10 @@ export class DashboardAdmiUnitsComponent implements OnInit {
   showUnitDetails(unit: any) {
     // Cambia 'any' por el tipo adecuado para tus datos
     this.selectedUnit = unit;
-    console.log(this.selectedUnit.id);
     this.unitForm.patchValue({
-      // Asigna los valores del producto al formulario
-
       productId: this.selectedUnit.id,
       name: this.selectedUnit.name,
       code: this.selectedUnit.code,
-      // ...otros campos aquí...
     });
   }
 
@@ -74,7 +67,6 @@ export class DashboardAdmiUnitsComponent implements OnInit {
       this.loader = true;
       this.admiService.updateUnitType(productId, name, code).subscribe(
         (response) => {
-          console.log(response);
           this.updateUnitData();
           this.loader = false;
           this.showSuccessMessage = true; // Mostrar mensaje de éxito
@@ -90,7 +82,6 @@ export class DashboardAdmiUnitsComponent implements OnInit {
           setTimeout(() => {
             this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
           }, 3000);
-          console.log(error);
         }
       );
     } else {
@@ -106,11 +97,7 @@ export class DashboardAdmiUnitsComponent implements OnInit {
   updateUnitData(): void {
     this.admiService.getUnits().subscribe(
       (data) => {
-        console.log(data);
-
-        this.unitsData = data; // Assuming the response structure matches the provided JSON
-
-        console.log(this.unitsData.data);
+        this.unitsData = data;
       },
       (error) => {
         console.error('Error fetching CP data:', error);
@@ -126,7 +113,6 @@ export class DashboardAdmiUnitsComponent implements OnInit {
       this.loader = true;
       this.admiService.setUnit(name, code).subscribe(
         (response) => {
-          console.log(response);
           this.updateUnitData();
           this.loader = false;
           this.showSuccessMessage = true;
@@ -135,7 +121,6 @@ export class DashboardAdmiUnitsComponent implements OnInit {
           }, 3000);
         },
         (error) => {
-          console.log(error);
           this.loader = false;
           this.errorMessage =
             'Se produjo un error en la operación. Por favor, intenta nuevamente.';
@@ -160,7 +145,6 @@ export class DashboardAdmiUnitsComponent implements OnInit {
     this.admiService.changeStatusUnit(id).subscribe(
       (response) => {
         this.loader = false;
-        console.log(response);
         this.updateUnitData();
         this.showSuccessMessage = true; // Mostrar mensaje de éxito
         setTimeout(() => {
@@ -168,7 +152,6 @@ export class DashboardAdmiUnitsComponent implements OnInit {
         }, 3000);
       },
       (error) => {
-        console.log(error);
         this.loader = false;
         this.errorMessage =
           'Se produjo un error en la operación. Por favor, intenta nuevamente.';

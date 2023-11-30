@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashborad-admi-register',
   templateUrl: './dashborad-admi-register.component.html',
-  styleUrls: ['./dashborad-admi-register.component.css'],
 })
 export class DashboradAdmiRegisterComponent {
   registerForm: FormGroup;
@@ -39,8 +38,6 @@ export class DashboradAdmiRegisterComponent {
         .setRegisterUser(name, lastName, email, password)
         .subscribe(
           (response) => {
-            console.log(response);
-
             this.loader = false;
             this.showSuccessMessage = true; // Mostrar mensaje de éxito
 
@@ -50,7 +47,6 @@ export class DashboradAdmiRegisterComponent {
             }, 2000);
           },
           (error) => {
-            console.log(error);
             this.loader = false;
             this.showErrorMessage = true; // Mostrar mensaje de error
             this.errorMessage =

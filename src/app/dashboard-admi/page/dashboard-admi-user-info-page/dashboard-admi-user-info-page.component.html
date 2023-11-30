@@ -1,118 +1,228 @@
-<section class="p-10 w-full h-screen bg-[#f6f6f6]">
-  <div class="p-10 bg-white shadow-lg rounded-3xl w-full h-full flex flex-col">
-    <h3
-      class="text-3xl font-bold text-[#2A9763] font-['Montserrat_Alternates']"
+<div
+  *ngIf="loading"
+  class="flex justify-center items-center bg-gray-700 absolute top-0 bottom-0 left-0 right-0 z-40 opacity-75"
+>
+  <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+  <svg
+    width="38"
+    height="38"
+    viewBox="0 0 38 38"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+        <stop stop-color="#fff" stop-opacity="0" offset="0%" />
+        <stop stop-color="#fff" stop-opacity=".631" offset="63.146%" />
+        <stop stop-color="#fff" offset="100%" />
+      </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+      <g transform="translate(1 1)">
+        <path
+          d="M36 18c0-9.94-8.06-18-18-18"
+          id="Oval-2"
+          stroke="url(#a)"
+          stroke-width="2"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="0.9s"
+            repeatCount="indefinite"
+          />
+        </path>
+        <circle fill="#fff" cx="36" cy="18" r="1">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="0.9s"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </g>
+    </g>
+  </svg>
+</div>
+<div class="flex flex-wrap h-screen">
+  <div
+    class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg pt-5"
+  >
+    <form
+      [formGroup]="profileForm"
+      (ngSubmit)="updateInfoUser()"
+      class="flex gap-10 pt-5 px-8 pb-8 mb-4"
     >
-      Información Usuario
-    </h3>
-    <div class="h-full flex gap-10">
-      <article class="w-1/2">
-        <div class="flex border-b border-[#2A9763] my-5">
-          <h3
-            class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
-          >
-            Datos Generales
-          </h3>
+      <div class="w-1/2">
+        <h2 class="text-xl font-semibold">Datos Generales</h2>
+        <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
+        <div class="md:flex gap-5 mb-6">
+          <div class="md:w-1/2">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-state"
+              >Nombre(s):
+            </label>
+            <input
+              formControlName="name"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
+
+          <div class="md:w-1/2">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-zip"
+            >
+              Apellido:
+            </label>
+            <input
+              formControlName="last_name"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
         </div>
-        <div class="p-5 rounded-3xl shadow bg-[#f6f6f6]">
-          <table [cellSpacing]="0" [cellPadding]="0" class="w-full">
-            <tbody>
-              <tr>
-                <td class="w-1/2 font-bold">ID de Usuario:</td>
-                <td>{{ (userData?.data)!.id }}</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Nombre:</td>
-                <td>{{ (userData?.data)!.first_name }}</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Apellido:</td>
-                <td>{{ (userData?.data)!.last_name }}</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Email:</td>
-                <td>{{ (userData?.data)!.email }}</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Teléfono:</td>
-                <td>{{ (userData?.data)!.phone }}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="md:flex gap-5 mb-6">
+          <div class="md:w-1/2">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-state"
+              >E-mail:
+            </label>
+            <input
+              formControlName="email"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
+
+          <div class="md:w-1/2">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-zip"
+            >
+              Telefono:
+            </label>
+            <input
+              formControlName="phone"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
         </div>
+        <div class="md:flex gap-5 mb-6">
+          <div class="w-full">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-state"
+              >Calle:
+            </label>
+            <input
+              formControlName="street"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
+        </div>
+        <div class="md:flex gap-5 mb-6">
+          <div class="md:w-1/2">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-state"
+              >Numero exterior:
+            </label>
+            <input
+              formControlName="ext_num"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
+
+          <div class="md:w-1/2">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-zip"
+            >
+              Numero interior:
+            </label>
+            <input
+              formControlName="int_num"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
+        </div>
+        <div class="md:flex gap-5 mb-6">
+          <div class="md:w-1/2">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-state"
+              >C.P:
+            </label>
+            <input
+              formControlName="zip_code"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
+
+          <div class="md:w-1/2">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-zip"
+              >Colonia:
+            </label>
+            <input
+              formControlName="suburb"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
+        </div>
+        <div class="md:flex gap-5 mb-6">
+          <div class="md:w-1/2">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-state"
+              >Ciudad:
+            </label>
+            <input
+              formControlName="city"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
+
+          <div class="md:w-1/2">
+            <label
+              class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+              for="grid-zip"
+              >Estado:
+            </label>
+            <input
+              formControlName="state"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="w-1/2">
+        <h2 class="text-xl font-semibold">Foto de Perfil</h2>
+        <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
         <div
-          class="flex border-b border-[#2A9763] my-5"
-          *ngIf="userRole !== 'admin'"
+          class="px-3 mb-6 md:mb-0 w-full h-1/2 flex items-center justify-center"
         >
-          <h3
-            class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
-          >
-            Dirección:
-          </h3>
+          <div class="w-full flex justify-center items-center">
+            <div
+              class="w-[250px] h-[300px] bg-red-200 rounded-3xl shadow-xl"
+              [ngStyle]="{
+                'background-image':
+                  'url(' +
+                  (userData?.data?.photo || '../assets/profile-default.png') +
+                  ')',
+                'background-size': 'cover',
+                'background-position': 'center',
+                'background-repeat': 'no-repeat'
+              }"
+            ></div>
+          </div>
         </div>
-        <div
-          class="p-5 rounded-3xl shadow bg-[#f6f6f6]"
-          *ngIf="userRole !== 'admin'"
-        >
-          <table [cellSpacing]="0" [cellPadding]="0" class="w-full">
-            <tbody>
-              <tr>
-                <td class="w-1/2 font-bold">Calle:</td>
-                <td>{{ (userData?.data)!.phone }}</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Número Exterior:</td>
-                <td>{{ (userData?.data)!.ext_num }}</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Número Interior:</td>
-                <td>{{ (userData?.data)!.int_num }}</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Colonia:</td>
-                <td>{{ (userData?.data)!.suburb }}</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Ciudad:</td>
-                <td>{{ (userData?.data)!.city }}</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Estado:</td>
-                <td>{{ (userData?.data)!.state }}</td>
-              </tr>
-              <tr>
-                <td class="font-bold">Código Postal:</td>
-                <td>{{ (userData?.data)!.zip_code }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </article>
-      <article class="w-1/2">
-        <div class="flex border-b border-[#2A9763] my-5">
-          <h3
-            class="text-lg font-bold text-[#2A9763] font-['Montserrat_Alternates']"
-          >
-            Foto:
-          </h3>
-        </div>
-        <div
-          class="p-5 h-[440px] flex justify-center items-center rounded-3xl shadow bg-[#f6f6f6]"
-        >
-          <div
-            class="w-[250px] h-[300px] bg-red-200 rounded-3xl shadow-xl"
-            [ngStyle]="{
-              'background-image':
-                'url(' +
-                (userData?.data?.photo || '../assets/profile-default.png') +
-                ')',
-              'background-size': 'cover',
-              'background-position': 'center',
-              'background-repeat': 'no-repeat'
-            }"
-          ></div>
-        </div>
-      </article>
-    </div>
+      </div>
+    </form>
   </div>
-</section>
+</div>

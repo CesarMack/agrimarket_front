@@ -1,118 +1,86 @@
 <section class="min-h-[90vh] px-24">
-  <!--
-  <div class="relative h-40">
+  <div class="mt-14 pb-10 px-10 w-full h-1/6 bg-[#F6F6F6] rounded-[60px]">
     <img
-      class="w-full h-full object-cover"
-      src="../assets/vegetables.jpg"
-      alt="Descripción de la imagen"
+      class="rounded-[60px] h-[350px] mx-auto relative z-0"
+      src="../assets/farmer-store.jpeg"
     />
-    <span
-      class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-[#EA892C95] text-center text-white font-semibold text-5xl"
-    >
-      <h2>Los produtos mas frescos del mercado</h2>
-    </span>
-  </div> -->
-
-  <div class="pt-10 pb-10 w-full mt-10 h-1/6 bg-[#F6F6F6] rounded-[60px]">
-    <h2
-      class="text-[#2A9763] font-['Montserrat_Alternates'] text-4xl font-bold text-center"
-    >
-      Los produtos mas frescos del mercado
-    </h2>
-
-    <p class="mt-10 text-[#797a7c] text-center text-2xl">
-      Del campo a tu alcance: Sabores frescos y auténticos. ¡Descubre lo mejor
-      del mercado!
-    </p>
-
-    <div class="px-10 mt-10 flex gap-5">
-      <button
-        class="bg-white shadow-lg py-3 px-6 rounded-3xl text-[#2A9763] font-medium"
-      >
-        Popular food
-      </button>
-      <button
-        class="py-3 px-6 rounded-3xl border-2 border-[#38C984] text-[#797a7c] font-medium"
-      >
-        Frutas
-      </button>
-      <button
-        class="border-2 border-[#38C984] text-[#797a7c] py-3 px-6 rounded-3xl font-medium"
-      >
-        Verduras
-      </button>
-      <button
-        class="border-2 border-[#38C984] text-[#797a7c] py-3 px-6 rounded-3xl font-medium"
-      >
-        Legumbres
-      </button>
-      <button
-        class="border-2 border-[#38C984] text-[#797a7c] py-3 px-6 rounded-3xl font-medium"
-      >
-        Granos
-      </button>
-    </div>
-
-    <div class="px-10 mt-10 grid grid-cols-6 gap-10">
-      <article class="h-72 p-5 bg-white rounded-3xl shadow-lg">
-        <img
-          class="h-2/3 w-full rounded-3xl border"
-          src="../assets/vegetables.jpg"
-        />
-
-        <h3 class="mt-4 font-medium">Manza Verde</h3>
-        <p
-          class="mt-4 font-bold text-xl text-[#2A9763] font-['Montserrat_Alternates']"
+    <div class="w-full bg-white p-10 rounded">
+      <div class="flex justify-end">
+        <form
+          [formGroup]="searchForm"
+          (ngSubmit)="searchProduct()"
+          class="w-6/12"
         >
-          $ 14.99
-        </p>
-      </article>
+          <div class="relative w-full">
+            <input
+              formControlName="search"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+              placeholder="Buscar producto..."
+            />
+            <div
+              class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="mt-10 grid grid-cols-4 gap-10">
+        <div *ngIf="loading" class="col-span-4">
+          <p colspan="7" class="text-center h-60 text-3xl">Cargando...</p>
+        </div>
+        <button
+          *ngFor="let data of catalog!.data"
+          class="flex h-36 rounded shadow-lg"
+          (click)="redirectToProductDetail(data.id)"
+        >
+          <img
+            class="w-5/12 h-auto rounded"
+            [src]="
+              data.photos.length > 0
+                ? data.photos[0].url
+                : '../assets/vegetables.jpg'
+            "
+          />
+          <div class="p-5 flex flex-col items-start justify-start">
+            <p
+              class="block uppercase tracking-wide text-grey-darker text-sm font-bold mt-2"
+            >
+              {{ data.product }}
+            </p>
+            <p
+              class="mt-1 block uppercase tracking-wide text-grey-darker text-sm"
+            >
+              ${{ data.price }}
+            </p>
+            <p
+              class="mt-1 block uppercase tracking-wide text-grey-darker text-sm"
+            >
+              Min. Venta:
+            </p>
+            <p
+              class="mt-1 block uppercase tracking-wide text-grey-darker text-sm"
+            >
+              {{ data.minimum_sale + " " + data.measure }}
+            </p>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
-  <!--
-  <div class="px-24 mt-10 grid grid-cols-6 gap-5">
-    <article class="h-72 bg-red-50 rounded-md">
-      <img class="h-2/3 w-full rounded-t-md" src="../assets/vegetables.jpg" />
-
-      <h3 class="mx-5 mt-4">Manza Verde</h3>
-      <p class="mx-5 font-semibold">$ 14.99</p>
-    </article>
-    <article class="h-72 bg-red-50 rounded-md">
-      <img class="h-2/3 w-full rounded-t-md" src="../assets/vegetables.jpg" />
-
-      <h3 class="mx-5 mt-4">Manza Verde</h3>
-      <p class="mx-5 font-semibold">$ 14.99</p>
-    </article>
-    <article class="h-72 bg-red-50 rounded-md">
-      <img class="h-2/3 w-full rounded-t-md" src="../assets/vegetables.jpg" />
-
-      <h3 class="mx-5 mt-4">Manza Verde</h3>
-      <p class="mx-5 font-semibold">$ 14.99</p>
-    </article>
-    <article class="h-72 bg-red-50 rounded-md">
-      <img class="h-2/3 w-full rounded-t-md" src="../assets/vegetables.jpg" />
-
-      <h3 class="mx-5 mt-4">Manza Verde</h3>
-      <p class="mx-5 font-semibold">$ 14.99</p>
-    </article>
-    <article class="h-72 bg-red-50 rounded-md">
-      <img class="h-2/3 w-full rounded-t-md" src="../assets/vegetables.jpg" />
-
-      <h3 class="mx-5 mt-4">Manza Verde</h3>
-      <p class="mx-5 font-semibold">$ 14.99</p>
-    </article>
-    <article class="h-72 bg-red-50 rounded-md">
-      <img class="h-2/3 w-full rounded-t-md" src="../assets/vegetables.jpg" />
-
-      <h3 class="mx-5 mt-4">Manza Verde</h3>
-      <p class="mx-5 font-semibold">$ 14.99</p>
-    </article>
-    <article class="h-72 bg-red-50 rounded-md">
-      <img class="h-2/3 w-full rounded-t-md" src="../assets/vegetables.jpg" />
-
-      <h3 class="mx-5 mt-4">Manza Verde</h3>
-      <p class="mx-5 font-semibold">$ 14.99</p>
-    </article>
-  </div> -->
-  <button (click)="navigateToAbout()">prueba</button>
 </section>
