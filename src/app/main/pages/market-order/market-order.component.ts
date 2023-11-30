@@ -23,17 +23,17 @@ export class MarketOrderComponent implements OnInit {
     private profileService: ProfileService
   ) {
     this.profileForm = this.formBuilder.group({
-      name: '',
-      last_name: '',
-      email: '',
-      phone: '',
-      street: '',
-      ext_num: '',
-      int_num: '',
-      suburb: '',
-      city: '',
-      state: '',
-      zip_code: '',
+      name: { value: '', disabled: true },
+      last_name: { value: '', disabled: true },
+      email: { value: '', disabled: true },
+      phone: { value: '', disabled: true },
+      street: { value: '', disabled: true },
+      ext_num: { value: '', disabled: true },
+      int_num: { value: '', disabled: true },
+      suburb: { value: '', disabled: true },
+      city: { value: '', disabled: true },
+      state: { value: '', disabled: true },
+      zip_code: { value: '', disabled: true },
     });
   }
   ngOnInit(): void {
@@ -46,6 +46,8 @@ export class MarketOrderComponent implements OnInit {
 
             this.price = response.data.price;
             this.quantity = localStorage.getItem('quantity');
+
+            console.log(this.selectedPhotoUrl);
 
             const quantityNumeric = parseFloat(this.quantity!);
             const priceNumeric = parseFloat(this.productData.data.price);

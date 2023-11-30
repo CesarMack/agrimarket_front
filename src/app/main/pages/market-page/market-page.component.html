@@ -5,39 +5,48 @@
       src="../assets/farmer-store.jpeg"
     />
     <div class="w-full bg-white p-10 rounded">
-      <div class="border-b-2"><input /></div>
-      <div class="mt-10 flex gap-5">
-        <button
-          class="bg-white shadow-lg py-3 px-6 rounded-3xl text-[#2A9763] font-medium"
+      <div class="flex justify-end">
+        <form
+          [formGroup]="searchForm"
+          (ngSubmit)="searchProduct()"
+          class="w-6/12"
         >
-          Popular food
-        </button>
-        <button
-          class="py-3 px-6 rounded-3xl border-2 border-[#38C984] text-[#797a7c] font-medium"
-        >
-          Frutas
-        </button>
-        <button
-          class="border-2 border-[#38C984] text-[#797a7c] py-3 px-6 rounded-3xl font-medium"
-        >
-          Verduras
-        </button>
-        <button
-          class="border-2 border-[#38C984] text-[#797a7c] py-3 px-6 rounded-3xl font-medium"
-        >
-          Legumbres
-        </button>
-        <button
-          class="border-2 border-[#38C984] text-[#797a7c] py-3 px-6 rounded-3xl font-medium"
-        >
-          Granos
-        </button>
+          <div class="relative w-full">
+            <input
+              formControlName="search"
+              class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+              placeholder="Buscar producto..."
+            />
+            <div
+              class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </div>
+          </div>
+        </form>
       </div>
 
       <div class="mt-10 grid grid-cols-4 gap-10">
+        <div *ngIf="loading" class="col-span-4">
+          <p colspan="7" class="text-center h-60 text-3xl">Cargando...</p>
+        </div>
         <button
           *ngFor="let data of catalog!.data"
-          class="flex h-36 rounded shadow-lg bg-gray-200"
+          class="flex h-36 rounded shadow-lg"
           (click)="redirectToProductDetail(data.id)"
         >
           <img
@@ -48,22 +57,26 @@
                 : '../assets/vegetables.jpg'
             "
           />
-          <div class="p-5 flex flex-col justify-start">
-            <p class="font-medium">{{ data.product }}</p>
+          <div class="p-5 flex flex-col items-start justify-start">
             <p
-              class="mt-1 font-bold text-xl text-[#2A9763] font-['Montserrat_Alternates']"
+              class="block uppercase tracking-wide text-grey-darker text-sm font-bold mt-2"
+            >
+              {{ data.product }}
+            </p>
+            <p
+              class="mt-1 block uppercase tracking-wide text-grey-darker text-sm"
             >
               ${{ data.price }}
             </p>
             <p
-              class="mt-1 font-bold text-base text-[#2A9763] font-['Montserrat_Alternates']"
+              class="mt-1 block uppercase tracking-wide text-grey-darker text-sm"
             >
-              Venta Minimo:
+              Min. Venta:
             </p>
             <p
-              class="mt-1 font-bold text-base text-[#2A9763] font-['Montserrat_Alternates']"
+              class="mt-1 block uppercase tracking-wide text-grey-darker text-sm"
             >
-              {{ data.minimum_sale }}{{ data.measure }}
+              {{ data.minimum_sale + " " + data.measure }}
             </p>
           </div>
         </button>
