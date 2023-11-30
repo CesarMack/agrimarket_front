@@ -9,7 +9,6 @@ import { Chart } from 'chart.js/auto';
 })
 export class DashboardPageComponent implements OnInit {
   public chart!: Chart;
-  public secondChart!: Chart;
   public completeOrders!: String;
   public canceledOrders!: String;
   public activeProducts!: String;
@@ -59,20 +58,12 @@ export class DashboardPageComponent implements OnInit {
       type: 'line',
       data: initialData,
     });
-
-    this.secondChart = new Chart('secondChart', {
-      type: 'line',
-      data: initialData,
-    });
   }
 
   updateChartData(newData: any) {
     // Actualizar data de gráficas y volver a renderizar
     this.chart.data = newData;
     this.chart.update();
-
-    this.secondChart.data = newData;
-    this.secondChart.update();
   }
 
   weekFilter() {
