@@ -1,41 +1,17 @@
 <div class="flex flex-wrap">
-  <div
-    class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg pt-5"
-  >
+  <div class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg p-4">
     <div class="mx-5 mb-10 flex justify-between items-center">
       <div>
-        <h3
-          class="text-3xl font-bold text-[#2A9763] font-['Montserrat_Alternates']"
-        >
-          Detalles Ordenes
-        </h3>
       </div>
 
-      <div class="flex gap-5">
-        <button
-          routerLink="/farmer/orders"
-          class="bg-white shadow-lg py-3 px-6 rounded-3xl text-[#2A9763] font-medium"
-        >
-          All Orders
-        </button>
-        <button
-          routerLink="/farmer/orders/completed"
-          class="py-3 px-6 rounded-3xl border-2 border-[#38C984] text-[#797a7c] font-medium"
-        >
-          Completado
-        </button>
-        <button
-          routerLink="/farmer/orders/pending"
-          class="border-2 border-[#38C984] text-[#797a7c] py-3 px-6 rounded-3xl font-medium"
-        >
-          Pendientes
-        </button>
-        <button
-          routerLink="/farmer/orders/canceled"
-          class="border-2 border-[#38C984] text-[#797a7c] py-3 px-6 rounded-3xl font-medium"
-        >
-          Canceladas
-        </button>
+      <div class="flex gap-3">
+        <button class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 py-3" type="button" routerLink="/farmer/orders">Mostrar todo</button>
+
+        <button class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 py-1 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" routerLink="/farmer/orders/completed">Completadas</button>
+
+        <button class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 py-1 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" routerLink="/farmer/orders/pending">Pendientes</button>
+
+        <button class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 py-1 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" routerLink="/farmer/orders/canceled">Canceladas</button>
       </div>
     </div>
 
