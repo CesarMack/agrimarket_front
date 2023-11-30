@@ -16,9 +16,7 @@ export class MainComponent implements OnInit {
         this.router.navigate(['/admin']);
       } else if (typeUser == 'farmer') {
         this.router.navigate(['/farmer']);
-      } else {
-        this.router.navigate(['/dashboard']);
-      }
+      }  
     });
   }
 }

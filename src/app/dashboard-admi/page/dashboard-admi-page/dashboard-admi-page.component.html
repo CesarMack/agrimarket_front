@@ -1,205 +1,204 @@
-<!-- <section class="p-10 w-full h-screen bg-[#f6f6f6]">
-  <div class="p-10 bg-white shadow-lg rounded-3xl w-full h-full flex flex-col">
-    <h3
-      class="text-3xl font-bold text-[#2A9763] font-['Montserrat_Alternates']"
+<div class="flex flex-wrap relative">
+  <div class="w-full flex justify-end mb-5 px-4">
+    <button
+      class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 py-3"
+      type="button"
+      (click)="weekFilter()"
     >
-      ¡Bienvenido, Aaron!
-    </h3>
-
-    <div class="mt-10 w-full flex gap-10">
-      <article
-        class="flex items-center gap-5 justify-start py-8 px-4 w-1/5 h-28 border rounded-lg bg-[#f6f6f6] shadow relative"
-      >
-        <div
-          class="bg-purple-100 w-16 h-16 rounded-full ring-4 ring-offset-4 ring-purple-100 ring-opacity-30 flex items-center justify-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            stroke-width="1.5"
-            class="w-4/6 h-4/6 fill-purple-700"
-          >
-            <path
-              d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"
-            />
-          </svg>
-        </div>
-        <div class="flex-grow">
-          <h4 class="text-[#797a7c] mb-1">Total de Usuarios</h4>
-          <h2
-            class="text-2xl font-bold font-['Montserrat_Alternates'] leading-none"
-          >
-            {{ (dashboardData?.data)!.total }}
-          </h2>
-        </div>
-      </article>
-      <article
-        class="flex items-center gap-5 justify-start py-8 px-4 w-1/5 h-28 border rounded-lg bg-[#f6f6f6] shadow relative"
-      >
-        <div
-          class="bg-green-100 w-16 h-16 rounded-full ring-4 ring-offset-4 ring-green-100 ring-opacity-30 flex items-center justify-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            class="w-4/6 h-4/6 fill-green-700"
-          >
-            <title>account-lock-outline</title>
-            <path
-              d="M10 12C12.21 12 14 10.21 14 8S12.21 4 10 4 6 5.79 6 8 7.79 12 10 12M10 6C11.11 6 12 6.9 12 8S11.11 10 10 10 8 9.11 8 8 8.9 6 10 6M12 20H2V17C2 14.33 7.33 13 10 13C11 13 12.38 13.19 13.71 13.56C13.41 14.12 13.23 14.74 13.21 15.39C12.23 15.1 11.11 14.9 10 14.9C7.03 14.9 3.9 16.36 3.9 17V18.1H12C12 18.13 12 18.17 12 18.2V20M20.8 17V15.5C20.8 14.1 19.4 13 18 13C16.6 13 15.2 14.1 15.2 15.5V17C14.6 17 14 17.6 14 18.2V21.7C14 22.4 14.6 23 15.2 23H20.7C21.4 23 22 22.4 22 21.8V18.3C22 17.6 21.4 17 20.8 17M19.5 17H16.5V15.5C16.5 14.7 17.2 14.2 18 14.2C18.8 14.2 19.5 14.7 19.5 15.5V17Z"
-            />
-          </svg>
-        </div>
-        <div class="flex-grow">
-          <h4 class="text-[#797a7c] mb-1">Administradores</h4>
-          <h2
-            class="text-2xl font-bold font-['Montserrat_Alternates'] leading-none"
-          >
-            {{ (dashboardData?.data)!.admins }}
-          </h2>
-        </div>
-      </article>
-
-      <article
-        class="flex items-center gap-5 justify-start py-8 px-4 w-1/5 h-28 border rounded-lg bg-[#f6f6f6] shadow relative"
-      >
-        <div
-          class="bg-blue-100 w-16 h-16 rounded-full ring-4 ring-offset-4 ring-blue-100 ring-opacity-30 flex items-center justify-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 0 297 297"
-            xml:space="preserve"
-            stroke-width="1.5"
-            class="w-4/6 h-4/6 fill-blue-700"
-          >
-            <g>
-              <path
-                d="M113.986,209.155c-2.197,0-4.361,0.889-5.909,2.447c-1.558,1.558-2.457,3.723-2.457,5.919c0,2.196,0.899,4.351,2.457,5.919
-		c1.548,1.557,3.712,2.447,5.909,2.447c2.206,0,4.361-0.89,5.919-2.447c1.557-1.558,2.447-3.713,2.447-5.919
-		c0-2.207-0.89-4.361-2.447-5.919C118.347,210.043,116.192,209.155,113.986,209.155z"
-              />
-              <path
-                d="M267.206,185.582c-2.057-16.465-11.21-30.85-24.486-38.482l-49.029-28.182c10.546-11.153,17.033-26.182,17.033-42.707
-		c0-1.178-0.042-2.354-0.109-3.529h58.672c5.775,0,10.458-4.682,10.458-10.458s-4.682-10.458-10.458-10.458h-46.3
-		C211.528,20.982,181.782,0,148.5,0S85.472,20.982,74.013,51.766h-46.3c-5.775,0-10.458,4.682-10.458,10.458
-		s4.682,10.458,10.458,10.458h58.672c-0.067,1.175-0.109,2.352-0.109,3.529c0,16.525,6.487,31.554,17.033,42.707L54.28,147.1
-		c-13.274,7.63-22.428,22.016-24.487,38.482l-12.457,99.663c-0.372,2.976,0.553,5.969,2.537,8.218
-		c1.985,2.249,4.841,3.537,7.84,3.537h241.574c2.999,0,5.855-1.288,7.84-3.537c1.985-2.249,2.909-5.242,2.537-8.218L267.206,185.582
-		z M89.937,193.468h117.127v82.616H89.937V193.468z M107.192,172.553v-31.742l14.619-8.403c8.093,3.859,17.142,6.026,26.69,6.026
-		s18.596-2.167,26.69-6.026l14.619,8.403v31.742H107.192z M148.5,20.915c21.248,0,40.54,11.606,50.806,29.456H97.694
-		C107.96,32.521,127.252,20.915,148.5,20.915z M189.656,72.681c0.101,1.174,0.152,2.351,0.152,3.529
-		c0,22.777-18.531,41.308-41.308,41.308s-41.308-18.531-41.308-41.308c0-1.179,0.051-2.355,0.152-3.529H189.656z M50.547,188.176
-		c1.249-9.989,6.54-18.566,14.156-22.943l21.573-12.4v19.72h-6.798c-5.775,0-10.458,4.683-10.458,10.458v93.074H39.56
-		L50.547,188.176z M227.979,276.085v-93.074c0-5.775-4.682-10.458-10.458-10.458h-6.798v-19.72l21.573,12.4
-		c7.616,4.377,12.907,12.955,14.155,22.943l10.989,87.908H227.979z"
-              />
-              <path
-                d="M183.007,209.155c-2.197,0-4.361,0.889-5.909,2.447c-1.558,1.558-2.457,3.712-2.457,5.919c0,2.206,0.899,4.361,2.457,5.919
-		c1.548,1.557,3.712,2.447,5.909,2.447c2.206,0,4.361-0.89,5.919-2.447c1.557-1.558,2.447-3.724,2.447-5.919
-		c0-2.207-0.89-4.361-2.447-5.919C187.368,210.043,185.213,209.155,183.007,209.155z"
-              />
-            </g>
-          </svg>
-        </div>
-        <div class="flex-grow">
-          <h4 class="text-[#797a7c] mb-1">Granjeros</h4>
-          <h2
-            class="text-2xl font-bold font-['Montserrat_Alternates'] leading-none"
-          >
-            {{ (dashboardData?.data)!.farmers }}
-          </h2>
-        </div>
-      </article>
-      <article
-        class="flex items-center gap-5 justify-start py-8 px-4 w-1/5 h-28 border rounded-lg bg-[#f6f6f6] shadow relative"
-      >
-        <div
-          class="bg-red-100 w-16 h-16 rounded-full ring-4 ring-offset-4 ring-red-100 ring-opacity-30 flex items-center justify-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            class="w-4/6 h-4/6 stroke-red-700"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-            />
-          </svg>
-        </div>
-        <div class="flex-grow">
-          <h4 class="text-[#797a7c] mb-1">Clientes</h4>
-          <h2
-            class="text-2xl font-bold font-['Montserrat_Alternates'] leading-none"
-          >
-            {{ (dashboardData?.data)!.clients }}
-          </h2>
-        </div>
-      </article>
-    </div>
+      Semana
+    </button>
+    <button
+      class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 py-3"
+      type="button"
+      (click)="monthFilter()"
+    >
+      Mes
+    </button>
+    <button
+      class="bg-green-700 text-white active:bg-green-600 text-xs font-bold uppercase px-3 rounded-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 py-3"
+      type="button"
+      (click)="yearFilter()"
+    >
+      Año
+    </button>
   </div>
-</section>
- -->
-<div class="flex flex-wrap">
-  <div class="w-full mb-12 xl:mb-0 px-4">
+  <div class="w-full mb-12 xl:mb-0">
     <div>
       <!-- Card stats -->
       <div class="flex flex-wrap">
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="TRAFFIC"
-            statTitle="350,897"
-            statArrow="up"
-            statPercent="3.48"
-            statPercentColor="text-emerald-500"
-            statDescripiron="Since last month"
-            statIconName="far fa-chart-bar"
-            statIconColor="bg-red-500"
-          ></app-card-stats>
+          <div
+            class="relative flex flex-col min-w-0 mb-6 break-words bg-white shadow-soft-xl rounded bg-clip-border"
+          >
+            <div class="flex-auto p-9 shadow-lg">
+              <div class="flex flex-wrap -mx-3">
+                <div class="flex-none w-2/3 max-w-full px-3">
+                  <div>
+                    <p class="mb-0 font-semibold leading-normal text-sm">
+                      TOTAL DE USUARIOS
+                    </p>
+                    <h5 class="mb-0 font-bold">
+                      {{ pendingOrders }}
+                    </h5>
+                  </div>
+                </div>
+                <div class="w-4/12 max-w-full px-3 ml-auto text-right flex-0">
+                  <div
+                    class="inline-block w-12 h-12 text-center rounded-full bg-yellow-600 shadow-soft-2xl"
+                  >
+                    <i
+                      class="fa-solid fa-users text-lg relative top-3 text-white"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="NEW USERS"
-            statTitle="2,356"
-            statArrow="down"
-            statPercent="3.48"
-            statPercentColor="text-red-500"
-            statDescripiron="Since last week"
-            statIconName="fas fa-chart-pie"
-            statIconColor="bg-orange-500"
-          ></app-card-stats>
+          <div
+            class="relative flex flex-col min-w-0 mb-6 break-words bg-white shadow-soft-xl rounded bg-clip-border"
+          >
+            <div class="flex-auto p-9 shadow-lg">
+              <div class="flex flex-wrap -mx-3">
+                <div class="flex-none w-2/3 max-w-full px-3">
+                  <div>
+                    <p class="mb-0 font-semibold leading-normal text-sm">
+                      USUARIOS NUEVOS
+                    </p>
+                    <h5 class="mb-0 font-bold">
+                      {{ completeOrders }}
+                    </h5>
+                  </div>
+                </div>
+                <div class="w-4/12 max-w-full px-3 ml-auto text-right flex-0">
+                  <div
+                    class="inline-block w-12 h-12 text-center rounded-full bg-green-700 shadow-soft-2xl"
+                  >
+                    <i
+                      class="fa-solid fa-user text-lg relative top-3 text-white"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="SALES"
-            statTitle="924"
-            statArrow="down"
-            statPercent="1.10"
-            statPercentColor="text-orange-500"
-            statDescripiron="Since yesterday"
-            statIconName="fas fa-users"
-            statIconColor="bg-pink-500"
-          ></app-card-stats>
+          <div
+            class="relative flex flex-col min-w-0 mb-6 break-words bg-white shadow-soft-xl rounded bg-clip-border"
+          >
+            <div class="flex-auto p-9 shadow-lg">
+              <div class="flex flex-wrap -mx-3">
+                <div class="flex-none w-2/3 max-w-full px-3">
+                  <div>
+                    <p class="mb-0 font-semibold leading-normal text-sm">
+                      ORDENES TOTALES
+                    </p>
+                    <h5 class="mb-0 font-bold">
+                      {{ canceledOrders }}
+                    </h5>
+                  </div>
+                </div>
+                <div class="w-4/12 max-w-full px-3 ml-auto text-right flex-0">
+                  <div
+                    class="inline-block w-12 h-12 text-center rounded-full bg-red-500 shadow-soft-2xl"
+                  >
+                    <i
+                      class="fa-solid fa-circle-notch text-lg relative top-3 text-white"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="PERFORMANCE"
-            statTitle="49,65%"
-            statArrow="up"
-            statPercent="12"
-            statPercentColor="text-emerald-500"
-            statDescripiron="Since last month"
-            statIconName="fas fa-percent"
-            statIconColor="bg-emerald-500"
-          ></app-card-stats>
+          <div
+            class="relative flex flex-col min-w-0 mb-6 break-words bg-white shadow-soft-xl rounded bg-clip-border"
+          >
+            <div class="flex-auto p-9 shadow-lg">
+              <div class="flex flex-wrap -mx-3">
+                <div class="flex-none w-2/3 max-w-full px-3">
+                  <div>
+                    <p class="mb-0 font-semibold leading-normal text-sm">
+                      PRODUCTOS ACTIVOS
+                    </p>
+                    <h5 class="mb-0 font-bold">
+                      {{ activeProducts }}
+                    </h5>
+                  </div>
+                </div>
+                <div class="w-4/12 max-w-full px-3 ml-auto text-right flex-0">
+                  <div
+                    class="inline-block w-12 h-12 text-center rounded-full bg-blue-500 shadow-soft-2xl"
+                  >
+                    <i
+                      class="fa-solid fa-basket-shopping text-lg relative top-3 text-white"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<div class="flex flex-wrap mt-4">
+  <div class="w-full xl:w-1/2 mb-12 xl:mb-0 px-4">
+    <div
+      class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700"
+    >
+      <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="relative w-full max-w-full flex-grow flex-1">
+            <h6 class="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
+              Predicción
+            </h6>
+            <h2 class="text-xl font-semibold">Órdenes</h2>
+          </div>
+        </div>
+      </div>
+      <div class="px-4 pb-4 flex-auto">
+        <!-- Chart -->
+        <div class="relative w-full">
+          <canvas id="chart">{{ chart }}</canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full xl:w-1/2 mb-12 xl:mb-0 px-4">
+    <div
+      class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700"
+    >
+      <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="relative w-full max-w-full flex-grow flex-1">
+            <h6 class="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
+              Predicción
+            </h6>
+            <h2 class="text-xl font-semibold">Órdenes</h2>
+          </div>
+        </div>
+      </div>
+      <div class="px-4 pb-4 flex-auto">
+        <!-- Chart -->
+        <div class="relative w-full">
+          <canvas id="chart">{{ chart }}</canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="flex flex-wrap px-4"></section>

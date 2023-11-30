@@ -9,6 +9,8 @@ import { ProductType } from '../interfaces/productType';
 import { Units } from '../interfaces/units';
 import { User } from '../interfaces/user';
 import { Backups } from '../interfaces/backups';
+import { Cards } from '../interfaces/cards';
+import { Days } from '../interfaces/days';
 
 @Injectable({ providedIn: 'root' })
 export class AdmiService {
@@ -16,16 +18,48 @@ export class AdmiService {
 
   constructor(private http: HttpClient) {}
 
-  getDashboard(): Observable<Dashboard> {
+  getDashboardCard(): Observable<Cards> {
     const token = localStorage.getItem('user_token');
-    if (!token) {
-      throw new Error('Token not available');
-    }
+
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
+
     return this.http
-      .get<Dashboard>(`${this.apiUrl}/admins/dashboard`, {
+      .get<Cards>(`${this.apiUrl}/admins/dashboard`, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  
+  getDashboardDays(): Observable<Days> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http
+      .get<Days>(`https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/dias`)
+      .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+  getDashboardCharts(): Observable<Cards> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<Cards>(`${this.apiUrl}/admins/predecirOrdenes/dias`, {
         headers,
       })
       .pipe(
