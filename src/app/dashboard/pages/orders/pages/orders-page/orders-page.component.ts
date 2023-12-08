@@ -22,6 +22,8 @@ export class OrdersPageComponent implements OnInit {
   ngOnInit(): void {
     this.farmerService.getOrders().subscribe(
       (response) => {
+        console.log('Ordenes Farmer');
+        
         console.log(response);
 
         this.ordersData = response;

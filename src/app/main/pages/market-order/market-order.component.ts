@@ -16,6 +16,10 @@ export class MarketOrderComponent implements OnInit {
   quantity: string | null = '0';
   total: string | null = '0';
   profileForm: FormGroup;
+  idProduct:string | null = '0';
+
+  modal : boolean= false;
+
   constructor(
     private route: ActivatedRoute,
     private mainService: MainService,
@@ -39,6 +43,7 @@ export class MarketOrderComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       if (params['id']) {
+        this.idProduct=params['id'];
         this.mainService.getProductData(params['id']).subscribe(
           (response) => {
             this.productData = response;
@@ -81,5 +86,23 @@ export class MarketOrderComponent implements OnInit {
         console.error('Error fetching dashboard data:', error);
       }
     );
+  }
+
+  createOrder(): void {
+    console.log('Press Button');
+    
+    const quantity=localStorage.getItem('quantity');
+    console.log(quantity);
+    console.log(this.idProduct);
+    
+    const data ={
+      product_id: this.idProduct,
+      quantity: this.quantity
+    }
+    this.mainService.createOrder(data).subscribe(((response)=>{
+console.log(response);
+
+    this.modal = true;
+    }))
   }
 }

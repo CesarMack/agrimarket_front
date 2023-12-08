@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { Catalog } from '../interfaces/catalog';
 import { Product } from '../interfaces/product';
 @Injectable({ providedIn: 'root' })
@@ -63,6 +63,25 @@ export class MainService {
         headers,
       })
       .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
+
+  createOrder(data: any): Observable<string> {
+    const token = localStorage.getItem('user_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .post<{ data: { id: string } }>(`${this.apiUrl}/clients/orders`, data, {
+        headers,
+      })
+      .pipe(
+        map((response) => response.data.id),
         catchError((e) => {
           throw new Error('Authentication error');
         })
