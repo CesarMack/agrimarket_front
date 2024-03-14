@@ -22,14 +22,17 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/custom-theme.scss",
               "src/styles.css"
             ],
             "scripts": [
-            ]
+            ],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -62,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "agrimarket_front:build:production"
+              "buildTarget": "agrimarket_front:build:production"
             },
             "development": {
-              "browserTarget": "agrimarket_front:build:development"
+              "buildTarget": "agrimarket_front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "agrimarket_front:build"
+            "buildTarget": "agrimarket_front:build"
           }
         },
         "test": {
@@ -86,7 +89,8 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.css"
