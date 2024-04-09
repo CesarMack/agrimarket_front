@@ -1,46 +1,56 @@
-<div
-  class="relative flex flex-col min-w-0 break-words w-full rounded bg-blueGray-700"
->
-  <table class="items-center w-full bg-transparent border-collapse">
+<div class="mt-10 overflow-x-auto px-0">
+  <table class="w-full min-w-max table-auto text-left">
     <thead>
-      <tr>
-        <!--    <th
-          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
-        >
-          No. Orden
+      <tr class="uppercase">
+        <!--  <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+          <p
+            class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
+          >No. Orden
+          </p>
         </th> -->
-        <th
-          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
-        >
-          Cliente
+        <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+          <p
+            class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
+          >
+            Cliente
+          </p>
         </th>
-        <th
-          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
-        >
-          Orden
+        <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+          <p
+            class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
+          >
+            Orden
+          </p>
         </th>
-        <th
-          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100"
-        >
-          Fecha Creacion
+        <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+          <p
+            class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
+          >
+            Fecha Creacion
+          </p>
         </th>
-        <th
-          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
-        >
-          Precio
+        <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+          <p
+            class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
+          >
+            Precio
+          </p>
         </th>
-        <th
-          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
-        >
-          Status
+        <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+          <p
+            class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
+          >
+            Status
+          </p>
         </th>
-        <th
-          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-blueGray-100"
-        >
-          <span class="sr-only">Edit</span>
+        <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+          <p
+            class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
+          ></p>
         </th>
       </tr>
     </thead>
+
     <tbody>
       <tr *ngIf="loading">
         <td colspan="7" class="text-center h-60">Cargando...</td>
@@ -55,27 +65,27 @@
           {{ order.id }}
         </th> -->
         <td
-          class="border-t-0 font-bold px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+          class="border-t-0 font-bold align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
         >
           {{ order.client.name }}
         </td>
         <td
-          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+          class="border-t-0 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
         >
           {{ order.product.name }}
         </td>
         <td
-          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+          class="border-t-0 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
         >
           {{ order.created_at }}
         </td>
         <td
-          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+          class="border-t-0 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
         >
           ${{ order.total }}
         </td>
         <td
-          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+          class="border-t-0 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
         >
           <ng-container
             *ngIf="order.status === 'Completado'; else cancelStatus"
@@ -102,7 +112,7 @@
           </ng-template>
         </td>
         <td
-          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+          class="border-t-0 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
         >
           <button
             class="text-white bg-green-700 hover:bg-green-800 mr-5 py-2.5 px-5 rounded text-sm leading-3 focus:outline-none"

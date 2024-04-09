@@ -1,6 +1,6 @@
-<div class="flex flex-wrap h-screen">
+<div class="flex flex-wrap mt-12">
   <div
-    class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg pt-5"
+    class="border relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg pt-5"
   >
     <div class="px-10 pt-5 flex justify-between">
       <div class="relative w-6/12">
@@ -36,20 +36,25 @@
       </button>
     </div>
 
-    <div class="px-10 mt-10 grid grid-cols-6 gap-10">
+    <div
+      class="px-10 my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-10"
+    >
       <button
         *ngFor="let data of catalogData!.data"
-        class="h-60 flex justify-start items-start flex-col bg-white rounded-2xl shadow-lg"
+        class="h-60 flex justify-start items-start flex-col rounded-2xl border"
         (click)="redirectToProductDetail(data.id)"
       >
-        <img
-          class="h-2/3 w-full rounded-2xl object-cover"
-          [src]="
-            data.photos.length > 0
-              ? data.photos[0].url
-              : '../assets/vegetables.jpg'
-          "
-        />
+        <div class="h-2/3 w-full bg-gray-100 rounded-t-2xl border-b">
+          <img
+            class="h-full w-2/3 mx-auto object-cover"
+            [src]="
+              data.photos.length > 0
+                ? data.photos[0].url
+                : '../assets/vegetables.jpg'
+            "
+          />
+        </div>
+
         <div class="p-2 flex flex-col items-start justify-start">
           <p
             class="block uppercase tracking-wide text-grey-darker text-sm font-bold mt-2"

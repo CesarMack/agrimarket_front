@@ -15,7 +15,8 @@ import { Months } from '../interfaces/months';
 
 @Injectable({ providedIn: 'root' })
 export class AdmiService {
-  private apiUrl: string = 'https://agrimarketapi.azurewebsites.net/api/v1';
+  private apiUrl: string =
+    'http://[2806:2f0:1001:45b:41d9:d8cd:d716:6d8d]:8000/api/v1';
 
   constructor(private http: HttpClient) {}
 
@@ -36,16 +37,18 @@ export class AdmiService {
         })
       );
   }
-  
+
   getDashboardDays(): Observable<Days> {
     const token = localStorage.getItem('user_token');
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
 
     return this.http
-      .get<Days>(`https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/dias`)
+      .get<Days>(
+        `https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/dias`
+      )
       .pipe(
         catchError((e) => {
           throw new Error('Authentication error');
@@ -56,11 +59,13 @@ export class AdmiService {
     const token = localStorage.getItem('user_token');
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
 
     return this.http
-      .get<Months>(`https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/semanas`)
+      .get<Months>(
+        `https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/semanas`
+      )
       .pipe(
         catchError((e) => {
           throw new Error('Authentication error');
@@ -71,11 +76,13 @@ export class AdmiService {
     const token = localStorage.getItem('user_token');
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
 
     return this.http
-      .get<Months>(`https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/meses`)
+      .get<Months>(
+        `https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/meses`
+      )
       .pipe(
         catchError((e) => {
           throw new Error('Authentication error');
@@ -242,6 +249,8 @@ export class AdmiService {
   }
 
   setProductType(name: String, category: String): Observable<any> {
+    console.log(name, category);
+
     const token = localStorage.getItem('user_token');
     const data = {
       name: name,
@@ -530,7 +539,8 @@ export class AdmiService {
   }
   //API BACKUP
 
-  private apiUrlBD: string = 'https://agrimarketapi.azurewebsites.net/api/v1/';
+  private apiUrlBD: string =
+    'http://[2806:2f0:1001:45b:41d9:d8cd:d716:6d8d]:8000/api/v1/';
   setBackupDifferential(): Observable<any> {
     const token = localStorage.getItem('user_token');
 

@@ -12,7 +12,8 @@ import { Cards } from '../interfaces/cards';
 
 @Injectable({ providedIn: 'root' })
 export class FarmerService {
-  private apiUrl: string = 'https://agrimarketapi.azurewebsites.net/api/v1';
+  private apiUrl: string =
+    'http://[2806:2f0:1001:45b:41d9:d8cd:d716:6d8d]:8000/api/v1';
 
   constructor(private http: HttpClient) {}
 

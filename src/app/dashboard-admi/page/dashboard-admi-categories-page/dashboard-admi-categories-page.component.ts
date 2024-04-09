@@ -29,6 +29,7 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       productId: [''],
       name: ['', [Validators.required]],
+      units: ['', [Validators.required]],
       categories: ['', Validators.required],
     });
     this.searchForm = this.formBuilder.group({
@@ -140,10 +141,16 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
   newProductType(): void {
     if (this.productForm.valid) {
       const name = this.productForm.get('name')!.value;
+      const units = this.productForm.get('units')!.value;
       const categories = this.productForm.get('categories')!.value;
       const selectedOption = this.categoriesData?.data.find(
-        (item) => item.name === categories
+        (item) => item.name === units
       );
+
+      console.log(units);
+      console.log(categories);
+
+      console.log(selectedOption);
 
       this.loader = true;
       this.admiService.setProductType(name, selectedOption?.id!).subscribe(

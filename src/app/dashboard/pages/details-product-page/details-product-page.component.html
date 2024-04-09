@@ -114,16 +114,20 @@
   <form
     [formGroup]="productForm"
     (ngSubmit)="newProduct()"
-    class="relative flex gap-5 w-full"
+    class="relative flex flex-col lg:flex-row gap-5 w-full"
   >
     <div class="w-full xl:w-1/2 mb-12 xl:mb-0">
       <div
         class="h-full bg-white shadow-lg rounded pt-5 px-8 pb-8 mb-4 flex flex-col my-2"
       >
-        <h2 class="text-xl font-semibold">Detalles del producto</h2>
-        <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
-        <div class="-mx-3 md:flex mb-6 mt-5">
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+        <h2
+          class="text-xl font-semibold mb-5 pb-2 border-b border-solid border-blueGray-200"
+        >
+          Detalles del producto
+        </h2>
+
+        <div class="flex flex-col md:grid md:grid-cols-2 gap-6">
+          <div class="w-full">
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-first-name"
@@ -161,7 +165,7 @@
             </div>
           </div>
 
-          <div class="md:w-1/2 px-3">
+          <div class="w-full">
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-last-name"
@@ -197,10 +201,7 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/2 px-3">
+          <div class="w-full">
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-last-name"
@@ -223,7 +224,7 @@
             </mat-form-field>
           </div>
 
-          <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+          <div class="w-full">
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-city"
@@ -239,10 +240,8 @@
               min="1"
             />
           </div>
-        </div>
 
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/2 px-3">
+          <div class="w-full">
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-state"
@@ -259,7 +258,7 @@
             />
           </div>
 
-          <div class="md:w-1/2 px-3">
+          <div class="w-full">
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-zip"
@@ -275,10 +274,8 @@
               min="1"
             />
           </div>
-        </div>
 
-        <div class="-mx-3 md:flex mb-6">
-          <div class="w-full px-3 mb-6 md:mb-0">
+          <div class="w-full col-span-2">
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-city"
@@ -298,13 +295,15 @@
       </div>
     </div>
 
-    <div class="xl:w-1/2 mb-12 xl:mb-0">
+    <div class="w-full h-auto xl:w-1/2 mb-12 xl:mb-0">
       <div
         class="h-full w-full relative bg-white shadow-lg rounded pt-5 px-8 pb-8 mb-4 flex flex-col my-2"
       >
-        <h2 class="text-xl font-semibold">Fotos</h2>
-        <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
-
+        <h2
+          class="text-xl font-semibold mb-5 pb-2 border-b border-solid border-blueGray-200"
+        >
+          Fotos
+        </h2>
         <div
           class="px-3 mb-6 md:mb-0 w-full flex items-center h-auto justify-center"
         >
@@ -359,17 +358,19 @@
           </div>
         </div>
 
-        <div class="w-full absolute bottom-0">
+        <div
+          class="mt-10 w-full flex flex-col items-center justify-center xl:absolute xl:bottom-0 xl:mt-0 xl:flex-row"
+        >
           <button
             type="button"
-            class="w-2/4 focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+            class="w-full xl:w-1/3 focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
             (click)="newProduct()"
           >
             Agregar Producto
           </button>
           <button
             type="button"
-            class="w-2/4 focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+            class="w-full xl:w-1/3 focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
             (click)="clearForm()"
           >
             Cancelar

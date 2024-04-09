@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <shared-sidebar-admin></shared-sidebar-admin>
   <div class="relative md:ml-64 bg-blueGray-100">
     <shared-header-stats></shared-header-stats>
@@ -6,5 +6,16 @@
       <router-outlet></router-outlet>
       <shared-footer-admin></shared-footer-admin>
     </div>
+  </div>
+</div> -->
+<div class="relative flex h-screen flex-col md:flex-row">
+  <shared-sidebar-admin></shared-sidebar-admin>
+  <div class="relative flex flex-col w-full overflow-y-auto">
+    <span class="absolute left-0 right-0 h-52 bg-[#f1a93d] -z-10"></span>
+    <shared-header-stats></shared-header-stats>
+    <div class="flex-1 px-4 md:px-10">
+      <router-outlet></router-outlet>
+    </div>
+    <shared-footer-admin></shared-footer-admin>
   </div>
 </div>
