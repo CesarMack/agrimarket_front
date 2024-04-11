@@ -11,6 +11,11 @@ import { ToogleComponentComponent } from './session/components/toogle-component/
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environments';
+import { initializeApp } from 'firebase/app';
+import { NotificationComponent } from './notification/notification.component';
+import { messaging } from 'src/configs/firebase.config';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +24,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ToogleComponentComponent,
   ],
   imports: [
+    NotificationComponent,
     CommonModule,
     BrowserModule,
     AppRoutingModule,
@@ -29,10 +35,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [],
+  providers: [{ provide: 'messaging', useValue: messaging }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

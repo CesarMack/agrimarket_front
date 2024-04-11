@@ -16,7 +16,7 @@ import { Months } from '../interfaces/months';
 @Injectable({ providedIn: 'root' })
 export class AdmiService {
   private apiUrl: string =
-    'http://[2806:2f0:1001:45b:41d9:d8cd:d716:6d8d]:8000/api/v1';
+    'http://[2806:2f0:1001:45b:1810:b1fa:fe5c:19b]:8000/api/v1';
 
   constructor(private http: HttpClient) {}
 
@@ -540,7 +540,7 @@ export class AdmiService {
   //API BACKUP
 
   private apiUrlBD: string =
-    'http://[2806:2f0:1001:45b:41d9:d8cd:d716:6d8d]:8000/api/v1/';
+    'http://[2806:2f0:1001:45b:1810:b1fa:fe5c:19b]:8000/api/v1/';
   setBackupDifferential(): Observable<any> {
     const token = localStorage.getItem('user_token');
 
