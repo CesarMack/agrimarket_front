@@ -5,4 +5,9 @@ import { Component } from '@angular/core';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
 })
-export class SidebarComponent {}
+export class SidebarComponent {
+  collapseShow = 'hidden';
+  openMenu(classes: any) {
+    this.collapseShow = classes;
+  }
+}

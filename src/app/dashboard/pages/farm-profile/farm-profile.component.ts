@@ -65,6 +65,8 @@ export class FarmProfileComponent implements OnInit {
             console.error('Error fetching CP data:', error);
           }
         );
+      } else {
+        this.loading = false;
       }
     });
   }

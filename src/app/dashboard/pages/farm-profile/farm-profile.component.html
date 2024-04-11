@@ -114,17 +114,20 @@
   <form
     [formGroup]="farmForm"
     (ngSubmit)="newFarmer()"
-    class="relative flex gap-5 w-full"
+    class="relative flex flex-col lg:flex-row gap-5 w-full"
   >
-    <div class="w-full xl:w-1/2 mb-12 xl:mb-0">
+    <div class="w-full lg:w-1/2 mb-12 xl:mb-0">
       <div
-        class="h-full bg-white shadow-lg rounded pt-5 px-8 pb-8 mb-4 flex flex-col my-2"
+        class="border h-full bg-white shadow-lg rounded pt-5 px-8 pb-8 mb-4 flex flex-col my-2"
       >
-        <h2 class="text-xl font-semibold">Datos Generales</h2>
-        <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
+        <h2
+          class="text-xl font-semibold border-b border-solid border-blueGray-200 mb-5 pb-2"
+        >
+          Datos Generales
+        </h2>
 
-        <div class="-mx-3 md:flex mb-6 mt-5">
-          <div class="md:w-1/2 px-3">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-state"
@@ -137,7 +140,7 @@
             />
           </div>
 
-          <div class="md:w-1/2 px-3">
+          <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-zip"
@@ -149,9 +152,7 @@
               class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
           </div>
-        </div>
-        <div class="-mx-3 md:flex mb-6 mt-5">
-          <div class="w-full px-3">
+          <div class="md:col-span-2">
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-state"
@@ -163,10 +164,7 @@
               class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
           </div>
-        </div>
-
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/2 px-3">
+          <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-state"
@@ -179,7 +177,7 @@
             />
           </div>
 
-          <div class="md:w-1/2 px-3">
+          <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-zip"
@@ -191,9 +189,7 @@
               class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
           </div>
-        </div>
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/2 px-3">
+          <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-state"
@@ -206,7 +202,7 @@
             />
           </div>
 
-          <div class="md:w-1/2 px-3">
+          <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-zip"
@@ -218,9 +214,7 @@
               class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
           </div>
-        </div>
-        <div class="-mx-3 md:flex mb-6">
-          <div class="md:w-1/2 px-3">
+          <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-state"
@@ -233,7 +227,7 @@
             />
           </div>
 
-          <div class="md:w-1/2 px-3">
+          <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-zip"
@@ -249,12 +243,15 @@
       </div>
     </div>
 
-    <div class="xl:w-1/2 mb-12 xl:mb-0">
+    <div class="lg:w-1/2 mb-12 xl:mb-0">
       <div
-        class="h-full w-full relative bg-white shadow-lg rounded pt-5 px-8 pb-8 mb-4 flex flex-col my-2"
+        class="border h-full w-full relative bg-white shadow-lg rounded pt-5 px-8 pb-8 mb-4 flex flex-col my-2"
       >
-        <h2 class="text-xl font-semibold">Foto</h2>
-        <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
+        <h2
+          class="text-xl font-semibold border-b border-solid border-blueGray-200 mb-5 pb-2"
+        >
+          Foto
+        </h2>
 
         <div
           class="px-3 mb-6 md:mb-0 w-full flex items-center h-auto justify-center"
@@ -316,7 +313,6 @@
           class="mt-10 col-start-2 col-end-3 flex flex-col justify-center items-center gap-10"
         >
           <button
-            type="button"
             class="w-1/3 focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
           >
             Guardar

@@ -85,8 +85,11 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
     }
   }
   showProductDetails(product: any) {
+    console.log(product);
+
     // Cambia 'any' por el tipo adecuado para tus datos
     this.selectedProduct = product;
+    console.log(this.selectedProduct.category);
     this.productForm.patchValue({
       productId: this.selectedProduct.id,
       name: this.selectedProduct.name,

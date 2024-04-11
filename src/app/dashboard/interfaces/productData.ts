@@ -4,11 +4,11 @@ export interface ProductData {
 
 export interface Data {
   id: string;
-  user_id: string;
+  user: User;
   product: string;
   description: string;
   price: string;
-  measure: string;
+  measure: Measure;
   stock: string;
   minimum_sale: string;
   cutoff_date: Date;
@@ -17,7 +17,20 @@ export interface Data {
   updated_at: Date;
 }
 
+export interface Measure {
+  id: string;
+  name: string;
+  code: string;
+}
+
 export interface Photo {
   id: string;
   url: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  phone: string;
+  photo: string;
 }

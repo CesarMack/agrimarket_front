@@ -30,6 +30,8 @@ export class DashboardAdmiUnitsComponent implements OnInit {
   ngOnInit(): void {
     this.admiService.getUnits().subscribe(
       (data) => {
+        console.log(data);
+
         this.unitsData = data;
         this.loading = false;
       },

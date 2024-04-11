@@ -81,8 +81,10 @@ export class DetailsProductPageComponent implements OnInit {
       if (params['id']) {
         this.farmerService.getInfoProduct(this.productId).subscribe(
           (data) => {
+            console.log(data);
+            console.log(data.data.measure);
             this.productForm.get('name')?.setValue(data.data.product);
-            this.productForm.get('units')?.setValue(data.data.measure);
+            this.productForm.get('units')?.setValue(data.data.measure.name);
             this.productForm.patchValue({
               minimumSale: data.data.minimum_sale,
             });

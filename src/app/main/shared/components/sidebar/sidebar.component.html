@@ -1,75 +1,91 @@
 <header
   class="container mx-auto bg-white pt-3 px-4 md:px-10 lg:px-28 overflow-x-hidden"
 >
-  <div class="flex items-center justify-between">
-    <div class="">
-      <img class="w-[300px]" src="../assets/horizontal_logo.png" />
-    </div>
-    <div class="flex items-center space-x-6">
-      <ul class="hidden lg:flex items-center space-x-7">
-        <li>
-          <a
-            href="login"
-            class="text-lg text-gray-900 hover:text-blue-800 focus:ring-blue-300 transition ease-in duration-300"
-            >Iniciar sesión</a
-          >
-        </li>
-      </ul>
+  <div class="hidden md:flex items-center justify-between">
+    <a
+      [routerLink]="['/']"
+      class="text-left text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold"
+    >
+      <img src="../assets/horizontal_logo.png" alt="" class="w-[300px]" />
+    </a>
+
+    <div class="flex items-center md:space-x-2 lg:space-x-6">
+      <a
+        href="login"
+        class="w-full text-center px-4 lg:px-6 py-2 md:py-3 text-lg text-gray-900 hover:text-blue-800 focus:ring-blue-300 transition ease-in duration-300 whitespace-nowrap"
+        >Iniciar sesión</a
+      >
+
       <a
         href="register"
-        class="hidden md:block px-4 md:px-6 py-2 md:py-3 bg-[#285429] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 transition rounded-xl text-base md:text-lg font-bold text-white focus:outline-none focus:ring-offset-2 ease-in duration-300"
+        class="w-full text-center md:block px-4 lg:px-6 py-2 md:py-3 bg-[#285429] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 transition rounded-xl text-base md:text-lg font-bold text-white focus:outline-none focus:ring-offset-2 ease-in duration-300"
         >Crear cuenta</a
       >
-      <div class="relative md:hidden">
-        <button
-          aria-label="open Menu"
-          onclick="openSmMenu()"
-          class="focus:outline-none focus:ring-2 focus:ring-gray-800 rounded"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-menu-2"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="#000000"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+    </div>
+  </div>
+  <div
+    class="md:hidden p-4 bg-white border shadow absolute top-2 left-2 right-2 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded"
+    [ngClass]="collapseShow"
+  >
+    <!-- Collapse header -->
+    <div class="block pb-4 mb-4 border-b border-solid border-blueGray-200">
+      <div class="flex flex-wrap">
+        <div class="w-6/12">
+          <a
+            [routerLink]="['/']"
+            class="text-left text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold"
           >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <line x1="4" y1="6" x2="20" y2="6" />
-            <line x1="4" y1="12" x2="20" y2="12" />
-            <line x1="4" y1="18" x2="20" y2="18" />
-          </svg>
-        </button>
-      </div>
-      <div class="relative hidden md:block lg:hidden">
-        <button
-          aria-label="open Menu"
-          onclick="openMenu()"
-          class="focus:outline-none focus:ring-2 focus:ring-gray-800 rounded"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-menu-2"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="#000000"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            <img src="../assets/horizontal_logo.png" alt="" class="w-[300px]" />
+          </a>
+        </div>
+        <div class="w-6/12 flex justify-end">
+          <button
+            type="button"
+            class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+            (click)="openMenu('hidden')"
           >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <line x1="4" y1="6" x2="20" y2="6" />
-            <line x1="4" y1="12" x2="20" y2="12" />
-            <line x1="4" y1="18" x2="20" y2="18" />
-          </svg>
-        </button>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
       </div>
     </div>
+    <div class="flex flex-col items-center justify-center space-x-1">
+      <a
+        href="login"
+        class="w-full text-center px-4 md:px-6 py-2 md:py-3 text-lg text-gray-900 hover:text-blue-800 focus:ring-blue-300 transition ease-in duration-300"
+        >Iniciar sesión</a
+      >
+
+      <a
+        href="register"
+        class="w-full text-center md:block px-4 md:px-6 py-2 md:py-3 bg-[#285429] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 transition rounded-xl text-base md:text-lg font-bold text-white focus:outline-none focus:ring-offset-2 ease-in duration-300"
+        >Crear cuenta</a
+      >
+    </div>
+  </div>
+  <div class="relative md:hidden">
+    <button
+      aria-label="open Menu"
+      (click)="openMenu(' ')"
+      class="focus:outline-none focus:ring-2 focus:ring-gray-800 rounded"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-menu-2"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="#000000"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <line x1="4" y1="6" x2="20" y2="6" />
+        <line x1="4" y1="12" x2="20" y2="12" />
+        <line x1="4" y1="18" x2="20" y2="18" />
+      </svg>
+    </button>
   </div>
 </header>

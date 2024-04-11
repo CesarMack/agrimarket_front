@@ -29,6 +29,8 @@ export class DashboardAdmiCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.admiService.getCategory().subscribe(
       (data) => {
+        console.log(data);
+
         this.categoriesData = data;
         this.loading = false;
       },

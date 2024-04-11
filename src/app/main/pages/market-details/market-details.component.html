@@ -1,20 +1,30 @@
-<section class="min-h-[90vh] px-24">
-  <div class="flex w-full mt-10 h-1/6 bg-[#F6F6F6] rounded-[60px]">
-    <article class="flex w-3/6 mt-10 mb-10 mx-10">
-      <div class="flex flex-col mr-4 gap-4">
+<section class="container mx-auto px-8 md:py-10 min-h-[90vh] lg:px-28">
+  <div
+    class="border flex flex-col md:flex-row w-full mt-5 lg:mt-10 h-1/6 p-5 lg:p-0 bg-gray-50 rounded-md"
+  >
+    <article
+      class="flex flex-col-reverse md:items-end md:justify-end md:w-3/6 md:pr-5 lg:p-5 gap-4 xl:flex-row xl:justify-start xl:items-start"
+    >
+      <div
+        class="w-full flex flex-row md:justify-start gap-4 xl:flex-col xl:h-full"
+      >
         <img
           *ngFor="let photo of productData?.data?.photos; let i = index"
-          class="w-36 h-36 rounded"
+          class="border w-16 h-16 md:h-20 md:w-20 xl:w-36 xl:h-36 rounded"
           [src]="photo.url"
           alt="Photo {{ i + 1 }}"
           (click)="onSelectPhoto(photo.url)"
         />
       </div>
-      <img class="w-full rounded" [src]="selectedPhotoUrl" />
+      <img class="border w-full rounded" [src]="selectedPhotoUrl" />
     </article>
-    <article class="bg-white w-3/6 shadow-lg rounded p-10 mt-10 mb-10 mx-24">
-      <div class="flex justify-between">
-        <h2 class="text-green-700 text-3xl font-semibold">
+    <article
+      class="border bg-white w-full md:w-3/6 shadow-md rounded p-5 mt-5 md:mt-0 xl:p-10 lg:my-5 lg:mx-10"
+    >
+      <div
+        class="flex flex-col xl:flex-row gap-4 justify-between mb-5 pb-2 border-b border-solid border-blueGray-200"
+      >
+        <h2 class="text-3xl font-semibold">
           {{ productData?.data?.product }}
         </h2>
         <h3 class="text-green-700 font-bold text-4xl">
@@ -22,41 +32,12 @@
           }}<span> {{ productData?.data?.measure?.code }}</span>
         </h3>
       </div>
-      <hr class="w-full h-1 mx-auto my-3 bg-gray-300 border-0 rounded" />
-
       <p class="mt-5 max-w-2xl text-base">
         {{ productData?.data?.description }}
       </p>
 
-      <div class="mt-10 flex gap-10">
-        <div class="flex flex-col w-1/2">
-          <p
-            class="block uppercase tracking-wide text-grey-darker text-sm font-bold mb-2"
-          >
-            Detalles
-          </p>
-          <div class="flex justify-between">
-            <p class="block tracking-wide text-sm font-semibold">
-              Fecha de Cosecha:
-            </p>
-            <p>
-              {{ productData?.data?.cutoff_date }}
-            </p>
-          </div>
-          <div class="flex justify-between">
-            <p class="block tracking-wide text-sm font-semibold">
-              Minimo de Venta:
-            </p>
-            <p>
-              {{
-                productData?.data?.minimum_sale +
-                  " " +
-                  productData?.data?.measure?.name
-              }}
-            </p>
-          </div>
-        </div>
-        <div class="w-1/2">
+      <div class="mt-10 flex flex-col gap-10">
+        <div class="w-full">
           <div *ngIf="productData?.data?.estate?.id; else productorSection">
             <p
               class="block uppercase tracking-wide text-grey-darker text-sm font-bold mb-2"
@@ -70,7 +51,6 @@
                 alt="Avatar"
               />
               <div class="px-6 py-4">
-                <!-- Contenido adicional de la tarjeta -->
                 <div class="font-bold text-xl mb-2">
                   {{ productData?.data?.estate?.name }}
                 </div>
@@ -87,7 +67,6 @@
                   alt="Avatar"
                 />
                 <div class="px-6 py-4">
-                  <!-- Contenido adicional de la tarjeta -->
                   <div class="font-bold text-xl mb-2">
                     {{ productData?.data?.user?.name }}
                   </div>
@@ -96,29 +75,63 @@
             </div>
           </ng-template>
         </div>
+        <div class="flex flex-col w-full">
+          <p
+            class="block uppercase tracking-wide text-grey-darker text-sm font-bold mb-2"
+          >
+            Detalles
+          </p>
+          <div class="flex items-center gap-2">
+            <p class="block tracking-wide text-sm font-semibold">
+              Fecha de Cosecha:
+            </p>
+            <p>
+              {{ productData?.data?.cutoff_date }}
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <p class="block tracking-wide text-sm font-semibold">
+              Minimo de Venta:
+            </p>
+            <p>
+              {{
+                productData?.data?.minimum_sale +
+                  " " +
+                  productData?.data?.measure?.name
+              }}
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div class="flex justify-between items-center mt-20">
-        <form [formGroup]="orderForm">
-          <div class="flex flex-col items-center">
-            <label
+      <div class="flex flex-col items-start mt-20">
+        <p
+          class="block uppercase tracking-wide text-grey-darker text-sm font-bold mb-2"
+        >
+          Cantidad
+        </p>
+        <div
+          class="w-full flex flex-col lg:flex-row items-start lg:justify-between lg:items-center"
+        >
+          <form [formGroup]="orderForm">
+            <!--  <label
               class="block uppercase tracking-wide text-grey-darker text-sm font-bold"
               >Cantidad</label
-            >
+            > -->
             <input
               formControlName="quantity"
               type="text"
-              class="w-3/12 h-12 rounded-md border l border-gray-400"
+              class="w-6/12 h-12 px-8 rounded-md border border-gray-400"
             />
-          </div>
-        </form>
+          </form>
 
-        <button
-          class="w-32 h-12 focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
-          (click)="redirectToProductDetail()"
-        >
-          Comprar
-        </button>
+          <button
+            class="w-full lg:w-4/12 h-12 focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 mt-4 lg:mt-0"
+            (click)="redirectToProductDetail()"
+          >
+            Comprar
+          </button>
+        </div>
       </div>
     </article>
   </div>
