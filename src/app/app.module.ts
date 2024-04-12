@@ -19,6 +19,7 @@ import { messaging } from 'src/configs/firebase.config';
 import localeEsMX from '@angular/common/locales/es-MX';
 
 import { registerLocaleData } from '@angular/common';
+import { NgToastModule } from 'ng-angular-popup';
 
 registerLocaleData(localeEsMX);
 @NgModule({
@@ -29,6 +30,7 @@ registerLocaleData(localeEsMX);
     ToogleComponentComponent,
   ],
   imports: [
+    NgToastModule,
     NotificationComponent,
     CommonModule,
     BrowserModule,

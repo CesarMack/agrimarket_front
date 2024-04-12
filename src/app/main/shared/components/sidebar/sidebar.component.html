@@ -11,12 +11,14 @@
 
     <div class="flex items-center md:space-x-2 lg:space-x-6">
       <a
+        *ngIf="!user"
         href="login"
         class="w-full text-center px-4 lg:px-6 py-2 md:py-3 text-lg text-gray-900 hover:text-blue-800 focus:ring-blue-300 transition ease-in duration-300 whitespace-nowrap"
         >Iniciar sesión</a
       >
 
       <a
+        *ngIf="!user"
         href="register"
         class="w-full text-center md:block px-4 lg:px-6 py-2 md:py-3 bg-[#285429] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 transition rounded-xl text-base md:text-lg font-bold text-white focus:outline-none focus:ring-offset-2 ease-in duration-300"
         >Crear cuenta</a
@@ -50,17 +52,22 @@
       </div>
     </div>
     <div class="flex flex-col items-center justify-center space-x-1">
+      <!-- Show these buttons only if the user is not logged in -->
       <a
+        *ngIf="!user"
         href="login"
         class="w-full text-center px-4 md:px-6 py-2 md:py-3 text-lg text-gray-900 hover:text-blue-800 focus:ring-blue-300 transition ease-in duration-300"
-        >Iniciar sesión</a
       >
+        Iniciar sesión
+      </a>
 
       <a
+        *ngIf="!user"
         href="register"
         class="w-full text-center md:block px-4 md:px-6 py-2 md:py-3 bg-[#285429] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 transition rounded-xl text-base md:text-lg font-bold text-white focus:outline-none focus:ring-offset-2 ease-in duration-300"
-        >Crear cuenta</a
       >
+        Crear cuenta
+      </a>
     </div>
   </div>
   <div class="relative md:hidden">

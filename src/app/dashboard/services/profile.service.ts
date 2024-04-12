@@ -9,8 +9,7 @@ import { Farm } from '../interfaces/farm';
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
   private apiUrlCP: string = 'https://api.copomex.com/query';
-  private apiUrl: string =
-    'http://[2806:2f0:1001:45b:1810:b1fa:fe5c:19b]:8000/api/v1';
+  private apiUrl: string = 'http://agrimarketapi.zapto.org:8000/api/v1';
 
   constructor(private http: HttpClient) {}
 

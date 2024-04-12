@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgToastService } from 'ng-angular-popup';
 import { messaging } from 'src/configs/firebase.config';
 import { environment } from 'src/environments/environments';
 /*
@@ -14,9 +15,9 @@ import { environment } from 'src/environments/environments';
   standalone: true,
   imports: [],
   template: ``,
-  styleUrl: './notification.component.css',
 })
 export class NotificationComponent implements OnInit {
+  constructor(private toast: NgToastService) {}
   ngOnInit(): void {
     this.requestPermission();
     this.listen();
@@ -42,6 +43,9 @@ export class NotificationComponent implements OnInit {
   listen() {
     messaging.onMessage((incomingMessage) => {
       console.log(incomingMessage);
+
+      console.log(incomingMessage.notification.title);
+      console.log(incomingMessage.notification.body);
     });
   }
 }

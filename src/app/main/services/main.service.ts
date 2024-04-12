@@ -5,8 +5,7 @@ import { Catalog } from '../interfaces/catalog';
 import { Product } from '../interfaces/product';
 @Injectable({ providedIn: 'root' })
 export class MainService {
-  private apiUrl: string =
-    'http://[2806:2f0:1001:45b:1810:b1fa:fe5c:19b]:8000/api/v1';
+  private apiUrl: string = 'http://agrimarketapi.zapto.org:8000/api/v1';
 
   constructor(private http: HttpClient) {}
 
