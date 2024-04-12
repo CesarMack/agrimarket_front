@@ -63,7 +63,7 @@ export class AdmiService {
 
     return this.http
       .get<Months>(
-        `https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/semanas`
+        `http://agrimarketapi.zapto.org:8001/admin/predecirOrdenes/semanas`
       )
       .pipe(
         catchError((e) => {
@@ -80,7 +80,7 @@ export class AdmiService {
 
     return this.http
       .get<Months>(
-        `https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/meses`
+        `http://agrimarketapi.zapto.org:8001/admin/predecirOrdenes/meses`
       )
       .pipe(
         catchError((e) => {
