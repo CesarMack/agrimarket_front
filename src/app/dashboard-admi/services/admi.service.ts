@@ -46,7 +46,7 @@ export class AdmiService {
 
     return this.http
       .get<Days>(
-        `https://agrimarketapipython-production.up.railway.app/admin/predecirOrdenes/dias`
+        `http://agrimarketapi.zapto.org:8001/admin/predecirOrdenes/dias`
       )
       .pipe(
         catchError((e) => {
