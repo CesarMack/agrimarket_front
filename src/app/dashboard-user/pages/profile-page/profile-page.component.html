@@ -1,4 +1,53 @@
 <div
+  *ngIf="loading"
+  class="flex justify-center items-center bg-gray-700 absolute top-0 bottom-0 left-0 right-0 z-40 opacity-75"
+>
+  <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+  <svg
+    width="38"
+    height="38"
+    viewBox="0 0 38 38"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+        <stop stop-color="#fff" stop-opacity="0" offset="0%" />
+        <stop stop-color="#fff" stop-opacity=".631" offset="63.146%" />
+        <stop stop-color="#fff" offset="100%" />
+      </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+      <g transform="translate(1 1)">
+        <path
+          d="M36 18c0-9.94-8.06-18-18-18"
+          id="Oval-2"
+          stroke="url(#a)"
+          stroke-width="2"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="0.9s"
+            repeatCount="indefinite"
+          />
+        </path>
+        <circle fill="#fff" cx="36" cy="18" r="1">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="0.9s"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </g>
+    </g>
+  </svg>
+</div>
+<div
   role="alert"
   id="alert"
   [ngClass]="
@@ -61,19 +110,23 @@
     </div>
   </div>
 </div>
-<section class="container mx-auto px-8 md:py-10 min-h-[90vh] lg:px-28">
+<div class="flex flex-wrap mt-12">
   <div
-    class="border p-5 flex flex-col gap-5 w-full md:mt-10 h-1/6 bg-gray-50 rounded-md"
+    class="relative w-full flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg pt-5"
   >
-    <article class="border bg-white shadow-md rounded p-5 md:p-8 lg:p-10">
-      <h2
-        class="text-xl font-semibold pb-2 border-b border-solid border-blueGray-200"
-      >
-        Datos Generales
-      </h2>
+    <form
+      [formGroup]="profileForm"
+      (ngSubmit)="updateInfoUser()"
+      class="flex flex-col lg:flex-row gap-10 pt-5 px-8 pb-8 mb-4"
+    >
+      <div class="w-full lg:w-1/2">
+        <h2
+          class="text-xl font-semibold border-b border-solid border-blueGray-200 mb-5 pb-2"
+        >
+          Datos Generales
+        </h2>
 
-      <form [formGroup]="profileForm" class="mt-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
@@ -98,6 +151,7 @@
               class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
           </div>
+
           <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
@@ -122,7 +176,8 @@
               class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
           </div>
-          <div>
+
+          <div class="lg:col-span-2">
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
               for="grid-state"
@@ -133,6 +188,7 @@
               class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
           </div>
+
           <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
@@ -157,6 +213,7 @@
               class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
           </div>
+
           <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
@@ -180,6 +237,7 @@
               class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
             />
           </div>
+
           <div>
             <label
               class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
@@ -204,153 +262,76 @@
             />
           </div>
         </div>
-      </form>
-    </article>
-    <article
-      class="border bg-white shadow-md rounded pt-5 md:pt-8 lg:pt-10 pb-10"
-    >
-      <div class="px-5 md:px-8 lg:px-10">
-        <h2
-          class="text-xl font-semibold pb-2 border-b border-solid border-blueGray-200"
-        >
-          Datos de la Orden
-        </h2>
       </div>
-      <div class="mt-10 overflow-x-auto px-0">
-        <table class="w-full min-w-max table-auto text-left">
-          <thead>
-            <tr class="uppercase">
-              <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                <p
-                  class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
-                >
-                  Foto
-                </p>
-              </th>
-              <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                <p
-                  class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
-                >
-                  Producto
-                </p>
-              </th>
-              <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                <p
-                  class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
-                >
-                  Fecha de corte
-                </p>
-              </th>
-              <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                <p
-                  class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
-                >
-                  Precio
-                </p>
-              </th>
-              <th class="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                <p
-                  class="block antialiased font-sans text-sm text-blue-gray-900 font-normal leading-none opacity-70"
-                >
-                  Cantidad
-                </p>
-              </th>
-            </tr>
-          </thead>
+      <div class="w-full lg:w-1/2">
+        <h2
+          class="text-xl font-semibold border-b border-solid border-blueGray-200 mb-5 pb-2"
+        >
+          Foto de Perfil
+        </h2>
 
-          <tbody>
-            <tr>
-              <td
-                class="border-t-0 font-bold align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+        <div
+          class="px-3 mb-6 md:mb-0 w-full h-1/2 flex items-center justify-center"
+        >
+          <div
+            x-data="{photoName: null, photoPreview: null}"
+            class="w-full col-span-6 ml-2 sm:col-span-4 md:mr-3"
+          >
+            <!-- Photo File Input -->
+            <input
+              type="file"
+              class="hidden"
+              x-ref="photo"
+              x-on:change="
+                                photoName = $refs.photo.files[0].name;
+                                const reader = new FileReader();
+                                reader.onload = (e) => {
+                                    photoPreview = e.target.result;
+                                };
+                                reader.readAsDataURL($refs.photo.files[0]);
+            "
+              multiple
+              (change)="onFileSelected($event)"
+            />
+
+            <div class="w-full grid grid-cols-2 gap-5">
+              <!-- New Profile Photo Preview -->
+              <div
+                class="relative mx-auto w-[150px] h-[150px]"
+                *ngIf="
+                  selectedImage.file != null || selectedImage.previewUrl != null
+                "
               >
                 <img
-                  class="w-32 h-32 object-cover rounded"
-                  [src]="
-                    selectedPhotoUrl
-                      ? selectedPhotoUrl
-                      : '../assets/vegetables.jpg'
-                  "
+                  class="rounded-lg w-full h-full border"
+                  *ngIf="selectedImage.previewUrl"
+                  [src]="selectedImage.previewUrl"
+                  alt="Vista previa"
                 />
-              </td>
-              <td
-                class="border-t-0 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
-              >
-                {{ productData?.data?.product }}
-              </td>
-              <td
-                class="border-t-0 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
-              >
-                {{ productData?.data?.cutoff_date }}
-              </td>
-              <td
-                class="border-t-0 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
-              >
-                {{
-                  productData?.data?.price +
-                    " " +
-                    productData?.data?.measure?.name
-                }}
-              </td>
-              <td
-                class="border-t-0 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
-              >
-                {{ quantity }}
-              </td>
-            </tr>
-            <tr>
-              <td
-                class="border-t-0 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
-                colspan="3"
-              ></td>
-              <td
-                class="border-t align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-bold"
-              >
-                Total
-              </td>
-              <td
-                class="border-t align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-bold"
-              >
-                ${{ total }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                <button
+                  class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-1.5 absolute bottom-[-10px] left-1/2 transform -translate-x-1/2"
+                  (click)="removeImage()"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="mt-5 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-400 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
+              x-on:click.prevent="$refs.photo.click()"
+            >
+              Seleccionar fotos
+            </button>
+          </div>
+        </div>
 
-      <div class="flex justify-center w-full mt-28 px-5">
         <button
-          (click)="createOrder()"
-          class="w-1/2 lg:w-1/3 mx-auto focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+          class="w-1/3 mx-auto lg:mt-5 focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
         >
-          Confirmar
+          Guardar
         </button>
       </div>
-    </article>
+    </form>
   </div>
-</section>
-<!--
-<section class="min-h-[90vh] px-24">
-  <div class="flex w-full mt-10 h-1/6 bg-[#F6F6F6] rounded-[60px]">
-    <article class="bg-white shadow-lg rounded-3xl p-10 mt-10 mb-10 mx-24">
-      <h2>DAtos de la orden</h2>
-
-      <div>
-        <img [src]="selectedPhotoUrl" />
-        <div>
-          <h2>{{ productData?.data?.product }}</h2>
-          <h2>Cantidad: {{ quantity }}</h2>
-        </div>
-        <div>
-          <h2>
-            ${{ productData?.data?.price }}
-            {{ productData?.data?.measure?.name }}
-          </h2>
-        </div>
-      </div>
-      <hr />
-      <h2>Total:${{ total }}</h2>
-    </article>
-    <button>Confirmar Orden</button>
-  </div>
-</section>
- -->
+</div>

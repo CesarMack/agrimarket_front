@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -15,7 +15,12 @@ import { environment } from '../environments/environments';
 import { initializeApp } from 'firebase/app';
 import { NotificationComponent } from './notification/notification.component';
 import { messaging } from 'src/configs/firebase.config';
+//Configuración del locale de la app
+import localeEsMX from '@angular/common/locales/es-MX';
 
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeEsMX);
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +43,10 @@ import { messaging } from 'src/configs/firebase.config';
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [{ provide: 'messaging', useValue: messaging }],
+  providers: [
+    { provide: 'messaging', useValue: messaging },
+    { provide: LOCALE_ID, useValue: 'es-MX' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

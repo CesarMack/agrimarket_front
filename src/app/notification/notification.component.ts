@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { messaging } from 'src/configs/firebase.config';
 import { environment } from 'src/environments/environments';
-
+/*
 @Component({
   selector: 'app-notification',
   standalone: true,
   imports: [],
   template: ` <p>notification works!</p> `,
+  styleUrl: './notification.component.css',
+}) */
+@Component({
+  selector: 'app-notification',
+  standalone: true,
+  imports: [],
+  template: ``,
   styleUrl: './notification.component.css',
 })
 export class NotificationComponent implements OnInit {

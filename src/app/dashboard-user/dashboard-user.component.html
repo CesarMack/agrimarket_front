@@ -1,8 +1,11 @@
-<div class="flex">
-  <header>
-    <shared-nav-bar></shared-nav-bar>
-  </header>
-  <main class="flex-grow">
-    <router-outlet></router-outlet>
-  </main>
+<div class="relative flex h-screen flex-col md:flex-row">
+  <shared-sidebar></shared-sidebar>
+  <div class="relative flex flex-col w-full overflow-y-auto">
+    <span class="absolute left-0 right-0 h-52 bg-[#f1a93d] -z-10"></span>
+    <shared-header-stats></shared-header-stats>
+    <div class="flex-1 px-4 md:px-10">
+      <router-outlet></router-outlet>
+    </div>
+    <shared-footer></shared-footer>
+  </div>
 </div>

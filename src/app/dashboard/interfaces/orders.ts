@@ -33,4 +33,5 @@ export interface Product {
   name: string;
   cutoff_date: Date;
   description: string;
+  photo: string;
 }

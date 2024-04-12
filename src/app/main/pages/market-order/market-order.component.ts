@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MainService } from '../../services/main.service';
 import { Product } from '../../interfaces/product';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -15,8 +15,10 @@ export class MarketOrderComponent implements OnInit {
   price: string | null = '0';
   quantity: string | null = '0';
   total: string | null = '0';
+  alert: boolean = true;
   profileForm: FormGroup;
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private mainService: MainService,
     private formBuilder: FormBuilder,
@@ -79,6 +81,32 @@ export class MarketOrderComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching dashboard data:', error);
+      }
+    );
+  }
+
+  closeAlert() {
+    this.alert = !this.alert;
+  }
+  createOrder() {
+    console.log('Creating order');
+
+    const orderData = {
+      product_id: this.productData?.data.id,
+      quantity: this.quantity,
+    };
+
+    this.mainService.createOrder(orderData).subscribe(
+      (data) => {
+        console.log('Order created:', data);
+        this.alert = false;
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 5000);
+      },
+      (error) => {
+        console.error('Error creating order:', error);
+        alert('Error creating order');
       }
     );
   }

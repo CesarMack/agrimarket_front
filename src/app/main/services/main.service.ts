@@ -69,4 +69,23 @@ export class MainService {
         })
       );
   }
+  createOrder(data: any): Observable<any> {
+    const token = localStorage.getItem('user_token');
+
+    if (!token) {
+      throw new Error('Token not available');
+    }
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .post<any>(`${this.apiUrl}/clients/orders`, data, {
+        headers,
+      })
+      .pipe(
+        catchError((e) => {
+          throw new Error('Authentication error');
+        })
+      );
+  }
 }
