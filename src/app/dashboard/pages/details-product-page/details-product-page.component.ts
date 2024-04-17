@@ -81,8 +81,9 @@ export class DetailsProductPageComponent implements OnInit {
       if (params['id']) {
         this.farmerService.getInfoProduct(this.productId).subscribe(
           (data) => {
+            /*
             console.log(data);
-            console.log(data.data.measure);
+            console.log(data.data.measure); */
             this.productForm.get('name')?.setValue(data.data.product);
             this.productForm.get('units')?.setValue(data.data.measure.name);
             this.productForm.patchValue({
@@ -194,7 +195,8 @@ export class DetailsProductPageComponent implements OnInit {
         (response) => {
           this.uploadImages(response)
             .then(() => {
-              console.log('All images uploaded successfully.');
+              /*
+              console.log('All images uploaded successfully.'); */
               this.loading = false;
               this.alert = true; // Esperar dos segundos antes de redirigir
               setTimeout(() => {
@@ -202,12 +204,14 @@ export class DetailsProductPageComponent implements OnInit {
               }, 2000);
             })
             .catch((error) => {
-              console.log('Error uploading images:', error);
+              /*
+              console.log('Error uploading images:', error); */
               this.loading = false;
             });
         },
         (error) => {
-          console.log(error);
+          /*
+          console.log(error); */
         }
       );
     } else {
@@ -215,7 +219,8 @@ export class DetailsProductPageComponent implements OnInit {
         (response) => {
           this.uploadImages(response)
             .then(() => {
-              console.log('All images uploaded successfully.');
+              /*
+              console.log('All images uploaded successfully.'); */
               this.loading = false;
               this.alert = true; // Esperar dos segundos antes de redirigir
               setTimeout(() => {
@@ -223,19 +228,22 @@ export class DetailsProductPageComponent implements OnInit {
               }, 2000);
             })
             .catch((error) => {
-              console.log('Error uploading images:', error);
+              /*
+              console.log('Error uploading images:', error); */
               this.loading = false;
             });
         },
         (error) => {
-          console.log(error);
+          /*
+          console.log(error); */
         }
       );
     }
   }
 
   async uploadImages(id: string): Promise<void> {
-    console.log('Starting image upload...');
+    /*
+    console.log('Starting image upload...'); */
 
     // Obtén las fotos y súbelas una por una
     for (const { file } of this.selectedImages) {
@@ -243,10 +251,11 @@ export class DetailsProductPageComponent implements OnInit {
         try {
           const response = await lastValueFrom(
             this.farmerService.uploadPhoto(file, id)
-          );
-          console.log('Photo uploaded:', response);
+          ); /*
+          console.log('Photo uploaded:', response); */
         } catch (error) {
-          console.log('Error uploading photo:', error);
+          /*
+          console.log('Error uploading photo:', error); */
         }
       }
     }

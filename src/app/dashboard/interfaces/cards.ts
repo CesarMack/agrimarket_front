@@ -7,7 +7,18 @@ export interface Data {
   pending: number;
   canceled: number;
   products: number;
+  completed_orders: number;
+  total_orders: number;
+  last_three_orders: LastThreeOrder[];
+}
+export interface LastThreeOrder {
+  id: string;
+  name: string;
+  quantity: string;
+  date: Date;
+} /*
   completed_orders: Orders;
+  total_orders: Orders;
   pending_orders: Orders;
   canceled_orders: Orders;
   orders_last_week: OrdersLastWeek;
@@ -15,20 +26,15 @@ export interface Data {
   orders_three_months: OrdersThreeMonths;
   orders_last_six_months: OrdersLastSixMonths;
   last_three_orders: LastThreeOrder[];
-}
-
+} */
+/*
 export interface Orders {
   week: number;
   month: number;
   six_months: number;
 }
 
-export interface LastThreeOrder {
-  id: string;
-  name: string;
-  quantity: string;
-  date: Date;
-}
+
 
 export interface OrdersLastMonth {
   'Semana 1': number;
@@ -61,3 +67,4 @@ export interface OrdersThreeMonths {
   September: number;
   August: number;
 }
+ */

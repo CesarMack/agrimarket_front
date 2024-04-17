@@ -24,13 +24,15 @@ export class DetailsOrderPageComponent implements OnInit {
       if (params['id']) {
         this.farmerService.getOrder(params['id']).subscribe(
           (response) => {
+            /*
             console.log(response);
-
+ */
             this.orderData = response;
             this.loading = false;
           },
           (error) => {
-            console.log(error);
+            /*
+            console.log(error); */
             this.loading = false;
           }
         );

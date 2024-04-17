@@ -21,39 +21,52 @@ export class DashboardAdmiPageComponent implements OnInit {
   public activeProducts!: string;
   public pendingOrders!: string;
 
-  constructor(private admiService: AdmiService, private router: Router) {}
+  public admins!: string;
+  public clients!: string;
+  public farmers!: string;
+  public usuariosTotales!: string;
 
+  constructor(private admiService: AdmiService, private router: Router) {}
 
   ngOnInit(): void {
     this.admiService.getDashboardCard().subscribe((response) => {
+      /*
       console.log('Respuesta Card');
-      console.log(response);
+      console.log(response); */ /*
       this.dataCard = response;
       this.activeProducts = response.data.active_products.toString();
       this.completeOrders = response.data.new_users.toString();
       this.pendingOrders = response.data.total_users.toString();
-      this.canceledOrders = response.data.total_orders.toString();
+      this.canceledOrders = response.data.total_orders.toString(); */
+
+      this.usuariosTotales = response.data.total.toString();
+      this.admins = response.data.admins.toString();
+      this.clients = response.data.clients.toString();
+      this.farmers = response.data.farmers.toString();
+
       // Inicializar gráficas con datos predeterminados
       this.initializeCharts();
     });
- 
 
-    this.admiService.getDashboardDays().subscribe((response)=>{
-      console.log(response);
-      this.days= response;
-      this.initializeCharts()
-      
-    }, (error)=>{
-      console.log(error);
-      
-    })
+    this.admiService.getDashboardDays().subscribe(
+      (response) => {
+        /*
+        console.log(response);
+        this.days = response; */
+        this.initializeCharts();
+      },
+      (error) => {
+        /*
+        console.log(error); */
+      }
+    );
   }
 
   initializeCharts() {
     // Obtén las etiquetas y datos desde tu JSON
     const labels = Object.keys(this.days!);
     const dataValues = Object.values(this.days!);
-     
+
     const initialData = {
       labels: labels,
       datasets: [
@@ -82,92 +95,99 @@ export class DashboardAdmiPageComponent implements OnInit {
   }
 
   daysFilter() {
-    this.admiService.getDashboardDays().subscribe((response)=>{
-      console.log(response);
-    // Obtén las etiquetas y datos desde tu JSON
-    const days = Object.keys(response);
-    const dataValues = Object.values(response); 
+    this.admiService.getDashboardDays().subscribe(
+      (response) => {
+        /*
+        console.log(response); */
+        // Obtén las etiquetas y datos desde tu JSON
+        const days = Object.keys(response);
+        const dataValues = Object.values(response);
 
-    const newData = {
-      labels: days,
-      datasets: [
-        {
-          backgroundColor: '#4c51bf',
-          label: 'Órdenes',
-          data: dataValues,
-          fill: false,
-          borderColor: '#4c51bf',
-          tension: 0.1,
-        },
-      ],
-    };
+        const newData = {
+          labels: days,
+          datasets: [
+            {
+              backgroundColor: '#4c51bf',
+              label: 'Órdenes',
+              data: dataValues,
+              fill: false,
+              borderColor: '#4c51bf',
+              tension: 0.1,
+            },
+          ],
+        };
 
-    this.updateChartData(newData);
-      
-    }, (error)=>{
-      console.log(error);
-      
-    })
-
+        this.updateChartData(newData);
+      },
+      (error) => {
+        /*
+        console.log(error); */
+      }
+    );
   }
 
   monthFilter() {
+    this.admiService.getDashboardMonths().subscribe(
+      (response) => {
+        /*
+        console.log(response); */
+        // Obtén las etiquetas y datos desde tu JSON
+        const month = Object.keys(response);
+        const dataValues = Object.values(response);
 
-    this.admiService.getDashboardMonths().subscribe((response)=>{
-      console.log(response);
-    // Obtén las etiquetas y datos desde tu JSON
-    const month = Object.keys(response);
-    const dataValues = Object.values(response); 
+        const newData = {
+          labels: month,
+          datasets: [
+            {
+              backgroundColor: '#4c51bf',
+              label: 'Órdenes',
+              data: dataValues,
+              fill: false,
+              borderColor: '#4c51bf',
+              tension: 0.1,
+            },
+          ],
+        };
 
-    const newData = {
-      labels: month,
-      datasets: [
-        {
-          backgroundColor: '#4c51bf',
-          label: 'Órdenes',
-          data: dataValues,
-          fill: false,
-          borderColor: '#4c51bf',
-          tension: 0.1,
-        },
-      ],
-    };
-
-    this.updateChartData(newData);
-      
-    }, (error)=>{
-      console.log(error);
-      
-    }) 
- 
+        this.updateChartData(newData);
+      },
+      (error) => {
+        /*
+        console.log(error); */
+      }
+    );
   }
 
-  weeksFilter() {  this.admiService.getDashboardWeeks().subscribe((response)=>{
-    console.log(response);
-  // Obtén las etiquetas y datos desde tu JSON
-  const weeks = Object.keys(response);
-  const dataValues = Object.values(response); 
+  weeksFilter() {
+    this.admiService.getDashboardWeeks().subscribe(
+      (response) => {
+        /*
+        console.log(response); */
+        // Obtén las etiquetas y datos desde tu JSON
+        const weeks = Object.keys(response);
+        const dataValues = Object.values(response);
 
-  const newData = {
-    labels: weeks,
-    datasets: [
-      {
-        backgroundColor: '#4c51bf',
-        label: 'Órdenes',
-        data: dataValues,
-        fill: false,
-        borderColor: '#4c51bf',
-        tension: 0.1,
+        const newData = {
+          labels: weeks,
+          datasets: [
+            {
+              backgroundColor: '#4c51bf',
+              label: 'Órdenes',
+              data: dataValues,
+              fill: false,
+              borderColor: '#4c51bf',
+              tension: 0.1,
+            },
+          ],
+        };
+
+        this.updateChartData(newData);
       },
-    ],
-  };
-
-  this.updateChartData(newData);
-    
-  }, (error)=>{
-    console.log(error);
-    
-  })  
+      (error) => {
+        /*
+        console.log(error); */
+      }
+    );
   } // Método para redirigir a la página de detalles del producto
   redirectToDetails(id: string) {
     // Utiliza el servicio Router para navegar a la nueva ventana

@@ -14,7 +14,9 @@ export class RegistrationPageComponent {
 
   loader: boolean = false;
   showSuccessMessage: boolean = false;
-  showErrorMessage: boolean = false;
+  showFieldRequiredMessage = false;
+  errorMessage: string = '';
+  alert: boolean = false;
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder
@@ -26,6 +28,10 @@ export class RegistrationPageComponent {
       password: ['', Validators.required],
       userRole: ['', Validators.required],
     });
+  }
+
+  closeAlert() {
+    this.alert = !this.alert;
   }
 
   selectOption(role: string): void {
@@ -62,13 +68,19 @@ export class RegistrationPageComponent {
           }, 3000);
         },
         (error) => {
-          this.loader = false;
-          this.showErrorMessage = true; // Mostrar mensaje de error
+          this.errorMessage = error.message;
+          // Mostrar mensaje de error en el HTML
+          this.authError = true;
           setTimeout(() => {
-            this.showErrorMessage = false; // Ocultar mensaje de error después de un tiempo
-          }, 3000);
+            this.authError = false;
+          }, 2000);
         }
       );
+    } else {
+      this.showFieldRequiredMessage = true;
+      setTimeout(() => {
+        this.showFieldRequiredMessage = false;
+      }, 2000);
     }
   }
 }

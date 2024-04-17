@@ -56,7 +56,8 @@ export class MarketOrderComponent implements OnInit {
             this.total = (quantityNumeric * priceNumeric).toString();
           },
           (error) => {
-            console.log('Error fetching DATA', error);
+            /*
+            console.log('Error fetching DATA', error); */
           }
         );
       }
@@ -89,8 +90,9 @@ export class MarketOrderComponent implements OnInit {
     this.alert = !this.alert;
   }
   createOrder() {
+    /*
     console.log('Creating order');
-
+ */
     const orderData = {
       product_id: this.productData?.data.id,
       quantity: this.quantity,
@@ -98,7 +100,8 @@ export class MarketOrderComponent implements OnInit {
 
     this.mainService.createOrder(orderData).subscribe(
       (data) => {
-        console.log('Order created:', data);
+        /*
+        console.log('Order created:', data); */
         this.alert = false;
         setTimeout(() => {
           this.router.navigate(['/dashboard']);

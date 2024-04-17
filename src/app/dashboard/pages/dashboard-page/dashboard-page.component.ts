@@ -23,18 +23,32 @@ export class DashboardPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.farmerService.getDashboardCard().subscribe((response) => {
-      console.log('Respuesta CArd');
       console.log(response);
+
+      /*
+      console.log('Respuesta CArd');
+      console.log(response); */
       this.dataCard = response;
       this.activeProducts = response.data.products.toString();
-      this.completeOrders = response.data.completed.toString();
-      this.pendingOrders = response.data.pending.toString();
-      this.canceledOrders = response.data.canceled.toString();
+      this.completeOrders = response.data.completed_orders.toString();
+      // Verificar si response.data.pending está vacío
+      if (!response.data.pending) {
+        this.pendingOrders = '0'; // Si está vacío, establecerlo en "0"
+      } else {
+        this.pendingOrders = response.data.pending.toString(); // Si no está vacío, asignar su valor
+      }
+
+      // Verificar si response.data.canceled está vacío
+      if (!response.data.canceled) {
+        this.canceledOrders = '0'; // Si está vacío, establecerlo en "0"
+      } else {
+        this.canceledOrders = response.data.canceled.toString(); // Si no está vacío, asignar su valor
+      }
       // Inicializar gráficas con datos predeterminados
-      this.initializeCharts();
+      /*   this.initializeCharts(); */
     });
   }
-
+  /*
   initializeCharts() {
     // Obtén las etiquetas y datos desde tu JSON
     const three_months = Object.keys(this.dataCard?.data.orders_three_months!);
@@ -147,7 +161,7 @@ export class DashboardPageComponent implements OnInit {
       this.dataCard?.data.pending_orders.six_months.toString()!;
     this.canceledOrders =
       this.dataCard?.data.canceled_orders.six_months.toString()!;
-  } // Método para redirigir a la página de detalles del producto
+  } */ // Método para redirigir a la página de detalles del producto
   redirectToDetails(id: string) {
     // Utiliza el servicio Router para navegar a la nueva ventana
     this.router.navigate(['/farmer/orders/details/', id]);

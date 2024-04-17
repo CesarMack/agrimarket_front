@@ -29,7 +29,8 @@ export class DashboardAdmiCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.admiService.getCategory().subscribe(
       (data) => {
-        console.log(data);
+        /*
+        console.log(data); */
 
         this.categoriesData = data;
         this.loading = false;
@@ -152,7 +153,8 @@ export class DashboardAdmiCategoryComponent implements OnInit {
         }, 3000);
       },
       (error) => {
-        console.log(error);
+        /*
+        console.log(error); */
       }
     );
   }

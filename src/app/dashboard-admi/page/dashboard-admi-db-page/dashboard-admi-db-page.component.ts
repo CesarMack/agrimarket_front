@@ -57,8 +57,8 @@ export class DashboardAdmiDbPageComponent implements OnInit {
         }, 3000); // Asignamos los datos de suggestions
       },
       (error) => {
-        console.error('Error fetching user data:', error);
-        console.log(error);
+        console.error('Error fetching user data:', error); /*
+        console.log(error); */
         this.loader = false;
         this.showErrorMessage = true; // Mostrar mensaje de error
         setTimeout(() => {
@@ -71,7 +71,8 @@ export class DashboardAdmiDbPageComponent implements OnInit {
   updateBackupDifferentialData(): void {
     this.admiService.getBackupDifferential().subscribe(
       (data) => {
-        console.log(data);
+        /*
+        console.log(data); */
 
         this.backupsData = data; // Asignamos los datos de suggestions
       },
@@ -92,9 +93,9 @@ export class DashboardAdmiDbPageComponent implements OnInit {
         }, 3000);
       },
       (error) => {
-        this.updateBackupDifferentialData();
+        this.updateBackupDifferentialData(); /*
         console.error('Error fetching user data:', error);
-        console.log(error);
+        console.log(error); */
         this.loader = false;
         this.showErrorMessage = true; // Mostrar mensaje de error
         setTimeout(() => {
@@ -118,8 +119,8 @@ export class DashboardAdmiDbPageComponent implements OnInit {
         }, 3000);
       },
       (error) => {
-        console.error('Error fetching user data:', error);
-        console.log(error);
+        console.error('Error fetching user data:', error); /*
+        console.log(error); */
         this.loader = false;
         this.showErrorMessage = true; // Mostrar mensaje de error
         setTimeout(() => {
@@ -140,8 +141,8 @@ export class DashboardAdmiDbPageComponent implements OnInit {
         }, 3000);
       },
       (error) => {
-        console.error('Error fetching user data:', error);
-        console.log(error);
+        console.error('Error fetching user data:', error); /*
+        console.log(error); */
         this.loader = false;
         this.showErrorMessage = true; // Mostrar mensaje de error
         setTimeout(() => {
@@ -177,7 +178,8 @@ export class DashboardAdmiDbPageComponent implements OnInit {
   }
 
   confirmAction() {
-    console.log(`Acción ${this.action} confirmada`);
+    /*
+    console.log(`Acción ${this.action} confirmada`); */
 
     if (this.action === 'eliminar') {
       this.deleteBdBackup(this.nameBackup!);

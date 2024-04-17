@@ -248,7 +248,8 @@ export class AdmiService {
   }
 
   setProductType(name: String, category: String): Observable<any> {
-    console.log(name, category);
+    /*
+    console.log(name, category); */
 
     const token = localStorage.getItem('user_token');
     const data = {

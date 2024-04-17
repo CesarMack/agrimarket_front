@@ -96,7 +96,8 @@ export class FarmProfileComponent implements OnInit {
           this.alert = false;
         },
         (error) => {
-          console.log(error);
+          /*
+          console.log(error); */
         }
       );
     } else {
@@ -106,7 +107,8 @@ export class FarmProfileComponent implements OnInit {
           this.alert = false;
         },
         (error) => {
-          console.log(error);
+          /*
+          console.log(error); */
           this.loading = false;
         }
       );

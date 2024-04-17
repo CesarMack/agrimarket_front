@@ -32,14 +32,16 @@ export class MarketDetailsComponent implements OnInit {
       if (params['id']) {
         this.mainService.getProductData(params['id']).subscribe(
           (response) => {
-            console.log(response);
+            /*
+            console.log(response); */
 
             this.productData = response;
 
             this.selectedPhotoUrl = response.data.photos[0].url;
           },
           (error) => {
-            console.log('Error fetching DATA', error);
+            /*
+            console.log('Error fetching DATA', error); */
           }
         );
       }

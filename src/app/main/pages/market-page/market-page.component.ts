@@ -29,8 +29,8 @@ export class MarketPageComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-
-        console.log('Error with catalog', error);
+        /*
+        console.log('Error with catalog', error); */
       }
     );
   }
@@ -54,7 +54,8 @@ export class MarketPageComponent implements OnInit {
         this.loading = false;
       },
       (error) => {
-        console.log('Error with catalog', error);
+        /*
+        console.log('Error with catalog', error); */
       }
     );
   }

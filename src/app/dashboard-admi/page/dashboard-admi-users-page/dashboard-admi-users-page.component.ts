@@ -26,8 +26,8 @@ export class DashboardAdmiUsersPageComponent implements OnInit {
     this.admiService.getUsers().subscribe(
       (data) => {
         this.usersData = data;
-        this.loading = false;
-        console.log(data);
+        this.loading = false; /*
+        console.log(data); */
       },
       (error) => {
         console.error('Error fetching dashboard data:', error);
@@ -41,8 +41,8 @@ export class DashboardAdmiUsersPageComponent implements OnInit {
 
       this.admiService.findUser(search).subscribe(
         (data) => {
-          this.usersData = data;
-          console.log(data);
+          this.usersData = data; /*
+          console.log(data); */
         },
         (error) => {
           console.error('Error fetching user data:', error);

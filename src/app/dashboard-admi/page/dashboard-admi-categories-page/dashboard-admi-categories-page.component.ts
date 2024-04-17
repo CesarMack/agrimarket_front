@@ -85,11 +85,12 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
     }
   }
   showProductDetails(product: any) {
-    console.log(product);
+    /*
+    console.log(product); */
 
     // Cambia 'any' por el tipo adecuado para tus datos
-    this.selectedProduct = product;
-    console.log(this.selectedProduct.category);
+    this.selectedProduct = product; /*
+    console.log(this.selectedProduct.category); */
     this.productForm.patchValue({
       productId: this.selectedProduct.id,
       name: this.selectedProduct.name,
@@ -149,12 +150,12 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
       const selectedOption = this.categoriesData?.data.find(
         (item) => item.name === units
       );
-
+      /*
       console.log(units);
       console.log(categories);
 
       console.log(selectedOption);
-
+ */
       this.loader = true;
       this.admiService.setProductType(name, selectedOption?.id!).subscribe(
         (response) => {
@@ -216,7 +217,8 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
         }, 3000);
       },
       (error) => {
-        console.log(error);
+        /*
+        console.log(error); */
       }
     );
   }
@@ -233,7 +235,8 @@ export class DashboardAdmiCategoriesPageComponent implements OnInit {
         }, 3000);
       },
       (error) => {
-        console.log(error);
+        /*
+        console.log(error); */
       }
     );
   }

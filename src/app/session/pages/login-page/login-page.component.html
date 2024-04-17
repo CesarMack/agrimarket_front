@@ -77,7 +77,7 @@
       <p class="mt-8 font-light">
         ¿No tienes cuenta?,
         <a
-          href="#"
+          href="register"
           class="text-[#f1a93d] hover:text-[#285429] transition font-semibold"
           >registrate aquí.</a
         >
@@ -183,7 +183,7 @@
             </svg>
           </div>
           <p class="mx-4 text-lg text-red-700 text-center sm:text-left">
-            Por favor, completa todos los campos antes de enviar el formulario.
+            {{ errorMessage }}
           </p>
         </div>
         <div class="w-2/12 flex justify-end">

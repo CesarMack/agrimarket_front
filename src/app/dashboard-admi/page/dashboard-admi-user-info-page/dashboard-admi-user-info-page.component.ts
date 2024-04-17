@@ -120,12 +120,14 @@ export class DashboardAdmiUserInfoPageComponent implements OnInit {
     }
     this.profileService.updateProfile(formData).subscribe(
       (response) => {
-        console.log(response);
+        /*
+        console.log(response); */
         this.loading = false;
         this.alert = false; // Esperar dos segundos antes de redirigir
       },
       (error) => {
-        console.log(error);
+        /*
+        console.log(error); */
         this.loading = false;
       }
     );

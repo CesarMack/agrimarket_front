@@ -23,7 +23,8 @@ export class CompletedOrdersPageComponent {
         this.loading = false;
       },
       (error) => {
-        console.log(error);
+        /*
+        console.log(error); */
         this.loading = false;
       }
     );

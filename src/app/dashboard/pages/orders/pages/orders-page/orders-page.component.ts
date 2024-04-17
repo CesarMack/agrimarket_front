@@ -22,13 +22,15 @@ export class OrdersPageComponent implements OnInit {
   ngOnInit(): void {
     this.farmerService.getOrders().subscribe(
       (response) => {
-        console.log(response);
+        /*
+        console.log(response); */
 
         this.ordersData = response;
         this.loading = false;
       },
       (error) => {
-        console.log(error);
+        /*
+        console.log(error); */
         this.loading = false;
       }
     );

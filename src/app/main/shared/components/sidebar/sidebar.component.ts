@@ -14,8 +14,8 @@ export class SidebarComponent implements OnInit {
       this.user = true; // Set user to true if user_role is 'cliente'
     } else {
       this.user = false; // Set user to false for other roles or when user_role is not set
-    }
-    console.log(this.user);
+    } /*
+    console.log(this.user); */
   }
 
   openMenu(classes: any) {

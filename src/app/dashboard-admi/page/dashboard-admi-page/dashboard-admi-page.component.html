@@ -37,7 +37,7 @@
                     TOTAL DE USUARIOS
                   </p>
                   <h5 class="mb-0 font-bold">
-                    {{ pendingOrders }}
+                    {{ usuariosTotales }}
                   </h5>
                 </div>
               </div>
@@ -64,11 +64,13 @@
             <div class="flex flex-wrap -mx-3">
               <div class="flex-none w-2/3 max-w-full px-3">
                 <div>
-                  <p class="mb-0 font-semibold leading-normal text-sm">
-                    USUARIOS NUEVOS
+                  <p
+                    class="mb-0 font-semibold leading-normal text-sm whitespace-nowrap"
+                  >
+                    USUARIOS ADMINISTRADORES
                   </p>
                   <h5 class="mb-0 font-bold">
-                    {{ completeOrders }}
+                    {{ admins }}
                   </h5>
                 </div>
               </div>
@@ -96,10 +98,10 @@
               <div class="flex-none w-2/3 max-w-full px-3">
                 <div>
                   <p class="mb-0 font-semibold leading-normal text-sm">
-                    ORDENES TOTALES
+                    CLIENTES TOTALES
                   </p>
                   <h5 class="mb-0 font-bold">
-                    {{ canceledOrders }}
+                    {{ clients }}
                   </h5>
                 </div>
               </div>
@@ -127,10 +129,10 @@
               <div class="flex-none w-2/3 max-w-full px-3">
                 <div>
                   <p class="mb-0 font-semibold leading-normal text-sm">
-                    PRODUCTOS ACTIVOS
+                    AGRICULTORES TOTALES
                   </p>
                   <h5 class="mb-0 font-bold">
-                    {{ activeProducts }}
+                    {{ farmers }}
                   </h5>
                 </div>
               </div>
@@ -152,7 +154,7 @@
   </div>
 </div>
 <div class="flex flex-wrap mt-4">
-  <div class="w-full xl:w-1/2 mb-12 xl:mb-0">
+  <!-- <div class="w-full xl:w-1/2 mb-12 xl:mb-0">
     <div
       class="border relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700"
     >
@@ -167,13 +169,13 @@
         </div>
       </div>
       <div class="px-4 pb-4 flex-auto">
-        <!-- Chart -->
+     Chart
         <div class="relative w-full">
           <canvas id="chart">{{ chart }}</canvas>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!--  <div class="w-full xl:w-1/2 mb-12 xl:mb-0 px-4">
     <div

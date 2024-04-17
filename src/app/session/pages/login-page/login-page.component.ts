@@ -11,6 +11,7 @@ export class LoginPageComponent {
   loginForm: FormGroup;
   authError = false;
   showFieldRequiredMessage = false;
+  errorMessage: string = '';
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -35,6 +36,9 @@ export class LoginPageComponent {
 
       this.authService.auth(email, password).subscribe(
         (response) => {
+          /*
+          console.log(response); */
+
           if (response.user.role === 'admin') {
             localStorage.setItem('user_token', response.user.access_token);
             localStorage.setItem('user_role', response.user.role);
@@ -51,6 +55,9 @@ export class LoginPageComponent {
           }
         },
         (error) => {
+          /*
+          console.log(error); */
+          this.errorMessage = error.message;
           // Mostrar mensaje de error en el HTML
           this.authError = true;
           setTimeout(() => {

@@ -19,13 +19,15 @@ export class PendingOrdersPageComponent {
   ngOnInit(): void {
     this.farmerService.getStatusOrder('Pendiente').subscribe(
       (response) => {
-        console.log(response);
+        /*
+        console.log(response); */
 
         this.ordersData = response;
         this.loading = false;
       },
       (error) => {
-        console.log(error);
+        /*
+        console.log(error); */
         this.loading = false;
       }
     );

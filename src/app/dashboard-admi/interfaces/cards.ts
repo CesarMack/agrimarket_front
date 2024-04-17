@@ -1,8 +1,13 @@
+import { NgToastModule } from 'ng-angular-popup';
 export interface Cards {
   data: Data;
 }
 
 export interface Data {
+  admins: number;
+  clients: number;
+  farmers: number;
+  total: number;
   total_orders: any;
   active_products: any;
   new_users: any;
